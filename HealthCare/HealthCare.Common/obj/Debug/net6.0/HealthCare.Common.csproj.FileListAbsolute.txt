@@ -1,0 +1,12 @@
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.Common\bin\Debug\net6.0\HealthCare.Common.deps.json
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.Common\bin\Debug\net6.0\HealthCare.Common.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.Common\bin\Debug\net6.0\HealthCare.Common.pdb
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.Common\obj\Debug\net6.0\HealthCare.Common.csproj.AssemblyReference.cache
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.Common\obj\Debug\net6.0\HealthCare.Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.Common\obj\Debug\net6.0\HealthCare.Common.AssemblyInfoInputs.cache
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.Common\obj\Debug\net6.0\HealthCare.Common.AssemblyInfo.cs
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.Common\obj\Debug\net6.0\HealthCare.Common.csproj.CoreCompileInputs.cache
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.Common\obj\Debug\net6.0\HealthCare.Common.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.Common\obj\Debug\net6.0\refint\HealthCare.Common.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.Common\obj\Debug\net6.0\HealthCare.Common.pdb
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.Common\obj\Debug\net6.0\ref\HealthCare.Common.dll
