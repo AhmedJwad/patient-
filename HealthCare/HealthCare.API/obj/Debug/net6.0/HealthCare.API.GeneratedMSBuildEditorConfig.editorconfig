@@ -31,6 +31,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmxvb2RUeXBlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/Cities/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2l0aWVzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/Cities/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2l0aWVzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/Cities/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2l0aWVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/diagnosic/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcZGlhZ25vc2ljXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -49,6 +61,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/nationalities/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcbmF0aW9uYWxpdGllc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/nationalities/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcbmF0aW9uYWxpdGllc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/nationalities/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcbmF0aW9uYWxpdGllc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/Shared/Error.cshtml]
