@@ -22,14 +22,17 @@ namespace HealthCare.API.Data
             await CheckNationalityypeAsync();
             await CheckCitiesypeAsync();
             await CheckRoleAsync();
-            await checkUserasync("Ahmed", "Almershady", "Ahmednet380@gmail.com", "4555555211", "babylon", UserType.Admin);
-            await checkUserasync("Ali", "Mohammad", "Ali@yopmail.com", "4555555211", "babylon", UserType.user);
-            await checkUserasync("haider", "Jawad", "haider@yopmail", "4555555211", "Baghdad", UserType.user);
-            await checkUserasync("Ahmed", "Jawad", "Ahmed@yopmail,com", "4555555211", "basrah", UserType.Admin);
+            await CheckUserAsync("Ahmed", "Almershady", "Ali@yopmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.Admin);
+            await CheckUserAsync("Ahmed", "Almershady", "Ahmednet751@gmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.Admin);
+            await CheckUserAsync("Ahmed", "Jwad", "Amm380@yahoo.com", "350 634 2747", "Calle Luna Calle Sol", UserType.User);
+            await CheckUserAsync("Ahmed", "Kadhum", "Ahmed@yopmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.User);
+            await CheckUserAsync("Juan", "Zuluaga", "nur.webmaster@uobabylon.edu.iq", "350 634 2747", "Calle Luna Calle Sol", UserType.User);
+           
+
 
         }
 
-        private async Task checkUserasync( string firstname ,string lastname , string email , string phonenumber, string address, UserType userType )
+        private async Task<User> CheckUserAsync( string firstname ,string lastname , string email , string phonenumber, string address, UserType userType )
         {
             User user = await _userHelper.GetUserAsync(email);
             if (user == null)
@@ -43,16 +46,18 @@ namespace HealthCare.API.Data
                     Address = address,
                     userType = userType,
                     UserName = email,
+                   
                 };
                await _userHelper.AddUserAsync(user, "123456");
                await _userHelper.AddUsertoRoleAsync(user, userType.ToString());
             }
+            return user;
         }
 
         private async Task CheckRoleAsync()
         {
             await _userHelper.CheckRoleAsync(UserType.Admin.ToString());
-            await _userHelper.CheckRoleAsync(UserType.user.ToString());    
+            await _userHelper.CheckRoleAsync(UserType.User.ToString());    
         }
 
         private async Task CheckCitiesypeAsync()

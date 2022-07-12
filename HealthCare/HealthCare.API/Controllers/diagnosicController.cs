@@ -1,10 +1,12 @@
 ﻿using HealthCare.API.Data;
 using HealthCare.API.Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace HealthCare.API.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class diagnosicController : Controller
     {
        private readonly DataContext _context;

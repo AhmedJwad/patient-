@@ -1,4 +1,5 @@
 ﻿using HealthCare.API.Data.Entities;
+using HealthCare.API.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace HealthCare.API.Helpers
@@ -12,7 +13,10 @@ namespace HealthCare.API.Helpers
 
         Task AddUsertoRoleAsync(User user , string roleName);
 
-        Task<bool>IsUserinRoleAsync(User user, string roleName);   
+        Task<bool>IsUserinRoleAsync(User user, string roleName);
+
+        Task<SignInResult> LoginSync(LoginViewModel model);
+        Task LogoutAsync();
         
     }
 }

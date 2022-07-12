@@ -1,5 +1,6 @@
 ﻿using HealthCare.API.Data;
 using HealthCare.API.Data.Entities;
+using HealthCare.API.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -51,6 +52,16 @@ namespace HealthCare.API.Helpers
         public async Task<bool> IsUserinRoleAsync(User user, string roleName)
         {
            return await _userManager.IsInRoleAsync(user, roleName); 
+        }
+
+        public async Task<SignInResult> LoginSync(LoginViewModel model)
+        {
+            return await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
+        }
+
+        public async Task LogoutAsync()
+        {
+            await _signInManager.SignOutAsync();
         }
     }
 }

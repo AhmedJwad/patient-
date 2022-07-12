@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,8 +9,10 @@ using Microsoft.EntityFrameworkCore;
 using HealthCare.API.Data;
 using HealthCare.API.Data.Entities;
 
+
 namespace HealthCare.API.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class BloodTypesController : Controller
     {
         private readonly DataContext _context;
