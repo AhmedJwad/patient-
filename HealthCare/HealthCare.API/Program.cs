@@ -24,6 +24,8 @@ builder.Services.AddIdentity<User, IdentityRole>(x =>
 .AddEntityFrameworkStores<DataContext>();
 builder.Services.AddTransient<SeedDb>();
 builder.Services.AddScoped<IuserHelper, UserHelper>();
+builder.Services.AddScoped<ICombosHelper, Comboshelper>();
+builder.Services.AddScoped<IBlobHelper, BlobHelper>();
 var app = builder.Build();
 SeedData();
 void SeedData()

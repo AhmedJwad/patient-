@@ -22,11 +22,11 @@ namespace HealthCare.API.Data
             await CheckNationalityypeAsync();
             await CheckCitiesypeAsync();
             await CheckRoleAsync();
-            await CheckUserAsync("Ahmed", "Almershady", "Ali@yopmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.Admin);
-            await CheckUserAsync("Ahmed", "Almershady", "Ahmednet751@gmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.Admin);
-            await CheckUserAsync("Ahmed", "Jwad", "Amm380@yahoo.com", "350 634 2747", "Calle Luna Calle Sol", UserType.User);
-            await CheckUserAsync("Ahmed", "Kadhum", "Ahmed@yopmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.User);
-            await CheckUserAsync("Juan", "Zuluaga", "nur.webmaster@uobabylon.edu.iq", "350 634 2747", "Calle Luna Calle Sol", UserType.User);
+            await CheckUserAsync("Ahmed", "Almershady", "Ali@yopmail.com", "350 634 2747", "Babylon", UserType.Admin);
+            await CheckUserAsync("Ahmed", "Almershady", "Ahmednet751@gmail.com", "350 634 2747", "Hilla", UserType.Admin);
+            await CheckUserAsync("Ahmed", "Jwad", "Amm380@yahoo.com", "350 634 2747", "Baghdad", UserType.User);
+            await CheckUserAsync("Ahmed", "Kadhum", "Ahmed@yopmail.com", "350 634 2747", "Babil", UserType.User);
+            await CheckUserAsync("saad", "Ali", "Saad@yopmail.com", "350 634 2747", "Basrah", UserType.User);
            
 
 

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "zNyzsaIdnFGGNW2b5ZerkdXn3BMQEsTRfJLaNHNwHPni2OO6wPgIILjl9Ud3VeUj6OfVIF26h7nEVbK+m16L3w==",
+  "dgSpecHash": "X5L3XN14E2oBu6M2/Nfd33S9pTxzS56Bp0hMt1Osfe5DtUZXkV68mQKXO4GyzjJ3r1S7oja4KfmtPUB5BUiEOQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\HealthCare.API.csproj",
   "expectedPackageFiles": [
@@ -179,7 +179,8 @@
     "C:\\Users\\alnaseem\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\alnaseem\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\alnaseem\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\alnaseem\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\alnaseem\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\alnaseem\\.nuget\\packages\\windowsazure.storage\\9.3.3\\windowsazure.storage.9.3.3.nupkg.sha512"
   ],
   "logs": []
 }

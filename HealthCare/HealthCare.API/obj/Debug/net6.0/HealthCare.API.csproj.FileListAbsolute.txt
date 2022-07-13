@@ -268,3 +268,4 @@ C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\HealthCare.Common.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\HealthCare.Common.pdb
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\Microsoft.WindowsAzure.Storage.dll

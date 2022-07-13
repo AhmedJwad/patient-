@@ -26,7 +26,7 @@ namespace HealthCare.API.Data.Entities
         public Guid ImageId { get; set; }
 
         public string ImagefullPath => ImageId == Guid.Empty
-                ? $"https://https://localhost:7152/images/noimage.png"
+                ? $"https://localhost:7152/images/noimage.png"
                 : $"https://vehicleszulu.blob.core.windows.net/users/{ImageId}";
 
         [Display(Name = "Type of User")]
@@ -34,6 +34,9 @@ namespace HealthCare.API.Data.Entities
 
         [Display(Name = "User")]
         public string FullName => $"{FirstName} {LastName}";
+
+        [Display(Name = "# Patients")]
+        public int PatientsCount => Patients == null ? 0 : Patients.Count;
 
         public ICollection<Patient> Patients { get; set; }
         public ICollection<History> histories { get; set; }
