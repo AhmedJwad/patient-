@@ -34,5 +34,8 @@ namespace HealthCare.API.Data.Entities
 
         [Display(Name = "User")]
         public string FullName => $"{FirstName} {LastName}";
+
+        public ICollection<Patient> Patients { get; set; }
+        public ICollection<History> histories { get; set; }
     }
 }

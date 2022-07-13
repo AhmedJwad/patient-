@@ -4,6 +4,7 @@ using HealthCare.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthCare.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220713065800_gendre")]
+    partial class gendre
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,33 +71,6 @@ namespace HealthCare.API.Migrations
                     b.ToTable("Cities");
                 });
 
-            modelBuilder.Entity("HealthCare.API.Data.Entities.Detail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("HistoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("diagonisicId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HistoryId");
-
-                    b.HasIndex("diagonisicId");
-
-                    b.ToTable("details");
-                });
-
             modelBuilder.Entity("HealthCare.API.Data.Entities.diagonisic", b =>
                 {
                     b.Property<int>("Id")
@@ -136,50 +111,6 @@ namespace HealthCare.API.Migrations
                         .IsUnique();
 
                     b.ToTable("gendres");
-                });
-
-            modelBuilder.Entity("HealthCare.API.Data.Entities.History", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Result")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("allergies")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("illnesses")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("patientId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("surgeries")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("userId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("patientId");
-
-                    b.HasIndex("userId");
-
-                    b.ToTable("histories");
                 });
 
             modelBuilder.Entity("HealthCare.API.Data.Entities.Natianality", b =>
@@ -255,9 +186,6 @@ namespace HealthCare.API.Migrations
                     b.Property<int>("bloodTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("gendreId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
@@ -267,8 +195,6 @@ namespace HealthCare.API.Migrations
                     b.HasIndex("UserId");
 
                     b.HasIndex("bloodTypeId");
-
-                    b.HasIndex("gendreId");
 
                     b.ToTable("patients");
                 });
@@ -520,42 +446,6 @@ namespace HealthCare.API.Migrations
                         .HasForeignKey("CityId");
                 });
 
-            modelBuilder.Entity("HealthCare.API.Data.Entities.Detail", b =>
-                {
-                    b.HasOne("HealthCare.API.Data.Entities.History", "History")
-                        .WithMany("details")
-                        .HasForeignKey("HistoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HealthCare.API.Data.Entities.diagonisic", "diagonisic")
-                        .WithMany("details")
-                        .HasForeignKey("diagonisicId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("History");
-
-                    b.Navigation("diagonisic");
-                });
-
-            modelBuilder.Entity("HealthCare.API.Data.Entities.History", b =>
-                {
-                    b.HasOne("HealthCare.API.Data.Entities.Patient", "patient")
-                        .WithMany("histories")
-                        .HasForeignKey("patientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HealthCare.API.Data.Entities.User", "user")
-                        .WithMany("histories")
-                        .HasForeignKey("userId");
-
-                    b.Navigation("patient");
-
-                    b.Navigation("user");
-                });
-
             modelBuilder.Entity("HealthCare.API.Data.Entities.Patient", b =>
                 {
                     b.HasOne("HealthCare.API.Data.Entities.City", "City")
@@ -582,12 +472,6 @@ namespace HealthCare.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HealthCare.API.Data.Entities.gendre", "gendre")
-                        .WithMany("Patients")
-                        .HasForeignKey("gendreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("City");
 
                     b.Navigation("Natianality");
@@ -595,8 +479,6 @@ namespace HealthCare.API.Migrations
                     b.Navigation("User");
 
                     b.Navigation("bloodType");
-
-                    b.Navigation("gendre");
                 });
 
             modelBuilder.Entity("HealthCare.API.Data.Entities.PatientPhoto", b =>
@@ -671,21 +553,6 @@ namespace HealthCare.API.Migrations
                     b.Navigation("Cities");
                 });
 
-            modelBuilder.Entity("HealthCare.API.Data.Entities.diagonisic", b =>
-                {
-                    b.Navigation("details");
-                });
-
-            modelBuilder.Entity("HealthCare.API.Data.Entities.gendre", b =>
-                {
-                    b.Navigation("Patients");
-                });
-
-            modelBuilder.Entity("HealthCare.API.Data.Entities.History", b =>
-                {
-                    b.Navigation("details");
-                });
-
             modelBuilder.Entity("HealthCare.API.Data.Entities.Natianality", b =>
                 {
                     b.Navigation("Patients");
@@ -693,16 +560,12 @@ namespace HealthCare.API.Migrations
 
             modelBuilder.Entity("HealthCare.API.Data.Entities.Patient", b =>
                 {
-                    b.Navigation("histories");
-
                     b.Navigation("patientPhotos");
                 });
 
             modelBuilder.Entity("HealthCare.API.Data.Entities.User", b =>
                 {
                     b.Navigation("Patients");
-
-                    b.Navigation("histories");
                 });
 #pragma warning restore 612, 618
         }

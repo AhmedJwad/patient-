@@ -59,6 +59,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcZGlhZ25vc2ljXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/Gendres/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VuZHJlc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/Gendres/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VuZHJlc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/Gendres/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VuZHJlc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
