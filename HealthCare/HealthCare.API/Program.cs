@@ -26,6 +26,7 @@ builder.Services.AddTransient<SeedDb>();
 builder.Services.AddScoped<IuserHelper, UserHelper>();
 builder.Services.AddScoped<ICombosHelper, Comboshelper>();
 builder.Services.AddScoped<IBlobHelper, BlobHelper>();
+builder.Services.AddScoped<IconverterHelper, ConverterHelper>();
 var app = builder.Build();
 SeedData();
 void SeedData()
