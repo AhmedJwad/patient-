@@ -32,7 +32,7 @@ namespace HealthCare.API.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Users.Include(x => x.Patients)
+            return View(await _context.Users.Include(x=>x.Patients)
                 .Where(x => x.userType == UserType.User).ToListAsync());
 
         }
@@ -70,7 +70,68 @@ namespace HealthCare.API.Controllers
             return View(model);
         }
 
+       public async Task<IActionResult>Edit(string Id)
+        {
+            if(string.IsNullOrEmpty(Id))
+            {
+                return NotFound();
+            }
+            User user = await _userhelper.GetUserAsync(Guid.Parse(Id));
+            if (user== null)
+            {
+                return NotFound();
+            }
 
+            UserViewModel model = _converterhleper.ToUserViewModel(user);          
+                
+            
+            return View(model); 
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task <IActionResult> Edit(UserViewModel model)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                Guid imageId = model.ImageId;
+                if (model.ImageFile != null)
+                {
+                    imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "users");
+                }
+                
+
+                User user = await _converterhleper.ToUserAsync(model, imageId, false);
+                await _userhelper.UpdateUserAsync(user);
+                return RedirectToAction(nameof(Index));
+            }
+
+            
+            return View(model);
+        }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+
+            User user = await _userhelper.GetUserAsync(Guid.Parse(id));
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            if (user.ImageId != Guid.Empty)
+            {
+                await _blobHelper.DeleteBlobAsync(user.ImageId, "users");
+            }
+
+            await _userhelper.DeleteUserAsync(user);
+            return RedirectToAction(nameof(Index));
+        }
 
     }
 }

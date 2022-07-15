@@ -41,12 +41,12 @@ namespace HealthCare.API.Models
         public UserType UserType { get; set; }
 
         [Display(Name = "Photo")]
-        public IFormFile ImageFile { get; set; }        
+        public IFormFile? ImageFile { get; set; }        
        
 
         [Display(Name = "Photo")]
         public string ImageFullPath => ImageId == Guid.Empty
-            ? $"https://vehicleszulu.azurewebsites.net/images/noimage.png"
-            : $"https://vehicleszulu.blob.core.windows.net/users/{ImageId}";
+           ? $"https://localhost:7152/images/noimage.png"
+           : $"https://imagesahmed.blob.core.windows.net/users/{ImageId}";
     }
 }

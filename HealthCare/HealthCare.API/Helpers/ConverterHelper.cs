@@ -23,7 +23,7 @@ namespace HealthCare.API.Helpers
             {
                 Address=model.Address,  
                 PhoneNumber=model.PhoneNumber,  
-                Email=model.FirstName,
+                Email=model.Email,
                 LastName=model.LastName,
                 ImageId=imageId,
                 Id = isNew ? Guid.NewGuid().ToString() : model.Id,
@@ -40,7 +40,7 @@ namespace HealthCare.API.Helpers
             {
                 Address = user.Address,
                 PhoneNumber = user.PhoneNumber,
-                Email = user.FirstName,
+                Email = user.Email,
                 LastName = user.LastName,
                 ImageId = user.ImageId,
                 Id = user.Id,

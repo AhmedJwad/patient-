@@ -7,6 +7,9 @@ namespace HealthCare.API.Helpers
     public interface IuserHelper
     {
         Task<User> GetUserAsync(string email);
+        Task<User> GetUserAsync(Guid id);
+        Task<IdentityResult> UpdateUserAsync(User user);
+        Task<IdentityResult> DeleteUserAsync(User user);
         Task<IdentityResult> AddUserAsync(User user, string password);
 
         Task CheckRoleAsync(string roleName);

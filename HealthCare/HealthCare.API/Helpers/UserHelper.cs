@@ -44,9 +44,19 @@ namespace HealthCare.API.Helpers
 
         }
 
+        public async Task<IdentityResult> DeleteUserAsync(User user)
+        {
+            return await _userManager.DeleteAsync(user);
+        }
+
         public async Task<User> GetUserAsync(string email)
         {
             return await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
+        }
+
+        public async Task<User> GetUserAsync(Guid id)
+        {
+            return await _context.Users.FirstOrDefaultAsync(x => x.Id == id.ToString());
         }
 
         public async Task<bool> IsUserinRoleAsync(User user, string roleName)
@@ -62,6 +72,20 @@ namespace HealthCare.API.Helpers
         public async Task LogoutAsync()
         {
             await _signInManager.SignOutAsync();
+        }
+
+        public async Task<IdentityResult> UpdateUserAsync(User user)
+        {
+            User currentuser = await GetUserAsync(user.Email);
+
+            currentuser.FirstName = user.FirstName;
+            currentuser.LastName = user.LastName;
+            currentuser.Address = user.Address;
+            currentuser.PhoneNumber = user.PhoneNumber;
+            currentuser.ImageId = user.ImageId;
+
+            return await _userManager.UpdateAsync(currentuser);
+
         }
     }
 }
