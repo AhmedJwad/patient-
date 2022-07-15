@@ -133,5 +133,26 @@ namespace HealthCare.API.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> Details(string Id)
+        {
+            if(string.IsNullOrEmpty(Id))
+            {
+                return NotFound();
+            }
+            User user = await _context.Users.Include(x => x.Patients)
+                .ThenInclude(p => p.patientPhotos)
+                .Include(x => x.Patients).ThenInclude(p => p.bloodType)
+                .Include(x => x.Patients).ThenInclude(p => p.Natianality)
+                .Include(x => x.Patients).ThenInclude(p => p.gendre)
+                .Include(x => x.Patients).ThenInclude(p => p.City)
+                .Include(x => x.Patients).ThenInclude(P => P.histories).FirstOrDefaultAsync(x => x.Id == Id);
+
+            if(user== null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
     }
 }
