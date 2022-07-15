@@ -25,9 +25,9 @@ namespace HealthCare.API.Helpers
                 PhoneNumber=model.PhoneNumber,  
                 Email=model.FirstName,
                 LastName=model.LastName,
-                ImageId=model.ImageId,
-                Id=isNew ? Guid.NewGuid().ToString():model.Id,
-                FirstName=model.FirstName,
+                ImageId=imageId,
+                Id = isNew ? Guid.NewGuid().ToString() : model.Id,
+                FirstName =model.FirstName,
                 userType=model.UserType,    
                 UserName=model.Email,
 
@@ -45,8 +45,7 @@ namespace HealthCare.API.Helpers
                 ImageId = user.ImageId,
                 Id = user.Id,
                 FirstName = user.FirstName,
-                userType = user.userType,
-                UserName = user.Email,
+                UserType = user.userType,               
             };
         }
     }

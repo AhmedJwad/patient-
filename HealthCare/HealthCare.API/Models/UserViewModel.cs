@@ -4,8 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HealthCare.API.Models
 {
-    public class UserViewModel:User
+    public class UserViewModel
     {
+        
         public string Id { get; set; }
 
         [Display(Name = "Email")]

@@ -25,9 +25,11 @@ namespace HealthCare.API.Data.Entities
         [Display(Name ="Photo")]
         public Guid ImageId { get; set; }
 
-        public string ImagefullPath => ImageId == Guid.Empty
-                ? $"https://localhost:7152/images/noimage.png"
-                : $"https://vehicleszulu.blob.core.windows.net/users/{ImageId}";
+        [Display(Name = "Photo")]
+        public string ImageFullPath => ImageId == Guid.Empty
+           ? $"https://localhost:7152/images/noimage.png"
+           : $"https://imagesahmed.blob.core.windows.net/users/{ImageId}";
+
 
         [Display(Name = "Type of User")]
         public UserType userType { get; set; }

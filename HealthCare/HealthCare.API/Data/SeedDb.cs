@@ -32,7 +32,7 @@ namespace HealthCare.API.Data
 
         }
 
-        private async Task<User> CheckUserAsync( string firstname ,string lastname , string email , string phonenumber, string address, UserType userType )
+        private async Task CheckUserAsync( string firstname ,string lastname , string email , string phonenumber, string address, UserType userType )
         {
             User user = await _userHelper.GetUserAsync(email);
             if (user == null)
@@ -51,7 +51,7 @@ namespace HealthCare.API.Data
                await _userHelper.AddUserAsync(user, "123456");
                await _userHelper.AddUsertoRoleAsync(user, userType.ToString());
             }
-            return user;
+            
         }
 
         private async Task CheckRoleAsync()
