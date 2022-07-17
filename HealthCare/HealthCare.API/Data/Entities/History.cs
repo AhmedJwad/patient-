@@ -15,7 +15,7 @@ namespace HealthCare.API.Data.Entities
         [Display(Name = "illnesses")]
         [MaxLength(100, ErrorMessage = "The field {0} cannot have more than {1} characters.")]
         [Required(ErrorMessage = "The field {0} is required.")]
-        
+
         public string illnesses { get; set; }
 
         [Display(Name = "illnesses")]
@@ -33,13 +33,16 @@ namespace HealthCare.API.Data.Entities
         [Display(Name = "Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}")]
         public DateTime DateLocal => Date.ToLocalTime();
+       
+        
         public Patient patient { get; set; }
 
+       
         public User user { get; set; }
-        [JsonIgnore]
-        public ICollection<Detail>details { get; set; }
 
-        
+        public ICollection<Detail> Details { get; set; }
 
+        [Display(Name = "# Details")]
+        public int DetailsCount => Details == null ? 0 : Details.Count;
     }
 }

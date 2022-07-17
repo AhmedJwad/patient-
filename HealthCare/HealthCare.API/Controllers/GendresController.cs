@@ -18,7 +18,7 @@ namespace HealthCare.API.Controllers
         public async Task<IActionResult> Index()
         {
             return _context.gendres != null ?
-                        View(await _context.gendres.ToListAsync()) :
+                        View(await _context.gendres.Include(x=>x.Patients).ToListAsync()) :
                         Problem("Entity set 'DataContext.gendres'  is null.");
         }
         public IActionResult Create()

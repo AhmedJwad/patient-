@@ -154,5 +154,115 @@ namespace HealthCare.API.Controllers
             return View(user);
         }
 
+
+        public async Task<IActionResult>AddPatient(string Id)
+        {
+            if(string.IsNullOrEmpty(Id))
+            {
+                return NotFound();
+            }
+            User user = await _context.Users.Include(x => x.Patients)
+                .FirstOrDefaultAsync(x => x.Id == Id);
+            if(user == null)
+            {
+                return NotFound();
+            }
+            patientViewmodel model = new patientViewmodel
+            {
+                UserId = user.Id,
+                Date = DateTime.Now.Date,
+                bloodTypes= _combosHelper.GetComboBloodtypes(),
+                Cities=_combosHelper.GetCities(),
+                Gendres=_combosHelper.Getgendres(),
+                Nationaliteis= _combosHelper.GetNationalities(),
+            };
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddPatient(patientViewmodel patientViewmodel)
+        {
+           
+                User user = await _context.Users
+                .Include(x => x.Patients)
+                .FirstOrDefaultAsync(x => x.Id == patientViewmodel.UserId);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                Guid imageId = Guid.Empty;
+                if (patientViewmodel.ImageFile != null)
+                {
+                    imageId = await _blobHelper.UploadBlobAsync(patientViewmodel.ImageFile, "patients");
+                }
+
+                Patient patient = await _converterhleper.ToPatientAsync(patientViewmodel, true);
+                if (patient.patientPhotos == null)
+                {
+                    patient.patientPhotos = new List<PatientPhoto>();
+                }
+
+                patient.patientPhotos.Add(new PatientPhoto
+                {
+                    ImageId = imageId
+                });
+
+                try
+                {
+                    user.Patients.Add(patient);
+                    _context.Users.Update(user);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Details), new { id = user.Id });
+                }
+                catch (DbUpdateException dbUpdateException)
+                {
+                    if (dbUpdateException.InnerException.Message.Contains("duplicate"))
+                    {
+                        ModelState.AddModelError(string.Empty, "Ya existe un vehículo con esa placa.");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, dbUpdateException.InnerException.Message);
+                    }
+                }
+                catch (Exception exception)
+                {
+                    ModelState.AddModelError(string.Empty, exception.Message);
+                }
+
+           
+            
+
+            patientViewmodel.bloodTypes = _combosHelper.GetComboBloodtypes();
+            patientViewmodel.Nationaliteis = _combosHelper.GetNationalities();
+            patientViewmodel.Cities = _combosHelper.GetCities();
+            patientViewmodel.Gendres = _combosHelper.Getgendres();
+            return View(patientViewmodel);
+        }
+
+        public async Task<IActionResult> DeletePatient(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+           Patient patient = await _context.patients
+                .Include(x => x.User)
+                .Include(x => x.patientPhotos)
+                .Include(x => x.histories)
+                .ThenInclude(x => x.Details)
+                .FirstOrDefaultAsync(x => x.Id == id);
+            if (patient == null)
+            {
+                return NotFound();
+            }
+
+            _context.patients.Remove(patient);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Details), new { id = patient.User.Id });
+        }
+
     }
 }

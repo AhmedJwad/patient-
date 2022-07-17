@@ -11,6 +11,6 @@ namespace HealthCare.API.Data.Entities
         [Required(ErrorMessage = "The field {0} is required.")]
         public string Description { get; set; }
 
-        public ICollection<City> Cities { get; set; }   
+        public ICollection<Patient> Patients { get; set; }
     }
 }

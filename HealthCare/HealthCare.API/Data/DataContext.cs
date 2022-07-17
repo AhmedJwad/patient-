@@ -16,9 +16,11 @@ namespace HealthCare.API.Data
         public DbSet<City> Cities { get; set; }
         public DbSet<Patient> patients { get; set; }
         public DbSet<PatientPhoto> patientPhotos { get; set; }
-        public DbSet<gendre> gendres { get; set; }
-        public DbSet<History> histories{ get; set; }
+        public DbSet<gendre> gendres { get; set; }        
+        public DbSet<History> histories { get; set; }
         public DbSet<Detail> details { get; set; }
+        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

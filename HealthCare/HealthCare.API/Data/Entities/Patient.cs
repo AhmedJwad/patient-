@@ -1,4 +1,4 @@
-﻿using HealthCare.API.Migrations;
+﻿
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
@@ -22,36 +22,29 @@ namespace HealthCare.API.Data.Entities
         [MaxLength(50, ErrorMessage = "The field {0} cannot have more than {1} characters.")]
         [Required(ErrorMessage = "The field {0} is required.")]
         public string Address { get; set; }
-
-        [Display(Name = "Type of Blood ")]
-        [Required(ErrorMessage = "The field {0} is required.")]
+        [JsonIgnore]
         public BloodType bloodType { get; set; }
 
-        [Display(Name = "City")]
-        [Required(ErrorMessage = "The field {0} is required.")]
+        [JsonIgnore]
         public City City { get; set; }
-
-        [Display(Name = "Natianality")]
-        [Required(ErrorMessage = "The field {0} is required.")]
+        [JsonIgnore]
         public Natianality Natianality { get; set; }
+        [JsonIgnore]
+        public gendre  gendre { get; set; }
 
-        [Display(Name = "Gendre")]
-        [Required(ErrorMessage = "The field {0} is required.")]
-        public gendre gendre { get; set; }
-
-        [Display(Name = "Birth of Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}")]
+        [Display(Name = "Birth of Date")]
+        [Required(ErrorMessage = "The field {0} is required.")]
         public DateTime Date { get; set; }
+        
         [Display(Name = "Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}")]
         public DateTime DateLocal => Date.ToLocalTime();
-        [Display(Name = "EPCN")]
-        [MaxLength(50, ErrorMessage = "The field {0} cannot have more than {1} characters.")]
+        [Display(Name = "EPCN")]        
         [Required(ErrorMessage = "The field {0} is required.")]
-        public int EPCNNumber { get; set; }
+        public string EPCNNumber { get; set; }
 
-        [Display(Name = "Mobile Phone")]
-        [MaxLength(50, ErrorMessage = "The field {0} cannot have more than {1} characters.")]
+        [Display(Name = "Mobile Phone")]        
         [Required(ErrorMessage = "The field {0} is required.")]
         [DataType(DataType.PhoneNumber)]
         public string MobilePhone { get; set; }
@@ -74,14 +67,14 @@ namespace HealthCare.API.Data.Entities
 
         [Display(Name = "Photo")]
         public string ImageFullPath => patientPhotos == null || patientPhotos.Count == 0
-           ? $"https://https://localhost:7152/images/noimage.png"
+           ? $"https://localhost:7152/images/noimage.png"
            : patientPhotos.FirstOrDefault().ImageFullPath;
 
         [Display(Name = "# histories")]
         public int HistoriesCount => histories == null ? 0 : histories.Count;
         public ICollection<PatientPhoto>patientPhotos { get; set; }
         
-        public ICollection<History>histories { get; set; }
+        public ICollection<History> histories { get; set; }
 
     }
 }

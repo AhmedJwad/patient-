@@ -17,6 +17,6 @@ namespace HealthCare.API.Data.Entities
         [Display(Name = "Photo")]
         public string ImageFullPath => ImageId == Guid.Empty
             ? $"https://https://localhost:7152/images/noimage.png"
-            : $"https://vehicleszulu.blob.core.windows.net/vehiclephotos/{ImageId}";
+            : $"https://imagesahmed.blob.core.windows.net/patients/{ImageId}";
     }
 }

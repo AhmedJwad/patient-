@@ -3,6 +3,7 @@ using HealthCare.API.Data.Entities;
 using HealthCare.API.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Azure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<DataContext>(o =>
 });
 builder.Services.AddIdentity<User, IdentityRole>(x =>
 {
+    x.Tokens.AuthenticatorTokenProvider = TokenOptions.DefaultAuthenticatorProvider;
     x.User.RequireUniqueEmail = false;
     x.Password.RequireDigit = false;
     x.Password.RequiredUniqueChars = 0;
@@ -27,6 +29,8 @@ builder.Services.AddScoped<IuserHelper, UserHelper>();
 builder.Services.AddScoped<ICombosHelper, Comboshelper>();
 builder.Services.AddScoped<IBlobHelper, BlobHelper>();
 builder.Services.AddScoped<IconverterHelper, ConverterHelper>();
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+
 var app = builder.Build();
 SeedData();
 void SeedData()

@@ -15,7 +15,24 @@ namespace HealthCare.API.Helpers
            _combosHelper = combosHelper;
         }
 
-      
+        public async Task<Patient> ToPatientAsync(patientViewmodel model, bool isNew)
+        {
+            return new Patient
+            {
+                FirstName=model.FirstName,
+                LastName=model.LastName,
+                Address=model.Address,
+                bloodType=await _context.BloodTypes.FindAsync(model.BloodTypeId),
+                gendre=await  _context.gendres.FindAsync(model.GendreId),
+                Natianality=await _context.natianalities.FindAsync(model.NationalityId),
+                City=await _context.Cities.FindAsync(model.CityId),
+                EPCNNumber=model.EPCNNumber,
+                Date=model.Date,
+                MobilePhone=model.MobilePhone,
+                Description=model.Description,
+
+            };
+        }
 
         public async Task<User> ToUserAsync(UserViewModel model, Guid imageId, bool isNew)
         {

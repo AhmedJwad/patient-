@@ -8,5 +8,6 @@ namespace HealthCare.API.Helpers
         Task<User> ToUserAsync(UserViewModel model, Guid imageId, bool isNew);
 
         UserViewModel ToUserViewModel(User user);
+        Task<Patient> ToPatientAsync(patientViewmodel model, bool isNew);
     }
 }

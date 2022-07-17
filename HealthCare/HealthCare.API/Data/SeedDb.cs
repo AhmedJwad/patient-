@@ -21,16 +21,18 @@ namespace HealthCare.API.Data
             await CheckBloodTypeAsync();
             await CheckNationalityypeAsync();
             await CheckCitiesypeAsync();
+            await CheckGendreAsync();
             await CheckRoleAsync();
             await CheckUserAsync("Ahmed", "Almershady", "Ali@yopmail.com", "350 634 2747", "Babylon", UserType.Admin);
             await CheckUserAsync("Ahmed", "Almershady", "Ahmednet751@gmail.com", "350 634 2747", "Hilla", UserType.Admin);
             await CheckUserAsync("Ahmed", "Jwad", "Amm380@yahoo.com", "350 634 2747", "Baghdad", UserType.User);
             await CheckUserAsync("Ahmed", "Kadhum", "Ahmed@yopmail.com", "350 634 2747", "Babil", UserType.User);
-            await CheckUserAsync("saad", "Ali", "Saad@yopmail.com", "350 634 2747", "Basrah", UserType.User);
-           
+            await CheckUserAsync("saad", "Ali", "Saad@yopmail.com", "350 634 2747", "Basrah", UserType.User);          
 
 
         }
+
+        
 
         private async Task CheckUserAsync( string firstname ,string lastname , string email , string phonenumber, string address, UserType userType )
         {
@@ -74,7 +76,7 @@ namespace HealthCare.API.Data
                 _context.Cities.Add(new City { Description = "Diwaniyah	" });
                 _context.Cities.Add(new City { Description = "Karbala" });
                 _context.Cities.Add(new City { Description = "Amarah" });
-                _context.Cities.Add(new City { Description = "Samawah" });                
+                _context.Cities.Add(new City { Description = "Samawah" });
                 await _context.SaveChangesAsync();
             }
         }
@@ -85,14 +87,14 @@ namespace HealthCare.API.Data
             {
                 _context.natianalities.Add(new Natianality { Description = "Arabs" });
                 _context.natianalities.Add(new Natianality { Description = "Kurds" });
-                _context.natianalities.Add(new Natianality { Description = "Turkmens" });              
+                _context.natianalities.Add(new Natianality { Description = "Turkmens" });
                 await _context.SaveChangesAsync();
             }
         }
 
         private async Task CheckBloodTypeAsync()
         {
-            if(! _context.BloodTypes.Any())
+            if (!_context.BloodTypes.Any())
             {
                 _context.BloodTypes.Add(new BloodType { Description = "A+" });
                 _context.BloodTypes.Add(new BloodType { Description = "A-" });
@@ -102,6 +104,16 @@ namespace HealthCare.API.Data
                 _context.BloodTypes.Add(new BloodType { Description = "O-" });
                 _context.BloodTypes.Add(new BloodType { Description = "AB+" });
                 _context.BloodTypes.Add(new BloodType { Description = "AB-" });
+                await _context.SaveChangesAsync();
+            }
+        }
+        private async Task CheckGendreAsync()
+        {
+            if (!_context.gendres.Any())
+            {
+                _context.gendres.Add(new gendre { Description = "Male" });
+                _context.gendres.Add(new gendre { Description = "Female" });
+
                 await _context.SaveChangesAsync();
             }
         }

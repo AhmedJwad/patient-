@@ -17,7 +17,7 @@ namespace HealthCare.API.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.6")
+                .HasAnnotation("ProductVersion", "6.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -51,17 +51,12 @@ namespace HealthCare.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("CityId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CityId");
 
                     b.HasIndex("Description")
                         .IsUnique();
@@ -78,7 +73,6 @@ namespace HealthCare.API.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("HistoryId")
@@ -150,7 +144,6 @@ namespace HealthCare.API.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Result")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("allergies")
@@ -163,11 +156,10 @@ namespace HealthCare.API.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("patientId")
+                    b.Property<int?>("patientId")
                         .HasColumnType("int");
 
                     b.Property<string>("surgeries")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("userId")
@@ -216,19 +208,18 @@ namespace HealthCare.API.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("CityId")
+                    b.Property<int?>("CityId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EPCNNumber")
-                        .HasMaxLength(50)
-                        .HasColumnType("int");
+                    b.Property<string>("EPCNNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -242,20 +233,19 @@ namespace HealthCare.API.Migrations
 
                     b.Property<string>("MobilePhone")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NatianalityId")
+                    b.Property<int?>("NatianalityId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("bloodTypeId")
+                    b.Property<int?>("bloodTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("gendreId")
+                    b.Property<int?>("gendreId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -513,17 +503,10 @@ namespace HealthCare.API.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("HealthCare.API.Data.Entities.City", b =>
-                {
-                    b.HasOne("HealthCare.API.Data.Entities.City", null)
-                        .WithMany("Cities")
-                        .HasForeignKey("CityId");
-                });
-
             modelBuilder.Entity("HealthCare.API.Data.Entities.Detail", b =>
                 {
                     b.HasOne("HealthCare.API.Data.Entities.History", "History")
-                        .WithMany("details")
+                        .WithMany("Details")
                         .HasForeignKey("HistoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -543,9 +526,7 @@ namespace HealthCare.API.Migrations
                 {
                     b.HasOne("HealthCare.API.Data.Entities.Patient", "patient")
                         .WithMany("histories")
-                        .HasForeignKey("patientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("patientId");
 
                     b.HasOne("HealthCare.API.Data.Entities.User", "user")
                         .WithMany("histories")
@@ -559,16 +540,12 @@ namespace HealthCare.API.Migrations
             modelBuilder.Entity("HealthCare.API.Data.Entities.Patient", b =>
                 {
                     b.HasOne("HealthCare.API.Data.Entities.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Patients")
+                        .HasForeignKey("CityId");
 
                     b.HasOne("HealthCare.API.Data.Entities.Natianality", "Natianality")
                         .WithMany("Patients")
-                        .HasForeignKey("NatianalityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("NatianalityId");
 
                     b.HasOne("HealthCare.API.Data.Entities.User", "User")
                         .WithMany("Patients")
@@ -578,15 +555,11 @@ namespace HealthCare.API.Migrations
 
                     b.HasOne("HealthCare.API.Data.Entities.BloodType", "bloodType")
                         .WithMany("Patients")
-                        .HasForeignKey("bloodTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("bloodTypeId");
 
                     b.HasOne("HealthCare.API.Data.Entities.gendre", "gendre")
                         .WithMany("Patients")
-                        .HasForeignKey("gendreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("gendreId");
 
                     b.Navigation("City");
 
@@ -668,7 +641,7 @@ namespace HealthCare.API.Migrations
 
             modelBuilder.Entity("HealthCare.API.Data.Entities.City", b =>
                 {
-                    b.Navigation("Cities");
+                    b.Navigation("Patients");
                 });
 
             modelBuilder.Entity("HealthCare.API.Data.Entities.diagonisic", b =>
@@ -683,7 +656,7 @@ namespace HealthCare.API.Migrations
 
             modelBuilder.Entity("HealthCare.API.Data.Entities.History", b =>
                 {
-                    b.Navigation("details");
+                    b.Navigation("Details");
                 });
 
             modelBuilder.Entity("HealthCare.API.Data.Entities.Natianality", b =>
