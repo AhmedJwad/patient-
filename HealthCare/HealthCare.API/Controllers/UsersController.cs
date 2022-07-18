@@ -241,6 +241,68 @@ namespace HealthCare.API.Controllers
             return View(patientViewmodel);
         }
 
+        public async Task<IActionResult> EditPatient(int? Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            Patient patient = await _context.patients.Include(x => x.User)
+                .Include(x => x.patientPhotos).Include(x => x.City).Include(x => x.bloodType)
+                .Include(x => x.Natianality).Include(x => x.gendre).FirstOrDefaultAsync(x => x.Id == Id);
+            if (patient == null)
+            {
+                return NotFound();
+            }
+
+            patientViewmodel model = _converterhleper.ToPatientViewModel(patient);
+           
+            return View(model);
+              
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditPatient(int Id , patientViewmodel model)
+        {
+            if(Id != model.Id)
+            {
+                return NotFound();
+            }
+            if(ModelState.IsValid)
+            {
+                try
+                {                   
+
+                  Patient patient = await _converterhleper.ToPatientAsync(model, false);                  
+                    _context.patients.Update(patient);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Details) , new {Id = model.UserId});
+                }
+                catch (DbUpdateException dbUpdateException)
+                {
+                    if (dbUpdateException.InnerException.Message.Contains("duplicate"))
+                    {
+                        ModelState.AddModelError(string.Empty, "Ya existe un vehículo con esta placa.");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, dbUpdateException.InnerException.Message);
+                    }
+                }
+                catch (Exception exception)
+                {
+                    ModelState.AddModelError(string.Empty, exception.Message);
+                }
+            }
+            model.bloodTypes = _combosHelper.GetComboBloodtypes();
+            model.Nationaliteis = _combosHelper.GetNationalities();
+            model.Cities = _combosHelper.GetCities();
+            model.Gendres = _combosHelper.Getgendres();
+            return View(model);
+
+        }
         public async Task<IActionResult> DeletePatient(int? id)
         {
             if (id == null)

@@ -30,7 +30,34 @@ namespace HealthCare.API.Helpers
                 Date=model.Date,
                 MobilePhone=model.MobilePhone,
                 Description=model.Description,
+                Id = isNew ? 0 : model.Id,
 
+
+            };
+        }
+
+        public  patientViewmodel ToPatientViewModel(Patient patient)
+        {
+            return new patientViewmodel
+            {
+                FirstName = patient.FirstName,
+                LastName = patient.LastName,
+                Address = patient.Address,
+                Id = patient.Id,
+                CityId = patient.City.Id,
+                Cities = _combosHelper.GetCities(),
+                NationalityId = patient.Natianality.Id,
+                Nationaliteis = _combosHelper.GetNationalities(),
+                GendreId = patient.gendre.Id,
+                Gendres = _combosHelper.Getgendres(),
+                BloodTypeId = patient.bloodType.Id,
+                bloodTypes = _combosHelper.GetComboBloodtypes(),
+                Description = patient.Description,
+                MobilePhone = patient.MobilePhone,
+                EPCNNumber = patient.EPCNNumber,
+                UserId = patient.User.Id,
+                patientPhotos=patient.patientPhotos,
+                Date = patient.Date,    
             };
         }
 

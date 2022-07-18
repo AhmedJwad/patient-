@@ -217,9 +217,8 @@ namespace HealthCare.API.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EPCNNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("EPCNNumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -239,7 +238,6 @@ namespace HealthCare.API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("bloodTypeId")
@@ -549,9 +547,7 @@ namespace HealthCare.API.Migrations
 
                     b.HasOne("HealthCare.API.Data.Entities.User", "User")
                         .WithMany("Patients")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.HasOne("HealthCare.API.Data.Entities.BloodType", "bloodType")
                         .WithMany("Patients")

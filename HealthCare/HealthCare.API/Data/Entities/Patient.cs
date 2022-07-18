@@ -40,9 +40,10 @@ namespace HealthCare.API.Data.Entities
         [Display(Name = "Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}")]
         public DateTime DateLocal => Date.ToLocalTime();
+
         [Display(Name = "EPCN")]        
         [Required(ErrorMessage = "The field {0} is required.")]
-        public string EPCNNumber { get; set; }
+        public int EPCNNumber { get; set; }
 
         [Display(Name = "Mobile Phone")]        
         [Required(ErrorMessage = "The field {0} is required.")]
@@ -53,9 +54,7 @@ namespace HealthCare.API.Data.Entities
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        [Display(Name = "User")]
-        [JsonIgnore]
-        [Required(ErrorMessage = "The field {0} is required.")]
+      
         public User User { get; set; }
         public int Age => DateLocal == null ? 0 : DateTime.Today.Year - DateLocal.Year;
 

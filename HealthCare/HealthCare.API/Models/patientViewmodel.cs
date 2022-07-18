@@ -54,10 +54,10 @@ namespace HealthCare.API.Models
         [Display(Name = "Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}")]
         public DateTime DateLocal => Date.ToLocalTime();
-        [Display(Name = "EPCN")]
-        [MaxLength(50, ErrorMessage = "The field {0} cannot have more than {1} characters.")]
-        [Required(ErrorMessage = "The field {0} is required.")]
-        public string EPCNNumber { get; set; }
+
+        [Display(Name = "EPCN")]        
+        [Required(ErrorMessage = "The field {0} is required.")]       
+        public int EPCNNumber { get; set; }
 
         [Display(Name = "Mobile Phone")]
         [Required(ErrorMessage = "The field {0} is required.")]

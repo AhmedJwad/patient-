@@ -9,5 +9,7 @@ namespace HealthCare.API.Helpers
 
         UserViewModel ToUserViewModel(User user);
         Task<Patient> ToPatientAsync(patientViewmodel model, bool isNew);
+
+        patientViewmodel ToPatientViewModel(Patient patient);   
     }
 }

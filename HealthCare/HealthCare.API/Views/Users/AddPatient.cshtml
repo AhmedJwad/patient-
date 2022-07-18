@@ -4,9 +4,9 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Crear</h2>
+<h2>Create</h2>
 
-<h4>Vehiculo</h4>
+<h4>Patient</h4>
 <hr />
 <div class="row">
     <div class="col-md-12">
@@ -14,63 +14,8 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="UserId" />             
 
-           @* <partial name="_Patient" />*@
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-             <div class="form-group">
-            <label asp-for="BloodTypeId" class="control-label"></label>
-            <select asp-for="BloodTypeId" asp-items="Model.bloodTypes" class="form-control"></select>
-            <span asp-validation-for="BloodTypeId" class="text-danger"></span>
-            </div>
-         <div class="form-group">
-            <label asp-for="CityId" class="control-label"></label>
-            <select asp-for="CityId" asp-items="Model.Cities" class="form-control"></select>
-            <span asp-validation-for="CityId" class="text-danger"></span>
-        </div>
-         <div class="form-group">
-            <label asp-for="NationalityId" class="control-label"></label>
-            <select asp-for="NationalityId" asp-items="Model.Nationaliteis" class="form-control"></select>
-            <span asp-validation-for="NationalityId" class="text-danger"></span>
-        </div>
-           <div class="form-group">
-            <label asp-for="GendreId" class="control-label"></label>
-            <select asp-for="GendreId" asp-items="Model.Gendres" class="form-control"></select>
-            <span asp-validation-for="GendreId" class="text-danger"></span>
-        </div>
-            <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EPCNNumber" class="control-label"></label>
-                <input asp-for="EPCNNumber" class="form-control" />
-                <span asp-validation-for="EPCNNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MobilePhone" class="control-label"></label>
-                <input asp-for="MobilePhone" class="form-control" />
-                <span asp-validation-for="MobilePhone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <textarea asp-for="Description" class="form-control"></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-
+            <partial name="_Patient" />
+        
             <div class="form-group">
                 <label asp-for="ImageFile" class="control-label"></label>
                 <input asp-for="ImageFile" type="file" class="form-control" />
