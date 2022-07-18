@@ -31,8 +31,7 @@ namespace HealthCare.API.Helpers
                 MobilePhone=model.MobilePhone,
                 Description=model.Description,
                 Id = isNew ? 0 : model.Id,
-
-
+                
             };
         }
 

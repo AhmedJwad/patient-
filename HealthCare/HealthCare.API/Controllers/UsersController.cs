@@ -274,8 +274,7 @@ namespace HealthCare.API.Controllers
             {
                 try
                 {                   
-
-                  Patient patient = await _converterhleper.ToPatientAsync(model, false);                  
+                    Patient patient = await _converterhleper.ToPatientAsync(model, false);                    
                     _context.patients.Update(patient);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Details) , new {Id = model.UserId});
@@ -284,7 +283,7 @@ namespace HealthCare.API.Controllers
                 {
                     if (dbUpdateException.InnerException.Message.Contains("duplicate"))
                     {
-                        ModelState.AddModelError(string.Empty, "Ya existe un vehículo con esta placa.");
+                        ModelState.AddModelError(string.Empty, "patient already exist in database");
                     }
                     else
                     {
@@ -326,5 +325,76 @@ namespace HealthCare.API.Controllers
             return RedirectToAction(nameof(Details), new { id = patient.User.Id });
         }
 
+        public async Task<IActionResult> DeleteImagePatient(int? Id)
+        {
+            if(Id == null)
+            {
+                return NotFound();
+            }
+
+            PatientPhoto patientPhoto = await _context.patientPhotos.Include(x => x.patient)
+                .FirstOrDefaultAsync(x => x.Id == Id);
+            if(patientPhoto == null)
+            {
+                return NotFound();
+            }
+            try
+            {
+                await _blobHelper.DeleteBlobAsync(patientPhoto.ImageId, "patients");
+            }
+            catch (Exception)
+            { }
+            _context.patientPhotos.Remove(patientPhoto);    
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(EditPatient), new { id = patientPhoto.patient.Id });           
+
+        }
+
+        public async Task<IActionResult> AddPatientImage(int? Id)
+        {
+            if(Id == null)
+            {
+                return NotFound();
+            }
+
+            Patient patient = await _context.patients.FirstOrDefaultAsync(x => x.Id == Id);
+            if(patient == null)
+            {
+                return NotFound();
+            }
+            PatientPhotoViewModel model = new PatientPhotoViewModel
+            {
+                PatientId = patient.Id,
+
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddPatientImage(PatientPhotoViewModel model)
+        {
+          if(ModelState.IsValid)
+            {
+                Guid ImageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "patients");
+                Patient patient = await _context.patients.Include(x => x.patientPhotos)
+                    .FirstOrDefaultAsync(x => x.Id == model.PatientId);
+
+                if(patient.patientPhotos==null)
+                {
+                    patient.patientPhotos =new List<PatientPhoto>();
+                }
+                patient.patientPhotos.Add(new PatientPhoto
+                {
+                    ImageId=ImageId,
+                });
+
+                _context.patients.Update(patient);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(EditPatient), new { Id = patient.Id });
+
+            }
+          return View(model);   
+        }
     }
 }

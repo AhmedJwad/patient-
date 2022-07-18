@@ -1,0 +1,33 @@
+﻿@model HealthCare.API.Models.PatientPhotoViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Add</h2>
+
+<h4>Patient Photos</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="AddPatientImage" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PatientId" />
+
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" type="file" class="form-control" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="EditPatient" asp-route-id="@Model.PatientId" class="btn btn-success">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
