@@ -1,0 +1,29 @@
+﻿@model HealthCare.API.Models.HistoryViewmodel
+@{
+    ViewData["Title"] = "EditHistory";
+}
+
+<h1>Edit History</h1>
+
+
+<h4>Histories</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="EditHistory" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PatientId" />
+
+            <partial name="_History" />
+
+            <div class="form-group">
+                <input type="submit" value="Edit" class="btn btn-primary" />
+                <a asp-action="DetailsPatient" asp-route-id="@Model.PatientId" class="btn btn-success">Details Patient</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

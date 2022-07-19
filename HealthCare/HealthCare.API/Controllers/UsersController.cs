@@ -396,5 +396,268 @@ namespace HealthCare.API.Controllers
             }
           return View(model);   
         }
+
+
+        public async Task<IActionResult> DetailsPatient(int? Id)
+        {
+            if(Id==null)
+            {
+                return NotFound();
+            }
+
+            Patient patient = await _context.patients.Include(x => x.User)
+                .Include(x => x.bloodType).Include(x => x.Natianality)
+                .Include(x => x.City).Include(x => x.gendre)
+                .Include(x=>x.patientPhotos).Include(x=>x.histories).ThenInclude(h=>h.Details)
+                .ThenInclude(h=>h.diagonisic)
+                .Include(x=>x.histories).ThenInclude(h=>h.user).FirstOrDefaultAsync(x => x.Id == Id);
+            if(patient==null)
+            {
+                return NotFound();
+            }
+            return View(patient);
+        }
+
+        public async Task<IActionResult> AddHistory(int? Id)
+        {
+            if(Id==null)
+            {
+                return NotFound();
+            }
+
+            Patient patient = await _context.patients.FindAsync(Id);
+
+            if(patient == null)
+            {
+                return NotFound();
+            }
+
+            HistoryViewmodel model = new HistoryViewmodel
+            {
+                PatientId = patient.Id,
+                Date = DateTime.Now,
+            };
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddHistory(HistoryViewmodel model)
+        {
+            if(ModelState.IsValid)
+            {
+                Patient patient = await _context.patients.Include(x => x.histories)
+                    .FirstOrDefaultAsync(x => x.Id == model.PatientId);
+                if(patient==null)
+                {
+
+                    return NotFound();
+                }
+
+                User user = await _userhelper.GetUserAsync(User.Identity.Name);
+
+                History history = new History
+                {
+                    illnesses = model.illnesses,
+                    allergies = model.allergies,
+                    surgeries = model.surgeries,
+                    Result = model.Result,
+                    Date = model.Date,
+                    user = user,
+                };
+                if(patient.histories== null)
+                {
+                    patient.histories = new List<History>();
+                }
+
+                patient.histories.Add(history);
+                _context.patients.Update(patient);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(DetailsPatient), new { id = model.PatientId });
+            }
+            return View(model);
+        }
+
+        public async Task<IActionResult>EditHistory(int? Id)
+        {
+            if(Id==null)
+            {
+                return NotFound();
+            }
+
+            History history = await _context.histories.Include(x => x.patient)
+                .FirstOrDefaultAsync(x => x.Id == Id);
+            if(history == null)
+            {
+                return NotFound();
+            }
+
+            HistoryViewmodel model = new HistoryViewmodel
+            {
+                PatientId = history.patient.Id,
+                illnesses = history.illnesses,
+                surgeries = history.surgeries,
+                allergies = history.allergies,
+                Result = history.Result,
+                Date = history.Date,
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditHistory(int Id , HistoryViewmodel model)
+        {
+            if(ModelState.IsValid)
+            {
+                History history = await _context.histories.FindAsync(Id);
+                history.illnesses = model.illnesses;
+                history.allergies = model.allergies;
+                history.surgeries = model.surgeries;
+                history.Result = model.Result;
+                history.Date = model.Date;
+                _context.histories.Update(history);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(DetailsPatient), new { id = model.PatientId });
+            };
+            return View(model);
+        }
+        public async Task<IActionResult> DeleteHistory(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            History history = await _context.histories
+                .Include(x => x.Details)
+                .Include(x => x.patient)
+                .FirstOrDefaultAsync(x => x.Id == id);
+            if (history == null)
+            {
+                return NotFound();
+            }
+
+            _context.histories.Remove(history);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(DetailsPatient), new { id = history.patient.Id });
+        }
+
+        public async Task<IActionResult> DetailsHistory(int? Id)
+        {
+            if(Id==null)
+            {
+                return NotFound();
+            }
+            History history = await _context.histories.Include(x => x.patient)
+                .ThenInclude(p => p.patientPhotos)
+                .Include(x => x.Details).ThenInclude(p => p.diagonisic)
+                .FirstOrDefaultAsync(x => x.Id == Id);
+            if(history == null)
+            {
+                return NotFound();
+            }
+            return View(history);
+        }
+
+        public async Task<IActionResult>AddDetails(int? Id)
+        {
+            if(Id==null)
+            {
+                return NotFound();
+            }
+            History history = await _context.histories.FindAsync(Id);
+            DetailViewModel model = new DetailViewModel
+            {
+                HistoryId = history.Id,
+                diagonisics = _combosHelper.GetCombodiagnosic(),
+            };
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddDetails(DetailViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                History history = await _context.histories
+                    .Include(x => x.Details)
+                    .FirstOrDefaultAsync(x => x.Id == model.HistoryId);
+                if (history == null)
+                {
+                    return NotFound();
+                }
+
+                if (history.Details == null)
+                {
+                    history.Details = new List<Detail>();
+                }
+
+                Detail detail = await _converterhleper.ToDetailAsync(model, true);
+                history.Details.Add(detail);
+                _context.histories.Update(history);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(DetailsHistory), new { id = model.HistoryId });
+            }
+
+            model.diagonisics = _combosHelper.GetCombodiagnosic();
+            return View(model);
+        }
+
+        public async Task<IActionResult> EditDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Detail detail = await _context.details
+                .Include(x => x.History)
+                .Include(x => x.diagonisic)
+                .FirstOrDefaultAsync(x => x.Id == id);
+            if (detail == null)
+            {
+                return NotFound();
+            }
+
+            DetailViewModel model = _converterhleper.ToDetailViewModel(detail);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditDetails(int id, DetailViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Detail detail = await _converterhleper.ToDetailAsync(model, false);
+                _context.details.Update(detail);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(DetailsHistory), new { id = model.HistoryId });
+            }
+
+            model.diagonisics = _combosHelper.GetCombodiagnosic();
+            return View(model);
+        }
+
+        public async Task<IActionResult> DeleteDetail(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Detail detail = await _context.details
+                .Include(x => x.History)
+                .FirstOrDefaultAsync(x => x.Id == id);
+            if (detail == null)
+            {
+                return NotFound();
+            }
+
+            _context.details.Remove(detail);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(DetailsHistory), new { id = detail.History.Id });
+        }
     }
 }

@@ -15,6 +15,31 @@ namespace HealthCare.API.Helpers
            _combosHelper = combosHelper;
         }
 
+        public async Task<Detail> ToDetailAsync(DetailViewModel model, bool isNew)
+        {
+            return new Detail
+            {
+                Id = isNew ? 0 : model.Id,
+                History = await _context.histories.FindAsync(model.HistoryId),
+                diagonisic = await _context.diagonisics.FindAsync(model.diagonisicId),
+              Description=model.Description,
+            };
+        }
+
+        public DetailViewModel ToDetailViewModel(Detail detail)
+        {
+            return new DetailViewModel
+            {
+                HistoryId = detail.History.Id,
+                Id = detail.Id,
+                Description = detail.Description,
+                diagonisicId = detail.diagonisic.Id,
+                diagonisics = _combosHelper.GetCombodiagnosic(),
+              
+
+            };
+        }
+
         public async Task<Patient> ToPatientAsync(patientViewmodel model, bool isNew)
         {
             return new Patient

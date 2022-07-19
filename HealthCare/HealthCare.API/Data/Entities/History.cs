@@ -18,7 +18,7 @@ namespace HealthCare.API.Data.Entities
 
         public string illnesses { get; set; }
 
-        [Display(Name = "illnesses")]
+        [Display(Name = "surgeries")]
         [DataType(DataType.MultilineText)]
         public string surgeries { get; set; }
 

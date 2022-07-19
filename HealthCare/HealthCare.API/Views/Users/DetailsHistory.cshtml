@@ -1,0 +1,147 @@
+﻿@model HealthCare.API.Data.Entities.History
+@{
+    ViewData["Title"] = "DetailsHistory";
+}
+
+<h1>Details History</h1>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+<h2>Historia</h2>
+
+<div>
+    <h4>Historia</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-8">
+            <dl class="row">
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.patient.FullName)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.patient.FullName)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Date)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Date)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.illnesses)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.illnesses)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.allergies)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.allergies)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.surgeries)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.surgeries)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Result)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Result)
+                </dd>
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.DetailsCount)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.DetailsCount)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-4">
+            <img src="@Model.patient.ImageFullPath" style="width: 200px; height: 200px; max-width: 100%; height: auto;" />
+        </div>
+    </div>
+</div>
+<div>
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="AddDetails" asp-route-id="@Model.Id" class="btn btn-primary">Add Diagnosic</a>
+        <a asp-action="EditHistory" asp-route-id="@Model.Id" class="btn btn-warning">Edit History</a>
+    }
+    <a asp-action="DetailsPatient" asp-route-id="@Model.patient.Id" class="btn btn-success">Back to List</a>
+</div>
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Procedimientos</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover table-responsive table-striped" id="MyTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Details.FirstOrDefault().diagonisic.Description)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Details.FirstOrDefault().Description)
+                            </th>
+                           
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Details)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.diagonisic.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                
+                                <td>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a asp-action="EditDetails" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                                        <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog">Delete</button>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<partial name="_DeleteDialog" />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="/js/deleteDialog.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#MyTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/English.json"
+                },
+                "aLengthMenu": [
+                    [25, 50, 100, 200, -1],
+                    [25, 50, 100, 200, "Todos"]
+                ]
+            });
+
+            // Delete item
+            sc_deleteDialog.openModal('deleteItem', true, 'btnYesDelete', '/Users/DeleteDetail/', false);
+        });
+    </script>
+}
