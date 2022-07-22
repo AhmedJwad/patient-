@@ -24,6 +24,11 @@ builder.Services.AddIdentity<User, IdentityRole>(x =>
     x.Password.RequireUppercase = false;   
 }).AddDefaultTokenProviders()
 .AddEntityFrameworkStores<DataContext>();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/NotAuthorized";
+    options.AccessDeniedPath = "/Account/NotAuthorized";
+});
 builder.Services.AddTransient<SeedDb>();
 builder.Services.AddScoped<IuserHelper, UserHelper>();
 builder.Services.AddScoped<ICombosHelper, Comboshelper>();
@@ -53,6 +58,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseStatusCodePagesWithReExecute("/error/{0}");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
