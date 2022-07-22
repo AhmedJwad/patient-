@@ -1,5 +1,6 @@
 ﻿using HealthCare.API.Data.Entities;
 using HealthCare.API.Models;
+using HealthCare.Common.Enums;
 using Microsoft.AspNetCore.Identity;
 
 namespace HealthCare.API.Helpers
@@ -11,7 +12,7 @@ namespace HealthCare.API.Helpers
         Task<IdentityResult> UpdateUserAsync(User user);
         Task<IdentityResult> DeleteUserAsync(User user);
         Task<IdentityResult> AddUserAsync(User user, string password);
-
+        Task<User> AddUserAsync(AddUserViewModel model, Guid imageId, UserType userType);
         Task CheckRoleAsync(string roleName);
 
         Task AddUsertoRoleAsync(User user , string roleName);
@@ -20,6 +21,9 @@ namespace HealthCare.API.Helpers
 
         Task<SignInResult> LoginSync(LoginViewModel model);
         Task LogoutAsync();
-        
+        Task<string> GenerateEmailConfirmationTokenAsync(User user);
+
+        Task<IdentityResult> ConfirmEmailAsync(User user, string token);
+
     }
 }

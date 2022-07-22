@@ -1,6 +1,7 @@
 ﻿using HealthCare.API.Data;
 using HealthCare.API.Data.Entities;
 using HealthCare.API.Models;
+using HealthCare.Common.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,6 +30,32 @@ namespace HealthCare.API.Helpers
             return await _userManager.CreateAsync(user, password);    
         }
 
+        public async Task<User> AddUserAsync(AddUserViewModel model, Guid imageId, UserType userType)
+        {
+            User user = new User
+            {
+                Address = model.Address,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Username,
+                UserName = model.Username,
+                PhoneNumber = model.PhoneNumber,
+                ImageId = model.ImageId,
+                userType = userType,
+
+            };
+            IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+            if(!result.Succeeded)
+            {
+                return null;
+            }
+
+            User newuser = await GetUserAsync(model.Username);
+            await AddUsertoRoleAsync(newuser, user.userType.ToString());
+            return newuser;
+
+        }
+
         public async Task AddUsertoRoleAsync(User user, string roleName)
         {
             await _userManager.AddToRoleAsync(user, roleName);
@@ -44,9 +71,19 @@ namespace HealthCare.API.Helpers
 
         }
 
+        public async Task<IdentityResult> ConfirmEmailAsync(User user, string token)
+        {
+            return await _userManager.ConfirmEmailAsync(user, token);
+        }
+
         public async Task<IdentityResult> DeleteUserAsync(User user)
         {
             return await _userManager.DeleteAsync(user);
+        }
+
+        public async Task<string> GenerateEmailConfirmationTokenAsync(User user)
+        {
+            return await _userManager.GenerateEmailConfirmationTokenAsync(user);
         }
 
         public async Task<User> GetUserAsync(string email)

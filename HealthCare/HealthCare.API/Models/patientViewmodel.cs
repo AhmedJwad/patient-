@@ -43,7 +43,7 @@ namespace HealthCare.API.Models
 
         [Display(Name = "Gendre")]
         [Range(1, int.MaxValue, ErrorMessage = "You must select a Gendre.")]
-        [Required(ErrorMessage = "The field {0} is required.")]
+       
         public int GendreId { get; set; }
         public IEnumerable<SelectListItem> Gendres { get; set; }
 

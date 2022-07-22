@@ -23,6 +23,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxOb3RBdXRob3JpemVkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/Account/_User.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxfVXNlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/BloodTypes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmxvb2RUeXBlc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
