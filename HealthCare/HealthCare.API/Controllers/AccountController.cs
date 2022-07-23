@@ -101,34 +101,29 @@ namespace HealthCare.API.Controllers
                 }
 
 
-                LoginViewModel loginViewModel = new LoginViewModel
+
+                string myToken = await _userhelper.GenerateEmailConfirmationTokenAsync(user);
+                string tokenLink = Url.Action("ConfirmEmail", "Account", new
                 {
-                    Password=model.Password,
-                    RememberMe=false,
-                    Username=model.Username,
-                };
-                var result2 = await _userhelper.LoginSync(loginViewModel);
-                if(result2.Succeeded)
+                    userid = user.Id,
+                    token = myToken
+                }, protocol: HttpContext.Request.Scheme);
+
+                Response response = _mailHelper.SendMail(
+                    $"{model.FirstName} {model.LastName}",
+                    model.Username,
+                    "HealthCare - Email Confirmation",
+                    $"<h1>HealthCare - Email Confirmation</h1>" +
+                        $"To enable the user please click on the following link:, " +
+                        $"<p><a href = \"{tokenLink}\">Confirm Email</a></p>");
+                if (response.IsSuccess)
                 {
-                    return RedirectToAction("Index", "Home");
+                    ViewBag.Message = "The instructions to enable the user have been sent to the mail.";
+                    return View(model);
                 }
-                //string myToken = await _userhelper.GenerateEmailConfirmationTokenAsync(user);
-                //string tokenLink = Url.Action("ConfirmEmail", "Account", new
-                //{
-                //    userid = user.Id,
-                //    token = myToken
-                //}, protocol: HttpContext.Request.Scheme);
 
-                //Response response = _mailHelper.SendMail(model.Username, "Vehicles - Confirmación de cuenta", $"<h1>Vehicles - Confirmación de cuenta</h1>" +
-                //    $"Para habilitar el usuario, " +
-                //    $"por favor hacer clic en el siguiente enlace: </br></br><a href = \"{tokenLink}\">Confirmar Email</a>");
-                //if (response.IsSuccess)
-                //{
-                //    ViewBag.Message = "Las instrucciones para habilitar su cuenta han sido enviadas al correo.";
-                //    return View(model);
-                //}
+                ModelState.AddModelError(string.Empty, response.Message);
 
-                //ModelState.AddModelError(string.Empty, response.Message);
             }
             return View(model);
         }

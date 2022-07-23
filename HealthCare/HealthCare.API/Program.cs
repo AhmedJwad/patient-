@@ -16,6 +16,7 @@ builder.Services.AddDbContext<DataContext>(o =>
 builder.Services.AddIdentity<User, IdentityRole>(x =>
 {
     x.Tokens.AuthenticatorTokenProvider = TokenOptions.DefaultAuthenticatorProvider;
+    x.SignIn.RequireConfirmedEmail = true;
     x.User.RequireUniqueEmail = false;
     x.Password.RequireDigit = false;
     x.Password.RequiredUniqueChars = 0;
