@@ -566,3 +566,6 @@ C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\Azure.Storage.Files.Shares.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\Azure.Storage.Queues.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\Microsoft.Extensions.Azure.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\MailKit.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\MimeKit.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\BouncyCastle.Crypto.dll

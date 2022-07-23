@@ -6,11 +6,7 @@ namespace HealthCare.API.Models
     public class EditUserViewModel
     {
         public string Id { get; set; }
-
-        [Display(Name = "Email")]
-        [EmailAddress(ErrorMessage = "You must enter a valid email.")]
-        [Required(ErrorMessage = "The field {0} is required.")]
-        public string Email { get; set; }
+      
 
         [Display(Name = "First Name")]
         [MaxLength(50, ErrorMessage = "The field {0} cannot have more than {1} characters.")]

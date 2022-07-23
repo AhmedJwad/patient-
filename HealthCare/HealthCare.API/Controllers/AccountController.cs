@@ -2,6 +2,8 @@
 using HealthCare.API.Data.Entities;
 using HealthCare.API.Helpers;
 using HealthCare.API.Models;
+using HealthCare.Common.Enums;
+using HealthCare.Common.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,12 +14,15 @@ namespace HealthCare.API.Controllers
         private readonly DataContext _context;
         private readonly IuserHelper _userhelper;
         private readonly IBlobHelper _blobHelper;
+        private readonly IMailHelper _mailHelper;
 
-        public AccountController(DataContext context, IuserHelper userhelper , IBlobHelper blobHelper)
+        public AccountController(DataContext context, IuserHelper userhelper , IBlobHelper blobHelper , 
+            IMailHelper mailHelper)
         {
             _context = context;
             _userhelper = userhelper;
             _blobHelper = blobHelper;
+            _mailHelper = mailHelper;
         }
 
         public IActionResult Login()
@@ -64,18 +69,20 @@ namespace HealthCare.API.Controllers
             return View();
         }
 
+
         public IActionResult Register()
         {
-            AddUserViewModel modeel = new AddUserViewModel
+            AddUserViewModel model = new AddUserViewModel
             {
-
+               
             };
-            return View(modeel);
+
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult>Register(AddUserViewModel model)
+        public async Task<IActionResult> Register(AddUserViewModel model)
         {
             if(ModelState.IsValid)
             {
@@ -85,30 +92,43 @@ namespace HealthCare.API.Controllers
                 {
                     imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "users");
                 }
-                User user = await _userhelper.AddUserAsync(model, imageId, model.UserType);
+                User user = await _userhelper.AddUserAsync(model, imageId, UserType.User);
 
                 if(user==null)
                 {
                     ModelState.AddModelError(string.Empty, "This email is already being used by another user.");
                     return View(model);
                 }
-                string myToken = await _userhelper.GenerateEmailConfirmationTokenAsync(user);
-                string tokenLink = Url.Action("ConfirmEmail", "Account", new
-                {
-                    userid = user.Id,
-                    token = myToken
-                }, protocol: HttpContext.Request.Scheme);
 
-                Response response = _mailHelper.SendMail(model.Username, "Vehicles - Confirmación de cuenta", $"<h1>Vehicles - Confirmación de cuenta</h1>" +
-                    $"Para habilitar el usuario, " +
-                    $"por favor hacer clic en el siguiente enlace: </br></br><a href = \"{tokenLink}\">Confirmar Email</a>");
-                if (response.IsSuccess)
+
+                LoginViewModel loginViewModel = new LoginViewModel
                 {
-                    ViewBag.Message = "Las instrucciones para habilitar su cuenta han sido enviadas al correo.";
-                    return View(model);
+                    Password=model.Password,
+                    RememberMe=false,
+                    Username=model.Username,
+                };
+                var result2 = await _userhelper.LoginSync(loginViewModel);
+                if(result2.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
                 }
+                //string myToken = await _userhelper.GenerateEmailConfirmationTokenAsync(user);
+                //string tokenLink = Url.Action("ConfirmEmail", "Account", new
+                //{
+                //    userid = user.Id,
+                //    token = myToken
+                //}, protocol: HttpContext.Request.Scheme);
 
-                ModelState.AddModelError(string.Empty, response.Message);
+                //Response response = _mailHelper.SendMail(model.Username, "Vehicles - Confirmación de cuenta", $"<h1>Vehicles - Confirmación de cuenta</h1>" +
+                //    $"Para habilitar el usuario, " +
+                //    $"por favor hacer clic en el siguiente enlace: </br></br><a href = \"{tokenLink}\">Confirmar Email</a>");
+                //if (response.IsSuccess)
+                //{
+                //    ViewBag.Message = "Las instrucciones para habilitar su cuenta han sido enviadas al correo.";
+                //    return View(model);
+                //}
+
+                //ModelState.AddModelError(string.Empty, response.Message);
             }
             return View(model);
         }

@@ -40,7 +40,7 @@ namespace HealthCare.API.Helpers
                 Email = model.Username,
                 UserName = model.Username,
                 PhoneNumber = model.PhoneNumber,
-                ImageId = model.ImageId,
+                ImageId = imageId,
                 userType = userType,
 
             };

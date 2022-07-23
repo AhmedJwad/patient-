@@ -34,6 +34,7 @@ builder.Services.AddScoped<IuserHelper, UserHelper>();
 builder.Services.AddScoped<ICombosHelper, Comboshelper>();
 builder.Services.AddScoped<IBlobHelper, BlobHelper>();
 builder.Services.AddScoped<IconverterHelper, ConverterHelper>();
+builder.Services.AddScoped<IMailHelper, MailHelper>();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
 var app = builder.Build();

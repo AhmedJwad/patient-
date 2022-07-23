@@ -1,5 +1,8 @@
-﻿using HealthCare.Common.Models;
+﻿using MailKit.Net.Smtp;
+
 using MimeKit;
+using System;
+using HealthCare.Common.Models;
 
 namespace HealthCare.API.Helpers
 {
@@ -7,10 +10,12 @@ namespace HealthCare.API.Helpers
     {
         private readonly IConfiguration _configuration;
 
-        public MailHelper(IConfiguration configuration)
+        public MailHelper( IConfiguration configuration )
         {
-            _configuration = configuration;
+           _configuration = configuration;
         }
+
+
         public Response SendMail(string to, string subject, string body)
         {
             try
@@ -21,8 +26,8 @@ namespace HealthCare.API.Helpers
                 string password = _configuration["Mail:Password"];
 
                 MimeMessage message = new MimeMessage();
-                message.From.Add(new MailboxAddress(from));
-                message.To.Add(new MailboxAddress(to));
+               // message.From.Add(new MailboxAddress(from));
+                //message.To.Add(new MailboxAddress(to));
                 message.Subject = subject;
                 BodyBuilder bodyBuilder = new BodyBuilder
                 {
