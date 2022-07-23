@@ -25,5 +25,7 @@ namespace HealthCare.API.Helpers
 
         Task<IdentityResult> ConfirmEmailAsync(User user, string token);
 
+        Task<IdentityResult> ChangePasswordAsync(User user, string oldPassword, string newPassword);
+
     }
 }

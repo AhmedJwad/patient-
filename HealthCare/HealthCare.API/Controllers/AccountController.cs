@@ -133,7 +133,87 @@ namespace HealthCare.API.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> ChangeUser()
+        {
+            User user = await _userhelper.GetUserAsync(User.Identity.Name);
+            if(user ==null)
+            {
+                return NotFound();
+            }
 
+            EditUserViewModel model = new()
+            {
+                Address=user.Address,
+                FirstName=user.FirstName,
+                LastName=user.LastName,
+                PhoneNumber=user.PhoneNumber,
+                ImageId=user.ImageId,
+                Id=user.Id,
+               
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangeUser(EditUserViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                Guid imageId = model.ImageId;
+                if(model.ImageFile !=null)
+                {
+                    imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "users");
+                }
+                User user = await _userhelper.GetUserAsync(User.Identity.Name);
+                if(user==null)
+                {
+                    return NotFound();
+                }
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.PhoneNumber = model.PhoneNumber;
+                user.Address = model.Address;
+                user.ImageId = imageId;
+                await _userhelper.UpdateUserAsync(user);
+                return RedirectToAction("Index", "Home");
+            }
+            return View(model);
+        }
+
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                User user=await _userhelper.GetUserAsync(User.Identity.Name);
+                if (user != null)
+                {
+                    IdentityResult result = await _userhelper.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction(nameof(ChangeUser));
+
+                    } else
+                    {
+                        ModelState.AddModelError(string.Empty, result.Errors.FirstOrDefault().Description);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "User not found.");
+                }
+                
+            }
+            return View(model); ;
+        }
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
             if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(token))
