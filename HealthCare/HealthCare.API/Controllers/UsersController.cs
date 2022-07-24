@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HealthCare.API.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin , User")]
     public class UsersController : Controller
     {
         private readonly DataContext _context;
@@ -28,8 +28,17 @@ namespace HealthCare.API.Controllers
             _blobHelper = blobHelper;
         }
 
-        
+       
+        public async Task<IActionResult> Patients()
+        {
+            User user = await _userhelper.GetUserAsync(User.Identity.Name);
+            if (user == null)
+            {
+                return NotFound();
+            }
 
+            return RedirectToAction(nameof(Details), new { id = user.Id });
+        }
         public async Task<IActionResult> Index()
         {
             return View(await _context.Users.Include(x=>x.Patients)

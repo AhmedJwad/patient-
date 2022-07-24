@@ -46,7 +46,11 @@
 <div>
     <a asp-action="AddPatient" asp-route-id="@Model.Id" class="btn btn-primary">Add Patient</a>
     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Udit User</a>
-    <a asp-action="Index" class="btn btn-success">Back to List</a>
+    @if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+         <a asp-action="Index" class="btn btn-success">Back to List</a>
+    }
+   
 </div>
 <br />
 
