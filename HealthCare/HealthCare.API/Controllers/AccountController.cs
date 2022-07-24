@@ -230,5 +230,64 @@ namespace HealthCare.API.Controllers
 
             return View();
         }
+
+        public IActionResult RecoverPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> RecoverPassword(RecoverPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await _userhelper.GetUserAsync(model.Email);
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "The email entered does not correspond to any user.");
+                    return View(model);
+                }
+
+                string myToken = await _userhelper.GeneratePasswordResetTokenAsync(user);
+                string link = Url.Action(
+                    "ResetPassword",
+                    "Account",
+                    new { token = myToken }, protocol: HttpContext.Request.Scheme);
+                _mailHelper.SendMail($"{user.FullName} ",
+                    model.Email, "HealthCare - Password Reset", $"<h1>HealthCare - Password Reset</h1>" +
+                    $"To set a new password click on the following link:</br></br>" +
+                    $"<a href = \"{link}\">Change of password</a>");
+                ViewBag.Message = "Instructions for changing your password have been sent to your email.";
+                return View();
+
+            }
+
+            return View(model);
+        }
+
+        public IActionResult ResetPassword(string token)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            User user = await _userhelper.GetUserAsync(model.UserName);
+            if (user != null)
+            {
+                IdentityResult result = await _userhelper.ResetPasswordAsync(user, model.Token, model.Password);
+                if (result.Succeeded)
+                {
+                    ViewBag.Message = "Account changed.";
+                    return View();
+                }
+
+                ViewBag.Message = "Error changing password.";
+                return View(model);
+            }
+
+            ViewBag.Message = "User not found.";
+            return View(model);
+        }
     }
 }

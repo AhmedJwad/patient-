@@ -91,6 +91,11 @@ namespace HealthCare.API.Helpers
             return await _userManager.GenerateEmailConfirmationTokenAsync(user);
         }
 
+        public async Task<string> GeneratePasswordResetTokenAsync(User user)
+        {
+           return await _userManager.GeneratePasswordResetTokenAsync(user);
+        }
+
         public async Task<User> GetUserAsync(string email)
         {
             return await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
@@ -116,6 +121,11 @@ namespace HealthCare.API.Helpers
             await _signInManager.SignOutAsync();
         }
 
+        public async Task<IdentityResult> ResetPasswordAsync(User user, string token, string password)
+        {
+            return await _userManager.ResetPasswordAsync(user, token, password);  
+        }
+
         public async Task<IdentityResult> UpdateUserAsync(User user)
         {
             User currentuser = await GetUserAsync(user.Email);
@@ -128,6 +138,11 @@ namespace HealthCare.API.Helpers
 
             return await _userManager.UpdateAsync(currentuser);
 
+        }
+
+        public async Task<SignInResult> ValidatePasswordAsync(User user, string password)
+        {
+            return await _signInManager.CheckPasswordSignInAsync(user, password, false);
         }
     }
 }
