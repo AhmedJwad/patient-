@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
+using HealthCare.API.Data;
 
 namespace HealthCare.API.Data.Entities
 {
@@ -14,5 +16,6 @@ namespace HealthCare.API.Data.Entities
 
         [JsonIgnore]
         public ICollection<Detail> details { get; set; }
+	
     }
 }

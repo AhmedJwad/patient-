@@ -63,9 +63,17 @@
               "target": "Package",
               "version": "[12.2.0, )"
             },
+            "Grpc.Net.Client": {
+              "target": "Package",
+              "version": "[2.47.0, )"
+            },
             "MailKit": {
               "target": "Package",
               "version": "[3.3.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.7, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
@@ -92,6 +100,18 @@
             "Microsoft.Extensions.Azure": {
               "target": "Package",
               "version": "[1.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Binder": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.EnvironmentVariables": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",

@@ -1,11 +1,19 @@
+﻿using Grpc.Net.Client.Configuration;
+using HealthCare.API;
 using HealthCare.API.Data;
 using HealthCare.API.Data.Entities;
 using HealthCare.API.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Azure;
+using Microsoft.IdentityModel.Tokens;
+using System.Configuration;
+using System.Text;
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -25,6 +33,21 @@ builder.Services.AddIdentity<User, IdentityRole>(x =>
     x.Password.RequireUppercase = false;   
 }).AddDefaultTokenProviders()
 .AddEntityFrameworkStores<DataContext>();
+
+
+builder.Services.AddAuthentication()
+                .AddCookie()
+                .AddJwtBearer(cfg =>
+                {
+                    
+                    cfg.TokenValidationParameters = new TokenValidationParameters
+                    {
+                   
+                    ValidIssuer = builder.Configuration["Tokens:Issuer"],
+                        ValidAudience = builder.Configuration["Tokens:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Tokens:Key"]))
+                    };
+                });
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/NotAuthorized";
@@ -71,5 +94,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
 app.Run();

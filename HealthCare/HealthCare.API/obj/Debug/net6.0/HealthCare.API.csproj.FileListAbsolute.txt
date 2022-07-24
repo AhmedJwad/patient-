@@ -569,3 +569,8 @@ C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\MailKit.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\MimeKit.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\libman.json
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\Grpc.Core.Api.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\Grpc.Net.Client.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\Grpc.Net.Common.dll

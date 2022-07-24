@@ -3,13 +3,13 @@
     ViewData["Title"] = "DetailsPatient";
 }
 
-<h1>DetailsPatient</h1>
+<h1>Details Patient</h1>
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
-<h2>Historia</h2>
+<h2>History</h2>
 
 <div>
-    <h4>Vehiculo</h4>
+    <h4>patients</h4>
     <hr />
     <div class="row">
         <div class="col-md-8">
@@ -76,7 +76,7 @@
     </div>
 </div>
 <div>
-    @if (User.IsInRole("Admin"))
+    @if ((User.IsInRole("Admin")) || (User.IsInRole("User")))
     {
         <a asp-action="AddHistory" asp-route-id="@Model.Id" class="btn btn-primary">Add History</a>
     }
@@ -147,12 +147,12 @@
                                 </td>                              
                                
                                 <td>
-                                    @if (User.IsInRole("Admin"))
+                                   @if ((User.IsInRole("Admin")) || (User.IsInRole("User")))
                                     {
                                         <a asp-action="EditHistory" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
                                     }
                                     <a asp-action="DetailsHistory" asp-route-id="@item.Id" class="btn btn-info">Details<i class="glyphicon glyphicon-align-justify"></i></a>
-                                    @if (User.IsInRole("Admin"))
+                                   @if ((User.IsInRole("Admin")) || (User.IsInRole("User")))
                                     {
                                         <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog">Delete</button>
                                     }
