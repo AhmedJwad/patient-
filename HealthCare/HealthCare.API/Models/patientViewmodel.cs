@@ -73,6 +73,7 @@ namespace HealthCare.API.Models
         [Display(Name = "Photo")]
         public IFormFile? ImageFile { get; set; }
 
+      
         public ICollection<PatientPhoto> patientPhotos { get; set; }
 
         

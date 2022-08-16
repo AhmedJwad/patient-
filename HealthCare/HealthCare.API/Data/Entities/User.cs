@@ -27,7 +27,7 @@ namespace HealthCare.API.Data.Entities
 
         [Display(Name = "Photo")]
         public string ImageFullPath => ImageId == Guid.Empty
-           ? $"https://localhost:7152/images/noimage.png"
+           ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
            : $"https://imagesahmed.blob.core.windows.net/users/{ImageId}";
 
 

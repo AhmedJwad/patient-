@@ -1,6 +1,7 @@
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\HealthCare.API.exe
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\appsettings.json
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\libman.json
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\refs\Microsoft.AspNetCore.Antiforgery.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\refs\Microsoft.AspNetCore.Authentication.Abstractions.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\refs\Microsoft.AspNetCore.Authentication.Cookies.dll
@@ -300,9 +301,14 @@ C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Azure.Storage.Common.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Azure.Storage.Files.Shares.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Azure.Storage.Queues.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Grpc.Core.Api.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Grpc.Net.Client.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Grpc.Net.Common.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Humanizer.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\MailKit.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\MessagePack.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\MessagePack.Annotations.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
@@ -353,6 +359,7 @@ C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\MimeKit.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Newtonsoft.Json.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\NuGet.Common.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\NuGet.Configuration.dll
@@ -363,6 +370,7 @@ C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\NuGet.ProjectModel.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\NuGet.Protocol.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\NuGet.Versioning.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\BouncyCastle.Crypto.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll

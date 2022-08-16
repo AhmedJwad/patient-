@@ -6,6 +6,11 @@ using HealthCare.Common.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Pango;
+using System.Drawing;
+using System.Drawing.Imaging;
+using VisioForge.Libs.MediaFoundation.OPM;
+using Color = System.Drawing.Color;
 
 namespace HealthCare.API.Controllers
 {
@@ -199,11 +204,13 @@ namespace HealthCare.API.Controllers
                 {
                     return NotFound();
                 }
-
                 Guid imageId = Guid.Empty;
-                if (patientViewmodel.ImageFile != null)
-                {
+           
+            if (patientViewmodel.ImageFile != null)
+                {           
+               
                     imageId = await _blobHelper.UploadBlobAsync(patientViewmodel.ImageFile, "patients");
+               
                 }
 
                 Patient patient = await _converterhleper.ToPatientAsync(patientViewmodel, true);
@@ -385,6 +392,8 @@ namespace HealthCare.API.Controllers
         {
           if(ModelState.IsValid)
             {
+             
+
                 Guid ImageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "patients");
                 Patient patient = await _context.patients.Include(x => x.patientPhotos)
                     .FirstOrDefaultAsync(x => x.Id == model.PatientId);
@@ -667,6 +676,24 @@ namespace HealthCare.API.Controllers
             _context.details.Remove(detail);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(DetailsHistory), new { id = detail.History.Id });
+        }
+
+        public async Task<IActionResult> ConverttoRGB(int? Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            PatientPhoto patientPhoto = await _context.patientPhotos.Include(x => x.patient)
+                .FirstOrDefaultAsync(x => x.Id == Id);
+            if (patientPhoto == null)
+            {
+                return NotFound();
+            }
+
+            return View(patientPhoto);
+
         }
     }
 }

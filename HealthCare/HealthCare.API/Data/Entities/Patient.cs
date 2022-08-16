@@ -66,7 +66,7 @@ namespace HealthCare.API.Data.Entities
 
         [Display(Name = "Photo")]
         public string ImageFullPath => patientPhotos == null || patientPhotos.Count == 0
-           ? $"https://localhost:7152/images/noimage.png"
+           ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
            : patientPhotos.FirstOrDefault().ImageFullPath;
 
         [Display(Name = "# histories")]

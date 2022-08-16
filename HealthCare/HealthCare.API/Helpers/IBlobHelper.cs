@@ -1,4 +1,6 @@
-﻿namespace HealthCare.API.Helpers
+﻿using System.Drawing;
+
+namespace HealthCare.API.Helpers
 {
     public interface IBlobHelper
     {
@@ -9,5 +11,6 @@
         Task<Guid> UploadBlobAsync(string image, string containerName);
 
         Task DeleteBlobAsync(Guid id, string containerName);
+        Bitmap Color(Bitmap original);
     }
 }
