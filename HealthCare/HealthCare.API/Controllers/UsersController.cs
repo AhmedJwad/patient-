@@ -691,8 +691,15 @@ namespace HealthCare.API.Controllers
             {
                 return NotFound();
             }
+            patientimageviewmodel model = new patientimageviewmodel
+            {
+                Id = patientPhoto.Id,
+                ImageId = patientPhoto.ImageId,
+                patient = patientPhoto.patient,
 
-            return View(patientPhoto);
+            };
+
+            return View(model);
 
         }
     }
