@@ -6,11 +6,8 @@ using HealthCare.Common.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Pango;
 using System.Drawing;
 using System.Drawing.Imaging;
-using VisioForge.Libs.MediaFoundation.OPM;
-using Color = System.Drawing.Color;
 
 namespace HealthCare.API.Controllers
 {
@@ -382,7 +379,7 @@ namespace HealthCare.API.Controllers
             {
                 PatientId = patient.Id,
 
-            };
+            };           
             return View(model);
         }
 
@@ -391,9 +388,7 @@ namespace HealthCare.API.Controllers
         public async Task<IActionResult> AddPatientImage(PatientPhotoViewModel model)
         {
           if(ModelState.IsValid)
-            {
-             
-
+            {             
                 Guid ImageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "patients");
                 Patient patient = await _context.patients.Include(x => x.patientPhotos)
                     .FirstOrDefaultAsync(x => x.Id == model.PatientId);
@@ -405,7 +400,7 @@ namespace HealthCare.API.Controllers
                 patient.patientPhotos.Add(new PatientPhoto
                 {
                     ImageId=ImageId,
-                });
+                });             
 
                 _context.patients.Update(patient);
                 await _context.SaveChangesAsync();
@@ -678,8 +673,9 @@ namespace HealthCare.API.Controllers
             return RedirectToAction(nameof(DetailsHistory), new { id = detail.History.Id });
         }
 
-        public async Task<IActionResult> ConverttoRGB(int? Id)
+        public async Task<IActionResult> ConverttoRGB(int? Id )
         {
+            double[,] red, green, blue;
             if (Id == null)
             {
                 return NotFound();
@@ -694,13 +690,62 @@ namespace HealthCare.API.Controllers
             patientimageviewmodel model = new patientimageviewmodel
             {
                 Id = patientPhoto.Id,
-                ImageId = patientPhoto.ImageId,
-                patient = patientPhoto.patient,
+                ImageId = patientPhoto.ImageId.ToString(),
+                patient = patientPhoto.patient,         
+            };         
+                              
+            Bitmap rbmp , bmp;      
+          
+               var httpClient = new HttpClient();
 
-            };
+                var stream = await httpClient.GetStreamAsync(model.ImageFullPath);
 
-            return View(model);
+                 bmp = new Bitmap(stream);                
+                
 
+                       int w;
+                        int h;
+                        w = bmp.Width;
+                        h = bmp.Height;
+                        red = new double[w, h];
+                        green = new double[w, h];
+                        blue = new double[w, h];
+                        for (int i = 0; i < 256; i++)
+                        {
+                            for (int j = 0; j < 256; j++)
+                            {
+                                red[i, j] = bmp.GetPixel(i, j).R;
+                                green[i, j] = bmp.GetPixel(i, j).G;
+                                blue[i, j] = bmp.GetPixel(i, j).B;
+
+                            }
+                        }
+                        rbmp = new Bitmap(w, h);
+                        Bitmap gbmp = new Bitmap(w, h);
+                        Bitmap bbmp = new Bitmap(w, h);
+                        for (int i = 0; i < 256; i++)
+                        {
+                            for (int j = 0; j < 256; j++)
+                            {
+                                rbmp.SetPixel(i, j, Color.FromArgb((int)red[i, j], 0, 0));
+                                gbmp.SetPixel(i, j, Color.FromArgb(0, (int)red[i, j], 0));
+                                bbmp.SetPixel(i, j, Color.FromArgb(0, 0, (int)red[i, j]));
+
+                            }
+                        }
+
+                rbmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\red" + ImageFormat.Png + ".jpg"));
+                gbmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\green" + ImageFormat.Png + ".jpg"));
+                bbmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\blue" + ImageFormat.Png + ".jpg"));
+                string path = ($"images\\red" + ImageFormat.Png + ".jpg");
+                string path1 = ($"images\\green" + ImageFormat.Png + ".jpg");
+                string path2 = ($"images\\blue" + ImageFormat.Png + ".jpg");
+            model.rbmp=path;
+            model.gbmp = path1;
+            model.bbmp = path2;
+              return View(model );
         }
+
+      
     }
 }

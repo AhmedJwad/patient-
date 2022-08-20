@@ -12,5 +12,7 @@ namespace HealthCare.API.Helpers
 
         Task DeleteBlobAsync(Guid id, string containerName);
         Bitmap Color(Bitmap original);
+
+        Bitmap Base64StringToBitmap(string base64String );
     }
 }
