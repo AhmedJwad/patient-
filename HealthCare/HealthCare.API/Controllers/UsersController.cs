@@ -3,6 +3,7 @@ using HealthCare.API.Data.Entities;
 using HealthCare.API.Helpers;
 using HealthCare.API.Models;
 using HealthCare.Common.Enums;
+using LazZiya.ImageResize;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -694,14 +695,17 @@ namespace HealthCare.API.Controllers
                 patient = patientPhoto.patient,         
             };         
                               
-            Bitmap rbmp , bmp;      
-          
-               var httpClient = new HttpClient();
+            Bitmap rbmp , bmp;
 
-                var stream = await httpClient.GetStreamAsync(model.ImageFullPath);
+            var httpClient = new HttpClient();            
+             var stream = await httpClient.GetStreamAsync(model.ImageFullPath);
 
-                 bmp = new Bitmap(stream);                
-                
+            //var path0 =Image.FromFile(stream);           
+
+
+
+            bmp = new Bitmap(stream );
+            bmp = new Bitmap(bmp, new Size(350, 300));
 
                        int w;
                         int h;

@@ -594,3 +594,4 @@ C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\MoyskleyTech.Mathematics.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\ImageProcessor.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\SixLabors.ImageSharp.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\LazZiya.ImageResize.dll

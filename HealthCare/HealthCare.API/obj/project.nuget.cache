@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "hsqdLC3+6k7nrutNiY3V/JvAQd9Uxc/4ZlJAHan38UwHSjQFoWgkzZPR4ZGHrl2Pj/UotxlpXMSG00klJanZMQ==",
+  "dgSpecHash": "pmHL0JsBkhlgQW/14Zw7RQIWhTbhZzR9nuO4c0OBIcclrWLCNZXTzy0iOvrZcTZeNP1PQ+USaulRwdq4o9xRLA==",
   "success": true,
   "projectFilePath": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\HealthCare.API.csproj",
   "expectedPackageFiles": [
@@ -16,6 +16,7 @@
     "C:\\Users\\alnaseem\\.nuget\\packages\\grpc.net.common\\2.47.0\\grpc.net.common.2.47.0.nupkg.sha512",
     "C:\\Users\\alnaseem\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\alnaseem\\.nuget\\packages\\imageprocessor\\2.9.1\\imageprocessor.2.9.1.nupkg.sha512",
+    "C:\\Users\\alnaseem\\.nuget\\packages\\lazziya.imageresize\\4.1.0\\lazziya.imageresize.4.1.0.nupkg.sha512",
     "C:\\Users\\alnaseem\\.nuget\\packages\\mailkit\\3.3.0\\mailkit.3.3.0.nupkg.sha512",
     "C:\\Users\\alnaseem\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\alnaseem\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",

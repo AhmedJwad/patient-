@@ -41,6 +41,7 @@
           "Grpc.Net.Client": "2.47.0",
           "HealthCare.Common": "1.0.0",
           "ImageProcessor": "2.9.1",
+          "LazZiya.ImageResize": "4.1.0",
           "MailKit": "3.3.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.7",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.7",
@@ -555,6 +556,20 @@
         },
         "compile": {
           "lib/net452/ImageProcessor.dll": {}
+        }
+      },
+      "LazZiya.ImageResize/4.1.0": {
+        "dependencies": {
+          "System.Drawing.Common": "6.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/LazZiya.ImageResize.dll": {
+            "assemblyVersion": "4.1.0.0",
+            "fileVersion": "4.1.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/LazZiya.ImageResize.dll": {}
         }
       },
       "MailKit/3.3.0": {
@@ -5242,6 +5257,13 @@
       "sha512": "sha512-QzYXsKGBdgAcxneFucxPcsMnCFr3VwZKZ09cPwVH6TzcgA2JWskfDPr3u6IyDsHRgX+Ju1rgQr+I2I5/wRbcog==",
       "path": "imageprocessor/2.9.1",
       "hashPath": "imageprocessor.2.9.1.nupkg.sha512"
+    },
+    "LazZiya.ImageResize/4.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bTAJ7Coa2I2PAKw7rcIyjVZlpJnoJacTpkAYAFDSQTrWC4r6m19zoVfMYbn/CXsJc9mfVqznuf0Ql0uwvproKg==",
+      "path": "lazziya.imageresize/4.1.0",
+      "hashPath": "lazziya.imageresize.4.1.0.nupkg.sha512"
     },
     "MailKit/3.3.0": {
       "type": "package",

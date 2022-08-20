@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "H+5dpwfi/0rtuAdYwax+9MO5qAn3BxJCTzPFqu0WdOA=",
+  "Hash": "dXM1dmCIrA8m0LJaveAvf/pwd1giXqo4E7vCXDID354=",
   "Source": "HealthCare.API",
   "BasePath": "_content/HealthCare.API",
   "Mode": "Default",
@@ -185,23 +185,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\redPng.jpg"
-    },
-    {
-      "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\resize.jpg",
-      "SourceId": "HealthCare.API",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\",
-      "BasePath": "_content/HealthCare.API",
-      "RelativePath": "images/resize.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\resize.jpg"
     },
     {
       "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images1e83b1d5-98f8-41ec-8d7d-178cae7a3391",
