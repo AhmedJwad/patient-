@@ -1,14 +1,25 @@
-﻿using HealthCare.API.Data;
+﻿using Aspose.Imaging;
+using Braintree;
+using Grpc.Core;
+using Gst;
+using HealthCare.API.Data;
 using HealthCare.API.Data.Entities;
 using HealthCare.API.Helpers;
 using HealthCare.API.Models;
 using HealthCare.Common.Enums;
+using ImageProcessor.Imaging.Helpers;
 using LazZiya.ImageResize;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MoyskleyTech.ImageProcessing.Form.Control;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Net.Http;
+using VisioForge.MediaFramework.GStreamer.Base;
+using DateTime = System.DateTime;
+using Uri = System.Uri;
 
 namespace HealthCare.API.Controllers
 {
@@ -705,7 +716,7 @@ namespace HealthCare.API.Controllers
 
 
             bmp = new Bitmap(stream );
-            bmp = new Bitmap(bmp, new Size(350, 300));
+            bmp = new Bitmap(bmp, new System.Drawing.Size(350, 300));
 
                        int w;
                         int h;
@@ -731,9 +742,9 @@ namespace HealthCare.API.Controllers
                         {
                             for (int j = 0; j < 256; j++)
                             {
-                                rbmp.SetPixel(i, j, Color.FromArgb((int)red[i, j], 0, 0));
-                                gbmp.SetPixel(i, j, Color.FromArgb(0, (int)red[i, j], 0));
-                                bbmp.SetPixel(i, j, Color.FromArgb(0, 0, (int)red[i, j]));
+                                rbmp.SetPixel(i, j,System.Drawing.Color.FromArgb((int)red[i, j], 0, 0));
+                                gbmp.SetPixel(i, j, System.Drawing.Color.FromArgb(0, (int)red[i, j], 0));
+                                bbmp.SetPixel(i, j, System.Drawing.Color.FromArgb(0, 0, (int)red[i, j]));
 
                             }
                         }
@@ -741,15 +752,56 @@ namespace HealthCare.API.Controllers
                 rbmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\red" + ImageFormat.Png + ".jpg"));
                 gbmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\green" + ImageFormat.Png + ".jpg"));
                 bbmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\blue" + ImageFormat.Png + ".jpg"));
+               // bmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\normal" + ImageFormat.Png + ".jpg"));
                 string path = ($"images\\red" + ImageFormat.Png + ".jpg");
                 string path1 = ($"images\\green" + ImageFormat.Png + ".jpg");
                 string path2 = ($"images\\blue" + ImageFormat.Png + ".jpg");
+               bmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\normal" + ImageFormat.Png + ".jpg"));
+              string path4 = ($"wwwroot\\images\\normal" + ImageFormat.Png + ".jpg");
             model.rbmp=path;
             model.gbmp = path1;
             model.bbmp = path2;
-              return View(model );
+            using (Aspose.Imaging.Image image = Aspose.Imaging.Image.Load(path4))
+            {
+                // Cast the image to RasterCachedImage and check if image is cached
+                RasterCachedImage rasterCachedImage = (RasterCachedImage)image;
+                if (!rasterCachedImage.IsCached)
+                {
+                    // Cache image if not already cached
+                    rasterCachedImage.CacheData();
+                }
+
+                // Transform image to its binary representation
+                rasterCachedImage.BinarizeFixed(100);
+
+                // Save the image
+                rasterCachedImage.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\blackandwhite" + ImageFormat.Png + ".jpg"));
+            }
+            string path5 = ($"images\\blackandwhite" + ImageFormat.Png + ".jpg");
+            model.binaryimage = path5;
+            Bitmap temp = bmp;
+            Bitmap bmap = (Bitmap)temp.Clone();
+           System.Drawing.Color col;
+            for (int i = 0; i < bmap.Width; i++)
+            {
+                for (int j = 0; j < bmap.Height; j++)
+                {
+                    col = bmap.GetPixel(i, j);
+                    byte gray = (byte)(.299 * col.R + .587 * col.G + .114 * col.B);                
+                    bmap.SetPixel(i, j, System.Drawing.Color.FromArgb(gray, gray, gray));
+                }
+            }           
+            bmp = (Bitmap)bmap.Clone();
+            Random rnd = new Random();
+            int a = rnd.Next();
+           
+            bmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\blackandwhite1" + ImageFormat.Png + ".jpg"));
+            string path3 = ($"images\\blackandwhite1" + ImageFormat.Png + ".jpg");
+
+            model.imagenormal = path3;
+            return View(model );
         }
 
-      
+       
     }
 }

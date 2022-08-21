@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dc544e49-9fe2-43b4-a44e-f6b069c2eec0</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -51,15 +52,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Aspose.Imaging" Version="22.8.0" />
     <PackageReference Include="Azure.Storage.Blobs" Version="12.3.0" />
     <PackageReference Include="Azure.Storage.Files.Shares" Version="12.1.0" />
     <PackageReference Include="Azure.Storage.Queues" Version="12.2.0" />
+    <PackageReference Include="Braintree" Version="5.13.0" />
     <PackageReference Include="Grpc.Core" Version="2.46.3" />
     <PackageReference Include="Grpc.Net.Client" Version="2.47.0" />
     <PackageReference Include="ImageProcessor" Version="2.9.1" />
     <PackageReference Include="LazZiya.ImageResize" Version="4.1.0" />
     <PackageReference Include="MailKit" Version="3.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.7" />
@@ -84,6 +88,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HealthCare.Common\HealthCare.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\binary\" />
   </ItemGroup>
 
 </Project>

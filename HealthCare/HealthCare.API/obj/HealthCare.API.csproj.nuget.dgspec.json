@@ -51,6 +51,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Aspose.Imaging": {
+              "target": "Package",
+              "version": "[22.8.0, )"
+            },
             "Azure.Storage.Blobs": {
               "target": "Package",
               "version": "[12.3.0, )"
@@ -62,6 +66,10 @@
             "Azure.Storage.Queues": {
               "target": "Package",
               "version": "[12.2.0, )"
+            },
+            "Braintree": {
+              "target": "Package",
+              "version": "[5.13.0, )"
             },
             "Grpc.Core": {
               "target": "Package",
@@ -86,6 +94,10 @@
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.7, )"
+            },
+            "Microsoft.AspNetCore.Http.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
