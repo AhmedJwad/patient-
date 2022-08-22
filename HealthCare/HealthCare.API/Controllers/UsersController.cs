@@ -14,11 +14,18 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MoyskleyTech.ImageProcessing.Form.Control;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Net.Http;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using VisioForge.Libs.AForge.Imaging.Filters;
+using VisioForge.Libs.MediaFoundation.OPM;
 using VisioForge.MediaFramework.GStreamer.Base;
 using DateTime = System.DateTime;
+using PixelFormat = System.Drawing.Imaging.PixelFormat;
+using Rectangle = System.Drawing.Rectangle;
 using Uri = System.Uri;
 
 namespace HealthCare.API.Controllers
@@ -799,6 +806,38 @@ namespace HealthCare.API.Controllers
             string path3 = ($"images\\blackandwhite1" + ImageFormat.Png + ".jpg");
 
             model.imagenormal = path3;
+
+            //convert to binary
+            Bitmap bitmap = new Bitmap(bmp);
+            BitmapData ImageData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            byte[] buffer = new byte[3 * bitmap.Width * bitmap.Height];
+            IntPtr pointer = ImageData.Scan0;
+            Marshal.Copy(pointer, buffer, 0, buffer.Length);
+            for (int i = 0; i < bitmap.Height * 3 * bitmap.Width; i += 3)
+            {
+                byte b = buffer[i];
+                byte g = buffer[i + 1];
+                byte r = buffer[i + 2];
+                byte grayscale = (byte)((r + g + b) / 3);
+                if (grayscale < 128)
+                {
+                    buffer[i] = 0;
+                    buffer[i + 1] = 0;
+                    buffer[i + 2] = 0;
+                }
+                else
+                {
+                    buffer[i] = 255;
+                    buffer[i + 1] = 255;
+                    buffer[i + 2] = 255;
+                }
+            }
+            Marshal.Copy(buffer, 0, pointer, buffer.Length);
+            bitmap.UnlockBits(ImageData);
+            bitmap.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\binaryimage" + ImageFormat.Png + ".jpg"));
+            string path6 = ($"images\\binaryimage" + ImageFormat.Png + ".jpg");
+            model.binaryorginale = path6;
+            ////end convert to binary
             return View(model );
         }
 

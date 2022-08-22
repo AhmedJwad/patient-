@@ -25,6 +25,8 @@ namespace HealthCare.API.Models
         public string imagenormal { get; set; }
         public string binaryimage { get; set; }
 
+        public string binaryorginale { get; set; }
+
         [Display(Name = "Photo")]
         public string ImageFullPath => ImageId == String.Empty
             ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
@@ -45,5 +47,8 @@ namespace HealthCare.API.Models
         public string Binaryimage => binaryimage == String.Empty
       ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
       : $"https://localhost:7152/{binaryimage}";
+        public string BinaryOrginal => binaryorginale == String.Empty
+     ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
+     : $"https://localhost:7152/{binaryorginale}";
     }
 }
