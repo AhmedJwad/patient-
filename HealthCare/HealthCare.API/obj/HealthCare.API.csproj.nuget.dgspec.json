@@ -71,6 +71,10 @@
               "target": "Package",
               "version": "[5.13.0, )"
             },
+            "Emgu.CV": {
+              "target": "Package",
+              "version": "[4.5.5.4823, )"
+            },
             "Grpc.Core": {
               "target": "Package",
               "version": "[2.46.3, )"
@@ -168,6 +172,10 @@
             "WindowsAzure.Storage": {
               "target": "Package",
               "version": "[9.3.3, )"
+            },
+            "Xamarin.Forms": {
+              "target": "Package",
+              "version": "[5.0.0.2515, )"
             }
           },
           "imports": [

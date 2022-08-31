@@ -11,6 +11,9 @@ namespace HealthCare.API.Helpers
         Task<Guid> UploadBlobAsync(string image, string containerName);
 
         Task DeleteBlobAsync(Guid id, string containerName);
-        
+        Bitmap ToGrayscale(Bitmap bmp);
+
+
+
     }
 }

@@ -550,9 +550,7 @@ C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Debug\net6.
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Debug\net6.0\HealthCare.API.RazorAssemblyInfo.cs
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Debug\net6.0\staticwebassets.development.json
-C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Debug\net6.0\scopedcss\bundle\HealthCare.API.styles.css
-C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Debug\net6.0\scopedcss\projectbundle\HealthCare.API.bundle.scp.css
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Debug\net6.0\HealthCare.API.csproj.CopyComplete
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Debug\net6.0\HealthCare.API.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Debug\net6.0\refint\HealthCare.API.dll
@@ -598,3 +596,8 @@ C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\Braintree.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\System.Xml.XPath.XmlDocument.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\Aspose.Imaging.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\Xamarin.Forms.Core.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\Xamarin.Forms.Platform.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\Xamarin.Forms.Xaml.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Debug\net6.0\Views\Shared\_Layout.cshtml.css.g.cs
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\bin\Debug\net6.0\Emgu.CV.Platform.NetStandard.dll
