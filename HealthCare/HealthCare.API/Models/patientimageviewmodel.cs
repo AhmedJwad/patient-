@@ -27,6 +27,8 @@ namespace HealthCare.API.Models
 
         public string t { get; set; }
 
+        public string scrabmle { get; set; }
+
         public string binaryorginale { get; set; }
 
         [Display(Name = "Photo")]
@@ -55,5 +57,9 @@ namespace HealthCare.API.Models
         public string T => t == String.Empty
      ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
      : $"https://localhost:7152/{t}";
+
+        public string Scramble => scrabmle == String.Empty
+     ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
+     : $"https://localhost:7152/{scrabmle}";
     }
 }

@@ -35,6 +35,14 @@ using PixelFormat = System.Drawing.Imaging.PixelFormat;
 using Rectangle = System.Drawing.Rectangle;
 using Uri = System.Uri;
 using GES;
+using Aspose.Imaging.FileFormats.OpenDocument.Objects.Graphic;
+using SixLabors.ImageSharp;
+using VisioForge.Libs.TagLib;
+using VisioForge.MediaFramework.FFMPEGCore.Instance;
+using System.Security.Cryptography;
+using GLib;
+using System.Diagnostics.Metrics;
+using MoyskleyTech.ImageProcessing.Image;
 
 namespace HealthCare.API.Controllers
 {
@@ -721,7 +729,7 @@ namespace HealthCare.API.Controllers
                 patient = patientPhoto.patient,
             };
 
-            Bitmap rbmp, bmp;
+            System.Drawing.Bitmap rbmp, bmp;
 
             var httpClient = new HttpClient();
             var stream = await httpClient.GetStreamAsync(model.ImageFullPath);
@@ -730,8 +738,8 @@ namespace HealthCare.API.Controllers
 
 
 
-          Bitmap  Almershady = new Bitmap(stream);
-            bmp = new Bitmap(Almershady, new System.Drawing.Size(350, 300));
+            System.Drawing.Bitmap  Almershady = new System.Drawing.Bitmap(stream);
+            bmp = new System.Drawing.Bitmap(Almershady, new System.Drawing.Size(350, 300));
 
             int w;
             int h;
@@ -750,9 +758,9 @@ namespace HealthCare.API.Controllers
 
                 }
             }
-            rbmp = new Bitmap(w, h);
-            Bitmap gbmp = new Bitmap(w, h);
-            Bitmap bbmp = new Bitmap(w, h);
+            rbmp = new System.Drawing.Bitmap(w, h);
+            System.Drawing.Bitmap gbmp = new System.Drawing.Bitmap(w, h);
+            System.Drawing.Bitmap bbmp = new System.Drawing.Bitmap(w, h);
             for (int i = 0; i < 256; i++)
             {
                 for (int j = 0; j < 256; j++)
@@ -794,8 +802,8 @@ namespace HealthCare.API.Controllers
             }
             string path5 = ($"images\\blackandwhite" + ImageFormat.Png + ".jpg");
             model.binaryimage = path5;
-            Bitmap temp = bmp;
-            Bitmap bmap = (Bitmap)temp.Clone();
+            System.Drawing.Bitmap temp = bmp;
+            System.Drawing.Bitmap bmap = (System.Drawing.Bitmap)temp.Clone();
             System.Drawing.Color col;
             for (int i = 0; i < bmap.Width; i++)
             {
@@ -806,7 +814,7 @@ namespace HealthCare.API.Controllers
                     bmap.SetPixel(i, j, System.Drawing.Color.FromArgb(gray, gray, gray));
                 }
             }
-            bmp = (Bitmap)bmap.Clone();
+            bmp = (System.Drawing.Bitmap)bmap.Clone();
             Random rnd = new Random();
             int a = rnd.Next();
 
@@ -816,8 +824,8 @@ namespace HealthCare.API.Controllers
             model.imagenormal = path3;
 
             //convert to binary
-            Bitmap Ahmed = _blobHelper.ToGrayscale(Almershady);
-            Bitmap bitmap = new Bitmap(Almershady);
+            System.Drawing.Bitmap Ahmed = _blobHelper.ToGrayscale(Almershady);
+            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(Almershady);
             BitmapData ImageData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             byte[] buffer = new byte[3 * bitmap.Width * bitmap.Height];
             IntPtr pointer = ImageData.Scan0;
@@ -851,66 +859,106 @@ namespace HealthCare.API.Controllers
             //end convert to binary
             //convert to 8 bit         
 
+            // Almershady = new Bitmap(Almershady, new System.Drawing.Size(350, 300));
            
-            byte[] imagetobinary = BitmapToByteArray(Almershady);
-            string str = PadBold(imagetobinary);
-            string try1 = bytes2bin(imagetobinary);         
-            string yourByteString = Convert.ToString(try1[20], 2).PadLeft(8, '0');
-            char first = yourByteString[0];
-            char second = yourByteString[1];
-            char third = yourByteString[2];
-            char foutth = yourByteString[3];
-            char five = yourByteString[4];
-            char six = yourByteString[5];
-            char seven = yourByteString[6];
-            char eight = yourByteString[7];
+            byte[] imagetobinary = BitmapToByteArray(Almershady);           
+            string  try1 = bytes2bin(imagetobinary);           
+            string str = Convert.ToString(try1[20], 2).PadLeft(8, '0');
+
+            char first = str[0];
+            char second = str[1];
+            char third = str[2];
+            char foutth = str[3];
+            char five = str[4];
+            char six = str[5];
+            char seven = str[6];
+            char eight = str[7];
+            // Returns '0' for '1' and '1' for '0'
+            first = (first == '0') ? '1' : '0';
+            eight = (eight == '0') ? '1' : '0';
+            //if (first == '0')
+            //{
+            //    first = '1';
+            //}
+            //else if(first == '1')
+            //{
+            //    first = '0';
+            //}
+           
+             if (second == '0')
+            {
+                seven = str[6];             
+
+            }
+             else if (second == '1')
+            {
+                seven = (seven == '0') ? '1' : '0';
+            }
+            if (third == '0')
+            {
+                six = str[5];
+
+            }
+            else if (second == '1')
+            {
+                six = (six == '0') ? '1' : '0';
+            }
+            if(six == '0')
+            {
+                third = str[2];
+            }
+            else if (six == '1')
+            {
+                third = (third == '0') ? '1' : '0';
+            }
+            if (seven == '0')
+            {
+               second = str[1];
+            }
+            else if (seven == '1')
+            {
+                second = (second == '0') ? '1' : '0';
+            }
             if (first == '0')
             {
-                five = '1';
-
-
+                foutth = str[3];
+            }
+            else if (first == '1')
+            {
+                foutth = (foutth == '0') ? '1' : '0';
+            }
+            if (eight == '0')
+            {
+               five = str[4];
+            }
+            else if (eight == '1')
+            {
+                five = (five == '0') ? '1' : '0';
             }
             var Ahmedjawad = $"{first}{second}{third}{foutth}{five}{six}{seven}{eight}";
-
-            for (int i = 0; i < bmp.Height; i++)
-            {
-                for (int j = 0; j < bmp.Width; j++)
-                {
-                    //When we add the value to the string we should invert the  
-                    // order because the images are reading from top to bottom
-                    //and the textBox is write from left to right.    
-                    if (bmp.GetPixel(j, i).A.ToString() == "255" && bmp.GetPixel(j, i).B.ToString() == "255" && bmp.GetPixel(j, i).G.ToString() == "255" && bmp.GetPixel(j, i).R.ToString() == "255")
-                    {
-                        model.t= model.t + "0";
-                    }
-                    else
-                    {
-                        model.t = model.t + "1";
-                    }
-                }
-                model.t = model.t + "\r\n"; // this is to make the enter between lines    
-            }
-            //model.t = Ahmedjawad;
-            var byteArray = Enumerable.Range(0, int.MaxValue / 8)
-                          .Select(i => i * 8)    // get the starting index of which char segment
-                          .TakeWhile(i => i < try1.Length)
-                          .Select(i => try1.Substring(i, 8)) // get the binary string segments
-                          .Select(s => Convert.ToByte(s, 2)) // convert to byte
-                          .ToArray();
-            var bytesAsStrings =
-            model.t.Select((c, i) => new { Char = c, Index = i })
+            str = Ahmedjawad;
+            // str = AhmedjawyourByteStringad ;           
+            first = '0';
+            string result = StringToBinary(str);
+            var bytesAsStrings11 = result.Select((c, i) => new { Char = c, Index = i })
            .GroupBy(x => x.Index / 8)
            .Select(g => new string(g.Select(x => x.Char).ToArray()));
-            byte[] bytes = bytesAsStrings.Select(s => Convert.ToByte(s, 2)).ToArray();
+            byte[] bytes11 = bytesAsStrings11.Select(s => Convert.ToByte(s, 2)).ToArray();          
+           result = StringtoBinary(try1);
+           var bytesAsStrings = result.Select((c, i) => new { Char = c, Index = i })
+          .GroupBy(x => x.Index / 8)
+          .Select(g => new string(g.Select(x => x.Char).ToArray()));
+           byte[] bytes = bytesAsStrings.Select(s => Convert.ToByte(s, 2)).ToArray();
+
 
             int width1 = 350;
             int height1 = 300;
             string bytetobitmap="";
-            SaveBitmap(bytetobitmap, width1, height1, bytes);
 
 
+            SaveBitmap(bytetobitmap, width1, height1, bytes11);
 
-            Bitmap newbmp = new Bitmap(width1, height1, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+          System.Drawing.Bitmap newbmp = new System.Drawing.Bitmap(width1, height1, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
             // Create a BitmapData and lock all pixels to be written 
             BitmapData bmpData = newbmp.LockBits(
@@ -923,17 +971,50 @@ namespace HealthCare.API.Controllers
             newbmp.UnlockBits(bmpData);
          
             // Do something with your image, e.g. save it to disc
-            newbmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\netbitmap" + ImageFormat.Png + ".jpg"));
-
-            
+            newbmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\orginalimage" + ImageFormat.Png + ".jpg"));
+            string path8 = ($"images\\orginalimage" + ImageFormat.Png + ".jpg");
+            string path9 = ($"images\\Png"  + ".jpg");
+            model.t = path8;
+            model.scrabmle = path9;
             Ahmed.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\bit8" + ImageFormat.Png + ".jpg"));
+            
             //end convert to 8 bit 
             return View(model);
+        }
+       
+        public static string StringtoBinary(string data)
+        {
+            string sb;
+
+            sb = data;
+            return sb.ToString();
+        }
+        public  string StringToBinary(string data)
+        {
+           
+            StringBuilder sb = new StringBuilder();            
+            foreach (char c in data.ToCharArray())
+            {
+                //26299
+                for (int i = 0; i <=256 ; i++)
+                {
+                    sb.Append(Convert.ToString((c * i * 8), 2));
+                    for (int j = 0; j <=255;  j++)
+                    {
+                        sb.Append(Convert.ToString((c * j * 8), 2));
+                    }            
+                }
+               
+                                  
+
+            }
+
+            return sb.ToString();
         }
         static string PadBold(byte[] b)
         {
             string bin = Convert.ToString(b[20], 2);
-            return new string('0', 8 - bin.Length) + "<b>" + bin + "</b>";
+            return new string('0', 8 - bin.Length) +  bin  ;
         }
 
 
@@ -960,7 +1041,7 @@ namespace HealthCare.API.Controllers
                 fixed (byte* ptr = data)
                 {
 
-                    using (Bitmap image = new Bitmap(width, height, width * 4,
+                    using (System.Drawing. Bitmap image = new System.Drawing.Bitmap(width, height, width * 4,
                                 PixelFormat.Format24bppRgb, new IntPtr(ptr)))
                     {
 
@@ -969,7 +1050,7 @@ namespace HealthCare.API.Controllers
                 }
             }
         }
-        public static byte[] BitmapToByteArray(Bitmap bitmap)
+        public static byte[] BitmapToByteArray(System.Drawing.Bitmap bitmap)
         {
 
             BitmapData bmpdata = null;
@@ -1008,7 +1089,7 @@ namespace HealthCare.API.Controllers
         {
             string[] instance = new string[1 + byte.MaxValue];
             StringBuilder buffer = new StringBuilder("00000000");
-            for (int i = 0; i < instance.Length; ++i)
+            for (int i = 0; i < instance.Length ; ++i)
             {
 
                 buffer[0] = (char)('0' + ((i >> 7) & 1));
@@ -1022,9 +1103,9 @@ namespace HealthCare.API.Controllers
 
                 instance[i] = buffer.ToString();
             }
-            return instance;
-        }
-
+            return instance ;
+        }     
+      
     }
 }
 
