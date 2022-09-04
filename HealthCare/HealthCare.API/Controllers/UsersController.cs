@@ -738,7 +738,7 @@ namespace HealthCare.API.Controllers
 
 
 
-            System.Drawing.Bitmap  Almershady = new System.Drawing.Bitmap(stream);
+            System.Drawing.Bitmap Almershady = new System.Drawing.Bitmap(stream);
             bmp = new System.Drawing.Bitmap(Almershady, new System.Drawing.Size(350, 300));
 
             int w;
@@ -849,7 +849,7 @@ namespace HealthCare.API.Controllers
                     buffer[i + 2] = 255;
                 }
             }
-          
+
             string ByteString = Convert.ToString(buffer[20], 2).PadLeft(8, '0');
             Marshal.Copy(buffer, 0, pointer, buffer.Length);
             bitmap.UnlockBits(ImageData);
@@ -860,11 +860,13 @@ namespace HealthCare.API.Controllers
             //convert to 8 bit         
 
             // Almershady = new Bitmap(Almershady, new System.Drawing.Size(350, 300));
-           
-            byte[] imagetobinary = BitmapToByteArray(Almershady);           
-            string  try1 = bytes2bin(imagetobinary);           
+
+            byte[] imagetobinary = BitmapToByteArray(Almershady);
+            string try1 = bytes2bin(imagetobinary);
+            char [] try6 = try1.ToCharArray();
             string str = Convert.ToString(try1[20], 2).PadLeft(8, '0');
 
+            char example = try1[0];
             char first = str[0];
             char second = str[1];
             char third = str[2];
@@ -873,6 +875,16 @@ namespace HealthCare.API.Controllers
             char six = str[5];
             char seven = str[6];
             char eight = str[7];
+
+            //example change 
+            for (int i = 0; i < try6.Length; i++)
+            {
+                try6[i] = (try6[i] == '0') ? '1' : '0';
+            }
+           
+          
+
+            string try7 = new string(try6);
             // Returns '0' for '1' and '1' for '0'
             first = (first == '0') ? '1' : '0';
             eight = (eight == '0') ? '1' : '0';
@@ -884,13 +896,13 @@ namespace HealthCare.API.Controllers
             //{
             //    first = '0';
             //}
-           
-             if (second == '0')
+
+            if (second == '0')
             {
-                seven = str[6];             
+                seven = str[6];
 
             }
-             else if (second == '1')
+            else if (second == '1')
             {
                 seven = (seven == '0') ? '1' : '0';
             }
@@ -903,7 +915,7 @@ namespace HealthCare.API.Controllers
             {
                 six = (six == '0') ? '1' : '0';
             }
-            if(six == '0')
+            if (six == '0')
             {
                 third = str[2];
             }
@@ -913,7 +925,7 @@ namespace HealthCare.API.Controllers
             }
             if (seven == '0')
             {
-               second = str[1];
+                second = str[1];
             }
             else if (seven == '1')
             {
@@ -929,7 +941,7 @@ namespace HealthCare.API.Controllers
             }
             if (eight == '0')
             {
-               five = str[4];
+                five = str[4];
             }
             else if (eight == '1')
             {
@@ -943,22 +955,22 @@ namespace HealthCare.API.Controllers
             var bytesAsStrings11 = result.Select((c, i) => new { Char = c, Index = i })
            .GroupBy(x => x.Index / 8)
            .Select(g => new string(g.Select(x => x.Char).ToArray()));
-            byte[] bytes11 = bytesAsStrings11.Select(s => Convert.ToByte(s, 2)).ToArray();          
-           result = StringtoBinary(try1);
-           var bytesAsStrings = result.Select((c, i) => new { Char = c, Index = i })
-          .GroupBy(x => x.Index / 8)
-          .Select(g => new string(g.Select(x => x.Char).ToArray()));
-           byte[] bytes = bytesAsStrings.Select(s => Convert.ToByte(s, 2)).ToArray();
+            byte[] bytes11 = bytesAsStrings11.Select(s => Convert.ToByte(s, 2)).ToArray();
+            result = StringtoBinary(try1);
+            var bytesAsStrings = result.Select((c, i) => new { Char = c, Index = i })
+           .GroupBy(x => x.Index / 8)
+           .Select(g => new string(g.Select(x => x.Char).ToArray()));
+            byte[] bytes = bytesAsStrings.Select(s => Convert.ToByte(s, 2)).ToArray();
 
 
-            int width1 = 350;
-            int height1 = 300;
-            string bytetobitmap="";
+            int width1 = 800;
+            int height1 = 600;            
+            string bytetobitmap = "";
 
 
-            SaveBitmap(bytetobitmap, width1, height1, bytes11);
+            SaveBitmap(bytetobitmap, Almershady.Width, Almershady.Height, bytes11);
 
-          System.Drawing.Bitmap newbmp = new System.Drawing.Bitmap(width1, height1, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+            System.Drawing.Bitmap newbmp = new System.Drawing.Bitmap(Almershady.Width, Almershady.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
             // Create a BitmapData and lock all pixels to be written 
             BitmapData bmpData = newbmp.LockBits(
@@ -969,19 +981,20 @@ namespace HealthCare.API.Controllers
 
             // Unlock the pixels
             newbmp.UnlockBits(bmpData);
-         
+
             // Do something with your image, e.g. save it to disc
             newbmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\orginalimage" + ImageFormat.Png + ".jpg"));
             string path8 = ($"images\\orginalimage" + ImageFormat.Png + ".jpg");
-            string path9 = ($"images\\Png"  + ".jpg");
+            string path9 = ($"images\\Png" + ".jpg");
             model.t = path8;
             model.scrabmle = path9;
             Ahmed.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\bit8" + ImageFormat.Png + ".jpg"));
-            
+
             //end convert to 8 bit 
             return View(model);
         }
-       
+
+        
         public static string StringtoBinary(string data)
         {
             string sb;
