@@ -28,5 +28,6 @@
     <PkgMicrosoft_CodeAnalysis_Analyzers Condition=" '$(PkgMicrosoft_CodeAnalysis_Analyzers)' == '' ">C:\Users\alnaseem\.nuget\packages\microsoft.codeanalysis.analyzers\3.3.2</PkgMicrosoft_CodeAnalysis_Analyzers>
     <PkgMicrosoft_CodeAnalysis_AnalyzerUtilities Condition=" '$(PkgMicrosoft_CodeAnalysis_AnalyzerUtilities)' == '' ">C:\Users\alnaseem\.nuget\packages\microsoft.codeanalysis.analyzerutilities\3.3.0</PkgMicrosoft_CodeAnalysis_AnalyzerUtilities>
     <PkgMicrosoft_EntityFrameworkCore_Tools Condition=" '$(PkgMicrosoft_EntityFrameworkCore_Tools)' == '' ">C:\Users\alnaseem\.nuget\packages\microsoft.entityframeworkcore.tools\6.0.7</PkgMicrosoft_EntityFrameworkCore_Tools>
+    <PkgIntersoft_Crosslight Condition=" '$(PkgIntersoft_Crosslight)' == '' ">C:\Users\alnaseem\.nuget\packages\intersoft.crosslight\6.0.5000.975</PkgIntersoft_Crosslight>
   </PropertyGroup>
 </Project>

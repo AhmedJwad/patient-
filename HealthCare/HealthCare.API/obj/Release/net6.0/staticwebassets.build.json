@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ug70x9FocfopZa+Zfq4CaYymC9uMb7iRZtbLp+SGVgM=",
+  "Hash": "3L0xl/LTs3uQLjusMix4X01njaIMs/4+dDQFf5H/oeA=",
   "Source": "HealthCare.API",
   "BasePath": "_content/HealthCare.API",
   "Mode": "Default",
@@ -16,40 +16,6 @@
     }
   ],
   "Assets": [
-    {
-      "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\obj\\Release\\net6.0\\scopedcss\\bundle\\HealthCare.API.styles.css",
-      "SourceId": "HealthCare.API",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\obj\\Release\\net6.0\\scopedcss\\bundle\\",
-      "BasePath": "_content/HealthCare.API",
-      "RelativePath": "HealthCare.API.styles.css",
-      "AssetKind": "All",
-      "AssetMode": "CurrentProject",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ApplicationBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\obj\\Release\\net6.0\\scopedcss\\bundle\\HealthCare.API.styles.css"
-    },
-    {
-      "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\obj\\Release\\net6.0\\scopedcss\\projectbundle\\HealthCare.API.bundle.scp.css",
-      "SourceId": "HealthCare.API",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\obj\\Release\\net6.0\\scopedcss\\projectbundle\\",
-      "BasePath": "_content/HealthCare.API",
-      "RelativePath": "HealthCare.API.bundle.scp.css",
-      "AssetKind": "All",
-      "AssetMode": "Reference",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ProjectBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\obj\\Release\\net6.0\\scopedcss\\projectbundle\\HealthCare.API.bundle.scp.css"
-    },
     {
       "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\css\\site.css",
       "SourceId": "HealthCare.API",
@@ -85,6 +51,23 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+      "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\8bitPng.jpg",
+      "SourceId": "HealthCare.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\",
+      "BasePath": "_content/HealthCare.API",
+      "RelativePath": "images/8bitPng.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\8bitPng.jpg"
+    },
+    {
       "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\binaryimagePng.jpg",
       "SourceId": "HealthCare.API",
       "SourceType": "Discovered",
@@ -100,6 +83,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\binaryimagePng.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\bit8Png.jpg",
+      "SourceId": "HealthCare.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\",
+      "BasePath": "_content/HealthCare.API",
+      "RelativePath": "images/bit8Png.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\bit8Png.jpg"
     },
     {
       "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\blackandwhite1Png.jpg",
@@ -151,6 +151,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\bluePng.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\bytetoimagePng.jpg",
+      "SourceId": "HealthCare.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\",
+      "BasePath": "_content/HealthCare.API",
+      "RelativePath": "images/bytetoimagePng.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\bytetoimagePng.jpg"
     },
     {
       "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\gopher_head-min.png",
@@ -236,6 +253,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\normalPng.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\orginalimagePng.jpg",
+      "SourceId": "HealthCare.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\",
+      "BasePath": "_content/HealthCare.API",
+      "RelativePath": "images/orginalimagePng.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\orginalimagePng.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\Png.jpg",
+      "SourceId": "HealthCare.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\",
+      "BasePath": "_content/HealthCare.API",
+      "RelativePath": "images/Png.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Png.jpg"
     },
     {
       "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\redPng.jpg",

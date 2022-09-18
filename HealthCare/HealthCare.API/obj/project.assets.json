@@ -2,6 +2,40 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "AForge/2.2.5": {
+        "type": "package",
+        "compile": {
+          "lib/AForge.dll": {}
+        },
+        "runtime": {
+          "lib/AForge.dll": {}
+        }
+      },
+      "AForge.Imaging/2.2.5": {
+        "type": "package",
+        "dependencies": {
+          "AForge": "2.2.5",
+          "AForge.Math": "2.2.5"
+        },
+        "compile": {
+          "lib/AForge.Imaging.dll": {}
+        },
+        "runtime": {
+          "lib/AForge.Imaging.dll": {}
+        }
+      },
+      "AForge.Math/2.2.5": {
+        "type": "package",
+        "dependencies": {
+          "AForge": "2.2.5"
+        },
+        "compile": {
+          "lib/AForge.Math.dll": {}
+        },
+        "runtime": {
+          "lib/AForge.Math.dll": {}
+        }
+      },
       "Aspose.Imaging/22.8.0": {
         "type": "package",
         "dependencies": {
@@ -142,6 +176,38 @@
           "lib/netstandard2.0/Braintree.dll": {}
         }
       },
+      "DlhSoft.GanttChartLightLibrary/4.3.45.15": {
+        "type": "package",
+        "dependencies": {
+          "DlhSoft.HierarchicalDataLightLibrary": "4.0.10.8"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/DlhSoft.ProjectData.GanttChart.LightWPF.Controls.dll": {},
+          "lib/netcoreapp3.1/DlhSoft.ProjectData.PertChart.LightWPF.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/DlhSoft.ProjectData.GanttChart.LightWPF.Controls.dll": {},
+          "lib/netcoreapp3.1/DlhSoft.ProjectData.PertChart.LightWPF.Controls.dll": {}
+        }
+      },
+      "DlhSoft.HierarchicalDataLightLibrary/4.0.10.8": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.1/DlhSoft.HierarchicalData.LightWPF.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/DlhSoft.HierarchicalData.LightWPF.Controls.dll": {}
+        }
+      },
+      "dotnetCHARTING/10.3.0": {
+        "type": "package",
+        "compile": {
+          "lib/net20/dotnetcharting.dll": {}
+        },
+        "runtime": {
+          "lib/net20/dotnetcharting.dll": {}
+        }
+      },
       "Emgu.CV/4.5.5.4823": {
         "type": "package",
         "dependencies": {
@@ -277,6 +343,27 @@
           }
         }
       },
+      "Intersoft.Crosslight/6.0.5000.975": {
+        "type": "package",
+        "compile": {
+          "lib/Intersoft.Crosslight.dll": {}
+        },
+        "runtime": {
+          "lib/Intersoft.Crosslight.dll": {}
+        }
+      },
+      "Intersoft.Crosslight.UI.DataVisualization/6.0.5000.975": {
+        "type": "package",
+        "dependencies": {
+          "Intersoft.Crosslight": "6.0.5000.975"
+        },
+        "compile": {
+          "lib/Intersoft.Crosslight.UI.DataVisualization.dll": {}
+        },
+        "runtime": {
+          "lib/Intersoft.Crosslight.UI.DataVisualization.dll": {}
+        }
+      },
       "LazZiya.ImageResize/4.1.0": {
         "type": "package",
         "dependencies": {
@@ -346,6 +433,54 @@
       },
       "MessagePackAnalyzer/2.1.152": {
         "type": "package"
+      },
+      "Microsoft.AspNet.Razor/3.2.9": {
+        "type": "package",
+        "compile": {
+          "lib/net45/System.Web.Razor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/System.Web.Razor.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.AspNet.WebPages/3.2.9": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Razor": "[3.2.9, 3.3.0)",
+          "Microsoft.Web.Infrastructure": "1.0.0"
+        },
+        "compile": {
+          "lib/net45/System.Web.Helpers.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/System.Web.WebPages.Deployment.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/System.Web.WebPages.Razor.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/System.Web.WebPages.dll": {
+            "related": ".Deployment.xml;.Razor.xml;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/System.Web.Helpers.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/System.Web.WebPages.Deployment.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/System.Web.WebPages.Razor.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/System.Web.WebPages.dll": {
+            "related": ".Deployment.xml;.Razor.xml;.xml"
+          }
+        }
       },
       "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.7": {
         "type": "package",
@@ -2244,6 +2379,15 @@
           }
         }
       },
+      "Microsoft.Web.Infrastructure/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Microsoft.Web.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Microsoft.Web.Infrastructure.dll": {}
+        }
+      },
       "Microsoft.Win32.Primitives/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -2554,6 +2698,9 @@
             "related": ".xml"
           }
         }
+      },
+      "OpenCV/2.4.11": {
+        "type": "package"
       },
       "Portable.BouncyCastle/1.9.0": {
         "type": "package",
@@ -4635,6 +4782,45 @@
     }
   },
   "libraries": {
+    "AForge/2.2.5": {
+      "sha512": "clkumhM9DggqIzEXAHgVLeWO4arG5YfoPr7J4jfjJx35AoeEIJSSm49J25bwp/9mXQYLwi7y1Wunc8qgYJsGxg==",
+      "type": "package",
+      "path": "aforge/2.2.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "aforge.2.2.5.nupkg.sha512",
+        "aforge.nuspec",
+        "lib/AForge.dll",
+        "lib/AForge.xml"
+      ]
+    },
+    "AForge.Imaging/2.2.5": {
+      "sha512": "n8l7Zdsm89EFW9Uz4uCO3D428Gu4Q56YxixSMJPruen1c30R8R9Mm8AreTdoOi2XjN5id04JwFFlXYTk8pIIfw==",
+      "type": "package",
+      "path": "aforge.imaging/2.2.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "aforge.imaging.2.2.5.nupkg.sha512",
+        "aforge.imaging.nuspec",
+        "lib/AForge.Imaging.dll",
+        "lib/AForge.Imaging.xml"
+      ]
+    },
+    "AForge.Math/2.2.5": {
+      "sha512": "pmT1WobVv13vMxwXhCu8sRunxjiUHyURWS0+dsW/aBPi06xiyYIdCLHI6jph9Axb4QoLIlb85eBI6zd2EAbGIg==",
+      "type": "package",
+      "path": "aforge.math/2.2.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "aforge.math.2.2.5.nupkg.sha512",
+        "aforge.math.nuspec",
+        "lib/AForge.Math.dll",
+        "lib/AForge.Math.xml"
+      ]
+    },
     "Aspose.Imaging/22.8.0": {
       "sha512": "XQLbouMH7aXBgvj33lV7K/aJhxIoFBfpg/3X7cqckN93PxjyxJusvUitgySLULFSnIhvrWkH/8kZUvNSDPkFgg==",
       "type": "package",
@@ -4773,6 +4959,84 @@
         "braintree.nuspec",
         "lib/net452/Braintree.dll",
         "lib/netstandard2.0/Braintree.dll"
+      ]
+    },
+    "DlhSoft.GanttChartLightLibrary/4.3.45.15": {
+      "sha512": "hBV7Fy4Yy9yDTI4Ulc+Voh9OW59+87Of9fs3YFGEyL97lNSvLbbbqEmeeCTakEv3hiwUQ2iRdBHcO/szm/Xl6g==",
+      "type": "package",
+      "path": "dlhsoft.ganttchartlightlibrary/4.3.45.15",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "dlhsoft.ganttchartlightlibrary.4.3.45.15.nupkg.sha512",
+        "dlhsoft.ganttchartlightlibrary.nuspec",
+        "lib/net40-client/DlhSoft.ProjectData.GanttChart.LightWPF.Controls.XML",
+        "lib/net40-client/DlhSoft.ProjectData.GanttChart.LightWPF.Controls.dll",
+        "lib/net40-client/DlhSoft.ProjectData.PertChart.LightWPF.Controls.dll",
+        "lib/net40-client/DlhSoft.ProjectData.PertChart.LightWPF.Controls.xml",
+        "lib/net40-client/LicenseManagement.zip",
+        "lib/net45/DlhSoft.ProjectData.GanttChart.LightWPF.Controls.XML",
+        "lib/net45/DlhSoft.ProjectData.GanttChart.LightWPF.Controls.dll",
+        "lib/net45/DlhSoft.ProjectData.PertChart.LightWPF.Controls.dll",
+        "lib/net45/DlhSoft.ProjectData.PertChart.LightWPF.Controls.xml",
+        "lib/net45/LicenseManagement.zip",
+        "lib/netcoreapp3.1/DlhSoft.ProjectData.GanttChart.LightWPF.Controls.dll",
+        "lib/netcoreapp3.1/DlhSoft.ProjectData.PertChart.LightWPF.Controls.dll",
+        "lib/sl40/DlhSoft.ProjectData.GanttChart.Silverlight.Controls.XML",
+        "lib/sl40/DlhSoft.ProjectData.GanttChart.Silverlight.Controls.dll",
+        "lib/sl40/DlhSoft.ProjectData.PertChart.Silverlight.Controls.dll",
+        "lib/sl40/DlhSoft.ProjectData.PertChart.Silverlight.Controls.xml",
+        "lib/sl40/LicenseManagement.zip",
+        "lib/sl50/DlhSoft.ProjectData.GanttChart.Silverlight.Controls.XML",
+        "lib/sl50/DlhSoft.ProjectData.GanttChart.Silverlight.Controls.dll",
+        "lib/sl50/DlhSoft.ProjectData.PertChart.Silverlight.Controls.dll",
+        "lib/sl50/DlhSoft.ProjectData.PertChart.Silverlight.Controls.xml",
+        "lib/sl50/LicenseManagement.zip",
+        "lib/sl50/LightSwitch/DlhSoft.GanttCharts.vsix"
+      ]
+    },
+    "DlhSoft.HierarchicalDataLightLibrary/4.0.10.8": {
+      "sha512": "GlJI0uVuThUwgRsiS2TcL6sDf0oR+aDC98FBciGRJvc8x4iLisMdKOF7eHCe63u2sX+4SyZJZ36OQscnaddF8Q==",
+      "type": "package",
+      "path": "dlhsoft.hierarchicaldatalightlibrary/4.0.10.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "dlhsoft.hierarchicaldatalightlibrary.4.0.10.8.nupkg.sha512",
+        "dlhsoft.hierarchicaldatalightlibrary.nuspec",
+        "lib/net40-client/DlhSoft.HierarchicalData.LightWPF.Controls.XML",
+        "lib/net40-client/DlhSoft.HierarchicalData.LightWPF.Controls.dll",
+        "lib/net40-client/LicenseManagement.zip",
+        "lib/net45/DlhSoft.HierarchicalData.LightWPF.Controls.XML",
+        "lib/net45/DlhSoft.HierarchicalData.LightWPF.Controls.dll",
+        "lib/net45/DlhSoft.OrganizationalChartLibrary.Controls.XML",
+        "lib/net45/DlhSoft.OrganizationalChartLibrary.Controls.dll",
+        "lib/net45/LicenseManagement.zip",
+        "lib/netcoreapp3.1/DlhSoft.HierarchicalData.LightWPF.Controls.dll",
+        "lib/sl40/DlhSoft.HierarchicalData.Silverlight.Controls.XML",
+        "lib/sl40/DlhSoft.HierarchicalData.Silverlight.Controls.dll",
+        "lib/sl40/LicenseManagement.zip",
+        "lib/sl40/System.Windows.Controls.Data.dll",
+        "lib/sl40/System.Windows.Controls.dll",
+        "lib/sl50/DlhSoft.HierarchicalData.Silverlight.Controls.XML",
+        "lib/sl50/DlhSoft.HierarchicalData.Silverlight.Controls.dll",
+        "lib/sl50/LicenseManagement.zip",
+        "lib/sl50/System.Windows.Controls.Data.dll",
+        "lib/sl50/System.Windows.Controls.dll"
+      ]
+    },
+    "dotnetCHARTING/10.3.0": {
+      "sha512": "fhMA0E7usv0sjNsw+qbNUrdBB5zsiGcAEx00EdgzmMXtfhyrerXIyDapa3YsFwQnZPtQM2SG7I7ygBxxFukCZA==",
+      "type": "package",
+      "path": "dotnetcharting/10.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "dotnetcharting.10.3.0.nupkg.sha512",
+        "dotnetcharting.nuspec",
+        "lib/net20/dotnetcharting.dll",
+        "license.txt"
       ]
     },
     "Emgu.CV/4.5.5.4823": {
@@ -4924,6 +5188,52 @@
         "lib/net452/ImageProcessor.xml"
       ]
     },
+    "Intersoft.Crosslight/6.0.5000.975": {
+      "sha512": "icRCEz9Fl9HI7LyiUniMnIN8TeI1vRI4QPZQyGDx3sTyX5YxDGNHE2uLXG3ShsI1EOSY4x/Vxycs/QTOL3uqnQ==",
+      "type": "package",
+      "path": "intersoft.crosslight/6.0.5000.975",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "intersoft.crosslight.6.0.5000.975.nupkg.sha512",
+        "intersoft.crosslight.nuspec",
+        "lib/Intersoft.Crosslight.dll",
+        "lib/MonoAndroid10/Intersoft.Crosslight.Android.dll",
+        "lib/MonoAndroid10/Intersoft.Crosslight.dll",
+        "lib/NetCore45/Intersoft.Crosslight.WinRT.dll",
+        "lib/NetCore45/Intersoft.Crosslight.WinRT/Controls/TabControl.xaml",
+        "lib/NetCore45/Intersoft.Crosslight.WinRT/Themes/DatePicker.xaml",
+        "lib/NetCore45/Intersoft.Crosslight.WinRT/Themes/Generic.xaml",
+        "lib/NetCore45/Intersoft.Crosslight.dll",
+        "lib/Xamarin.iOS10/Intersoft.Crosslight.dll",
+        "lib/Xamarin.iOS10/Intersoft.Crosslight.iOS.dll",
+        "lib/wp8/Intersoft.Crosslight.WinPhone.dll",
+        "lib/wp8/Intersoft.Crosslight.dll",
+        "tools/CocoaDialog.app.zip",
+        "tools/CocoaDialog.sh",
+        "tools/NugetUtil.dll",
+        "tools/dependencies.xml",
+        "tools/init.ps1",
+        "tools/install.ps1"
+      ]
+    },
+    "Intersoft.Crosslight.UI.DataVisualization/6.0.5000.975": {
+      "sha512": "ZGO8WeNI2VRFmMA3MFV4Bir5xwyOZo94LHBiz2EufjjW1vaHw8YU/ZmGpuDI6PpgWM4QdN6PvJg2mt6qULA1Qg==",
+      "type": "package",
+      "path": "intersoft.crosslight.ui.datavisualization/6.0.5000.975",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "intersoft.crosslight.ui.datavisualization.6.0.5000.975.nupkg.sha512",
+        "intersoft.crosslight.ui.datavisualization.nuspec",
+        "lib/Intersoft.Crosslight.UI.DataVisualization.dll",
+        "lib/MonoAndroid10/Intersoft.Crosslight.UI.DataVisualization.Android.dll",
+        "lib/MonoAndroid10/Intersoft.Crosslight.UI.DataVisualization.dll",
+        "lib/Xamarin.iOS10/Intersoft.Crosslight.UI.DataVisualization.dll",
+        "lib/Xamarin.iOS10/Intersoft.Crosslight.UI.DataVisualization.iOS.dll"
+      ]
+    },
     "LazZiya.ImageResize/4.1.0": {
       "sha512": "bTAJ7Coa2I2PAKw7rcIyjVZlpJnoJacTpkAYAFDSQTrWC4r6m19zoVfMYbn/CXsJc9mfVqznuf0Ql0uwvproKg==",
       "type": "package",
@@ -5017,6 +5327,44 @@
         "messagepackanalyzer.nuspec",
         "tools/install.ps1",
         "tools/uninstall.ps1"
+      ]
+    },
+    "Microsoft.AspNet.Razor/3.2.9": {
+      "sha512": "QOJEnEw3xp+t5lMvYR5nGCF4CfZpHqr2p8uZOBEgDZoB6r2txtSj6581YNr+/dOHjI3YRlo1QAKGQoSohbQ/KA==",
+      "type": "package",
+      "path": "microsoft.aspnet.razor/3.2.9",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "NET.icon.png",
+        "NET_Library_EULA_ENU.txt",
+        "lib/net45/System.Web.Razor.dll",
+        "lib/net45/System.Web.Razor.xml",
+        "microsoft.aspnet.razor.3.2.9.nupkg.sha512",
+        "microsoft.aspnet.razor.nuspec"
+      ]
+    },
+    "Microsoft.AspNet.WebPages/3.2.9": {
+      "sha512": "yByb721lwv8YFsx1oKA5CLKXa89XVbVMkPafS4bg/bPelBEgChq/coFBQEkA4kwcabG7AR56w3vapnoZUfr2Cw==",
+      "type": "package",
+      "path": "microsoft.aspnet.webpages/3.2.9",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Content/Web.config.install.xdt",
+        "Content/Web.config.uninstall.xdt",
+        "NET.icon.png",
+        "NET_Library_EULA_ENU.txt",
+        "lib/net45/System.Web.Helpers.dll",
+        "lib/net45/System.Web.Helpers.xml",
+        "lib/net45/System.Web.WebPages.Deployment.dll",
+        "lib/net45/System.Web.WebPages.Deployment.xml",
+        "lib/net45/System.Web.WebPages.Razor.dll",
+        "lib/net45/System.Web.WebPages.Razor.xml",
+        "lib/net45/System.Web.WebPages.dll",
+        "lib/net45/System.Web.WebPages.xml",
+        "microsoft.aspnet.webpages.3.2.9.nupkg.sha512",
+        "microsoft.aspnet.webpages.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.7": {
@@ -7489,6 +7837,18 @@
         "microsoft.visualstudio.web.codegenerators.mvc.nuspec"
       ]
     },
+    "Microsoft.Web.Infrastructure/1.0.0": {
+      "sha512": "FNmvLn5m2LTU/Rs2KWVo0SIIh9Ek+U0ojex7xeDaSHw/zgEP77A8vY5cVWgUtBGS8MJfDGNn8rpXJWEIQaPwTg==",
+      "type": "package",
+      "path": "microsoft.web.infrastructure/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/Microsoft.Web.Infrastructure.dll",
+        "microsoft.web.infrastructure.1.0.0.nupkg.sha512",
+        "microsoft.web.infrastructure.nuspec"
+      ]
+    },
     "Microsoft.Win32.Primitives/4.3.0": {
       "sha512": "9ZQKCWxH7Ijp9BfahvL2Zyf1cJIk8XYLF6Yjzr2yi0b2cOut/HQ31qf1ThHAgCc3WiZMdnWcfJCgN82/0UunxA==",
       "type": "package",
@@ -7865,6 +8225,189 @@
         "lib/netstandard2.0/NuGet.Versioning.xml",
         "nuget.versioning.6.2.1.nupkg.sha512",
         "nuget.versioning.nuspec"
+      ]
+    },
+    "OpenCV/2.4.11": {
+      "sha512": "1W5nlWqWx82FI6q6ISqLUj3paH5DpbfXqnNrFi9eOCeChr59I0d0xklDtMMNsGt8JLlZTMu6IW2Pyp7IMnGVAA==",
+      "type": "package",
+      "path": "opencv/2.4.11",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "NuGet-Overlay.cmd",
+        "build/configurations.autopkg",
+        "build/native/OpenCV.props",
+        "build/native/OpenCV.targets",
+        "build/native/default-propertiesui.xml",
+        "build/native/docs/LICENSE",
+        "build/native/include/opencv/cv.h",
+        "build/native/include/opencv/cv.hpp",
+        "build/native/include/opencv/cvaux.h",
+        "build/native/include/opencv/cvaux.hpp",
+        "build/native/include/opencv/cvwimage.h",
+        "build/native/include/opencv/cxcore.h",
+        "build/native/include/opencv/cxcore.hpp",
+        "build/native/include/opencv/cxeigen.hpp",
+        "build/native/include/opencv/cxmisc.h",
+        "build/native/include/opencv/highgui.h",
+        "build/native/include/opencv/ml.h",
+        "build/native/include/opencv2/calib3d/calib3d.hpp",
+        "build/native/include/opencv2/contrib/contrib.hpp",
+        "build/native/include/opencv2/contrib/detection_based_tracker.hpp",
+        "build/native/include/opencv2/contrib/hybridtracker.hpp",
+        "build/native/include/opencv2/contrib/openfabmap.hpp",
+        "build/native/include/opencv2/contrib/retina.hpp",
+        "build/native/include/opencv2/core/affine.hpp",
+        "build/native/include/opencv2/core/core.hpp",
+        "build/native/include/opencv2/core/core_c.h",
+        "build/native/include/opencv2/core/cuda_devptrs.hpp",
+        "build/native/include/opencv2/core/devmem2d.hpp",
+        "build/native/include/opencv2/core/eigen.hpp",
+        "build/native/include/opencv2/core/gpumat.hpp",
+        "build/native/include/opencv2/core/internal.hpp",
+        "build/native/include/opencv2/core/mat.hpp",
+        "build/native/include/opencv2/core/opengl_interop.hpp",
+        "build/native/include/opencv2/core/opengl_interop_deprecated.hpp",
+        "build/native/include/opencv2/core/operations.hpp",
+        "build/native/include/opencv2/core/types_c.h",
+        "build/native/include/opencv2/core/version.hpp",
+        "build/native/include/opencv2/core/wimage.hpp",
+        "build/native/include/opencv2/features2d/features2d.hpp",
+        "build/native/include/opencv2/flann/all_indices.h",
+        "build/native/include/opencv2/flann/allocator.h",
+        "build/native/include/opencv2/flann/any.h",
+        "build/native/include/opencv2/flann/autotuned_index.h",
+        "build/native/include/opencv2/flann/composite_index.h",
+        "build/native/include/opencv2/flann/config.h",
+        "build/native/include/opencv2/flann/defines.h",
+        "build/native/include/opencv2/flann/dist.h",
+        "build/native/include/opencv2/flann/dummy.h",
+        "build/native/include/opencv2/flann/dynamic_bitset.h",
+        "build/native/include/opencv2/flann/flann.hpp",
+        "build/native/include/opencv2/flann/flann_base.hpp",
+        "build/native/include/opencv2/flann/general.h",
+        "build/native/include/opencv2/flann/ground_truth.h",
+        "build/native/include/opencv2/flann/hdf5.h",
+        "build/native/include/opencv2/flann/heap.h",
+        "build/native/include/opencv2/flann/hierarchical_clustering_index.h",
+        "build/native/include/opencv2/flann/index_testing.h",
+        "build/native/include/opencv2/flann/kdtree_index.h",
+        "build/native/include/opencv2/flann/kdtree_single_index.h",
+        "build/native/include/opencv2/flann/kmeans_index.h",
+        "build/native/include/opencv2/flann/linear_index.h",
+        "build/native/include/opencv2/flann/logger.h",
+        "build/native/include/opencv2/flann/lsh_index.h",
+        "build/native/include/opencv2/flann/lsh_table.h",
+        "build/native/include/opencv2/flann/matrix.h",
+        "build/native/include/opencv2/flann/miniflann.hpp",
+        "build/native/include/opencv2/flann/nn_index.h",
+        "build/native/include/opencv2/flann/object_factory.h",
+        "build/native/include/opencv2/flann/params.h",
+        "build/native/include/opencv2/flann/random.h",
+        "build/native/include/opencv2/flann/result_set.h",
+        "build/native/include/opencv2/flann/sampling.h",
+        "build/native/include/opencv2/flann/saving.h",
+        "build/native/include/opencv2/flann/simplex_downhill.h",
+        "build/native/include/opencv2/flann/timer.h",
+        "build/native/include/opencv2/gpu/device/block.hpp",
+        "build/native/include/opencv2/gpu/device/border_interpolate.hpp",
+        "build/native/include/opencv2/gpu/device/color.hpp",
+        "build/native/include/opencv2/gpu/device/common.hpp",
+        "build/native/include/opencv2/gpu/device/datamov_utils.hpp",
+        "build/native/include/opencv2/gpu/device/detail/color_detail.hpp",
+        "build/native/include/opencv2/gpu/device/detail/reduce.hpp",
+        "build/native/include/opencv2/gpu/device/detail/reduce_key_val.hpp",
+        "build/native/include/opencv2/gpu/device/detail/transform_detail.hpp",
+        "build/native/include/opencv2/gpu/device/detail/type_traits_detail.hpp",
+        "build/native/include/opencv2/gpu/device/detail/vec_distance_detail.hpp",
+        "build/native/include/opencv2/gpu/device/dynamic_smem.hpp",
+        "build/native/include/opencv2/gpu/device/emulation.hpp",
+        "build/native/include/opencv2/gpu/device/filters.hpp",
+        "build/native/include/opencv2/gpu/device/funcattrib.hpp",
+        "build/native/include/opencv2/gpu/device/functional.hpp",
+        "build/native/include/opencv2/gpu/device/limits.hpp",
+        "build/native/include/opencv2/gpu/device/reduce.hpp",
+        "build/native/include/opencv2/gpu/device/saturate_cast.hpp",
+        "build/native/include/opencv2/gpu/device/scan.hpp",
+        "build/native/include/opencv2/gpu/device/simd_functions.hpp",
+        "build/native/include/opencv2/gpu/device/static_check.hpp",
+        "build/native/include/opencv2/gpu/device/transform.hpp",
+        "build/native/include/opencv2/gpu/device/type_traits.hpp",
+        "build/native/include/opencv2/gpu/device/utility.hpp",
+        "build/native/include/opencv2/gpu/device/vec_distance.hpp",
+        "build/native/include/opencv2/gpu/device/vec_math.hpp",
+        "build/native/include/opencv2/gpu/device/vec_traits.hpp",
+        "build/native/include/opencv2/gpu/device/warp.hpp",
+        "build/native/include/opencv2/gpu/device/warp_reduce.hpp",
+        "build/native/include/opencv2/gpu/device/warp_shuffle.hpp",
+        "build/native/include/opencv2/gpu/devmem2d.hpp",
+        "build/native/include/opencv2/gpu/gpu.hpp",
+        "build/native/include/opencv2/gpu/gpumat.hpp",
+        "build/native/include/opencv2/gpu/stream_accessor.hpp",
+        "build/native/include/opencv2/highgui/cap_ios.h",
+        "build/native/include/opencv2/highgui/highgui.hpp",
+        "build/native/include/opencv2/highgui/highgui_c.h",
+        "build/native/include/opencv2/highgui/ios.h",
+        "build/native/include/opencv2/imgproc/imgproc.hpp",
+        "build/native/include/opencv2/imgproc/imgproc_c.h",
+        "build/native/include/opencv2/imgproc/types_c.h",
+        "build/native/include/opencv2/legacy/blobtrack.hpp",
+        "build/native/include/opencv2/legacy/compat.hpp",
+        "build/native/include/opencv2/legacy/legacy.hpp",
+        "build/native/include/opencv2/legacy/streams.hpp",
+        "build/native/include/opencv2/ml/ml.hpp",
+        "build/native/include/opencv2/nonfree/features2d.hpp",
+        "build/native/include/opencv2/nonfree/gpu.hpp",
+        "build/native/include/opencv2/nonfree/nonfree.hpp",
+        "build/native/include/opencv2/nonfree/ocl.hpp",
+        "build/native/include/opencv2/objdetect/objdetect.hpp",
+        "build/native/include/opencv2/ocl/matrix_operations.hpp",
+        "build/native/include/opencv2/ocl/ocl.hpp",
+        "build/native/include/opencv2/opencv.hpp",
+        "build/native/include/opencv2/opencv_modules.hpp",
+        "build/native/include/opencv2/photo/photo.hpp",
+        "build/native/include/opencv2/photo/photo_c.h",
+        "build/native/include/opencv2/stitching/detail/autocalib.hpp",
+        "build/native/include/opencv2/stitching/detail/blenders.hpp",
+        "build/native/include/opencv2/stitching/detail/camera.hpp",
+        "build/native/include/opencv2/stitching/detail/exposure_compensate.hpp",
+        "build/native/include/opencv2/stitching/detail/matchers.hpp",
+        "build/native/include/opencv2/stitching/detail/motion_estimators.hpp",
+        "build/native/include/opencv2/stitching/detail/seam_finders.hpp",
+        "build/native/include/opencv2/stitching/detail/util.hpp",
+        "build/native/include/opencv2/stitching/detail/util_inl.hpp",
+        "build/native/include/opencv2/stitching/detail/warpers.hpp",
+        "build/native/include/opencv2/stitching/detail/warpers_inl.hpp",
+        "build/native/include/opencv2/stitching/stitcher.hpp",
+        "build/native/include/opencv2/stitching/warpers.hpp",
+        "build/native/include/opencv2/superres/optical_flow.hpp",
+        "build/native/include/opencv2/superres/superres.hpp",
+        "build/native/include/opencv2/ts/gpu_perf.hpp",
+        "build/native/include/opencv2/ts/gpu_test.hpp",
+        "build/native/include/opencv2/ts/ts.hpp",
+        "build/native/include/opencv2/ts/ts_gtest.h",
+        "build/native/include/opencv2/ts/ts_perf.hpp",
+        "build/native/include/opencv2/video/background_segm.hpp",
+        "build/native/include/opencv2/video/tracking.hpp",
+        "build/native/include/opencv2/video/video.hpp",
+        "build/native/include/opencv2/videostab/deblurring.hpp",
+        "build/native/include/opencv2/videostab/fast_marching.hpp",
+        "build/native/include/opencv2/videostab/fast_marching_inl.hpp",
+        "build/native/include/opencv2/videostab/frame_source.hpp",
+        "build/native/include/opencv2/videostab/global_motion.hpp",
+        "build/native/include/opencv2/videostab/inpainting.hpp",
+        "build/native/include/opencv2/videostab/log.hpp",
+        "build/native/include/opencv2/videostab/motion_stabilizing.hpp",
+        "build/native/include/opencv2/videostab/optical_flow.hpp",
+        "build/native/include/opencv2/videostab/stabilizer.hpp",
+        "build/native/include/opencv2/videostab/videostab.hpp",
+        "build/native/pivot-list.txt",
+        "build/native/private/CoApp.NuGetNativeExtensions.dll",
+        "build/native/private/CoApp.NuGetNativeMSBuildTasks.dll.orig",
+        "build/native/private/nuget.exe",
+        "build/publisher-info.txt",
+        "opencv.2.4.11.nupkg.sha512",
+        "opencv.nuspec"
       ]
     },
     "Portable.BouncyCastle/1.9.0": {
@@ -12891,18 +13434,22 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "AForge.Imaging >= 2.2.5",
       "Aspose.Imaging >= 22.8.0",
       "Azure.Storage.Blobs >= 12.3.0",
       "Azure.Storage.Files.Shares >= 12.1.0",
       "Azure.Storage.Queues >= 12.2.0",
       "Braintree >= 5.13.0",
+      "DlhSoft.GanttChartLightLibrary >= 4.3.45.15",
       "Emgu.CV >= 4.5.5.4823",
       "Grpc.Core >= 2.46.3",
       "Grpc.Net.Client >= 2.47.0",
       "HealthCare.Common >= 1.0.0",
       "ImageProcessor >= 2.9.1",
+      "Intersoft.Crosslight.UI.DataVisualization >= 6.0.5000.975",
       "LazZiya.ImageResize >= 4.1.0",
       "MailKit >= 3.3.0",
+      "Microsoft.AspNet.WebPages >= 3.2.9",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.7",
       "Microsoft.AspNetCore.Http.Abstractions >= 2.2.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.7",
@@ -12917,12 +13464,14 @@
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.8",
       "MimeKit >= 3.3.0",
       "MoyskleyTech.ImageProcessing >= 1.0.2",
+      "OpenCV >= 2.4.11",
       "SixLabors.ImageSharp >= 2.1.3",
       "Swashbuckle.AspNetCore >= 6.3.0",
       "System.Drawing.Common >= 6.0.0",
       "VisioForge.DotNet.Core.TRIAL >= 15.1.12",
       "WindowsAzure.Storage >= 9.3.3",
-      "Xamarin.Forms >= 5.0.0.2515"
+      "Xamarin.Forms >= 5.0.0.2515",
+      "dotnetCHARTING >= 10.3.0"
     ]
   },
   "packageFolders": {
@@ -12977,6 +13526,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "AForge.Imaging": {
+            "target": "Package",
+            "version": "[2.2.5, )"
+          },
           "Aspose.Imaging": {
             "target": "Package",
             "version": "[22.8.0, )"
@@ -12997,6 +13550,10 @@
             "target": "Package",
             "version": "[5.13.0, )"
           },
+          "DlhSoft.GanttChartLightLibrary": {
+            "target": "Package",
+            "version": "[4.3.45.15, )"
+          },
           "Emgu.CV": {
             "target": "Package",
             "version": "[4.5.5.4823, )"
@@ -13013,6 +13570,10 @@
             "target": "Package",
             "version": "[2.9.1, )"
           },
+          "Intersoft.Crosslight.UI.DataVisualization": {
+            "target": "Package",
+            "version": "[6.0.5000.975, )"
+          },
           "LazZiya.ImageResize": {
             "target": "Package",
             "version": "[4.1.0, )"
@@ -13020,6 +13581,10 @@
           "MailKit": {
             "target": "Package",
             "version": "[3.3.0, )"
+          },
+          "Microsoft.AspNet.WebPages": {
+            "target": "Package",
+            "version": "[3.2.9, )"
           },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
@@ -13079,6 +13644,10 @@
             "target": "Package",
             "version": "[1.0.2, )"
           },
+          "OpenCV": {
+            "target": "Package",
+            "version": "[2.4.11, )"
+          },
           "SixLabors.ImageSharp": {
             "target": "Package",
             "version": "[2.1.3, )"
@@ -13102,6 +13671,10 @@
           "Xamarin.Forms": {
             "target": "Package",
             "version": "[5.0.0.2515, )"
+          },
+          "dotnetCHARTING": {
+            "target": "Package",
+            "version": "[10.3.0, )"
           }
         },
         "imports": [
@@ -13132,8 +13705,98 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
+      "message": "Package 'AForge 2.2.5' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "AForge",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'AForge.Imaging 2.2.5' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "AForge.Imaging",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'AForge.Math 2.2.5' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "AForge.Math",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'dotnetCHARTING 10.3.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "dotnetCHARTING",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
       "message": "Package 'ImageProcessor 2.9.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
       "libraryId": "ImageProcessor",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Intersoft.Crosslight 6.0.5000.975' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Intersoft.Crosslight",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Intersoft.Crosslight.UI.DataVisualization 6.0.5000.975' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Intersoft.Crosslight.UI.DataVisualization",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.Razor 3.2.9' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.Razor",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.WebPages 3.2.9' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.WebPages",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.Web.Infrastructure 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.Web.Infrastructure",
       "targetGraphs": [
         "net6.0"
       ]

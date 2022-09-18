@@ -309,6 +309,7 @@ C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Azure.Storage.Files.Shares.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Azure.Storage.Queues.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Braintree.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Emgu.CV.Platform.NetStandard.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Grpc.Core.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Grpc.Core.Api.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Grpc.Net.Client.dll
@@ -412,6 +413,9 @@ C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\VisioForge.MediaFramework.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\VisioForge.Types.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Microsoft.WindowsAzure.Storage.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Xamarin.Forms.Core.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Xamarin.Forms.Platform.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Xamarin.Forms.Xaml.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\cs\Microsoft.CodeAnalysis.resources.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\de\Microsoft.CodeAnalysis.resources.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\es\Microsoft.CodeAnalysis.resources.dll

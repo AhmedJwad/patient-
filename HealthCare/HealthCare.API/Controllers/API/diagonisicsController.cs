@@ -29,7 +29,7 @@ namespace HealthCare.API.Controllers.API{
         [HttpGet]
         public async Task<ActionResult<IEnumerable<diagonisic>>> Getdiagonisics()
         {
-            return await _context.diagonisics.ToListAsync();
+            return await _context.diagonisics.OrderBy(x=>x.Description).ToListAsync();
         }
 
         // GET: api/diagonisics/5
@@ -61,20 +61,23 @@ namespace HealthCare.API.Controllers.API{
             try
             {
                 await _context.SaveChangesAsync();
+                return NoContent();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateException dbUpdateException)
             {
-                if (!diagonisicExists(id))
+                if (dbUpdateException.InnerException.Message.Contains("duplicate"))
                 {
-                    return NotFound();
+                   return BadRequest("This type of diagonisic exists.");
                 }
                 else
                 {
-                    throw;
+                    return BadRequest(dbUpdateException.InnerException.Message);
                 }
             }
-
-            return NoContent();
+            catch (Exception exception)
+            {
+              return BadRequest(exception.Message);   
+            }                                  
         }
 
         // POST: api/diagonisics
@@ -83,9 +86,28 @@ namespace HealthCare.API.Controllers.API{
         public async Task<ActionResult<diagonisic>> Postdiagonisic(diagonisic diagonisic)
         {
             _context.diagonisics.Add(diagonisic);
-            await _context.SaveChangesAsync();
+            try
+            {               
+                await _context.SaveChangesAsync(); 
+                return CreatedAtAction("Getdiagonisic", new { id = diagonisic.Id }, diagonisic);
 
-            return CreatedAtAction("Getdiagonisic", new { id = diagonisic.Id }, diagonisic);
+            }
+            catch (DbUpdateException dbUpdateException)
+            {
+                if (dbUpdateException.InnerException.Message.Contains("duplicate"))
+                {
+                    return BadRequest("This type of diagonisic exists.");
+                }
+                else
+                {
+                    return BadRequest(dbUpdateException.InnerException.Message);
+                }
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+           
         }
 
         // DELETE: api/diagonisics/5
@@ -103,10 +125,6 @@ namespace HealthCare.API.Controllers.API{
 
             return NoContent();
         }
-
-        private bool diagonisicExists(int id)
-        {
-            return _context.diagonisics.Any(e => e.Id == id);
-        }
+      
     }
 }

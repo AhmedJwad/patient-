@@ -7,7 +7,7 @@ namespace HealthCare.API.Models
 {
     public class patientimageviewmodel
     {
-        public int Id { get; set; }
+        public int Id { get; set; }        
 
         [JsonIgnore]
         [Required(ErrorMessage = "The field {0} is required.")]
@@ -31,6 +31,10 @@ namespace HealthCare.API.Models
 
         public string binaryorginale { get; set; }
 
+        public string histgrame { get; set; }
+
+        public string histgrameorginal { get; set; }
+        
         [Display(Name = "Photo")]
         public string ImageFullPath => ImageId == String.Empty
             ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
@@ -61,5 +65,13 @@ namespace HealthCare.API.Models
         public string Scramble => scrabmle == String.Empty
      ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
      : $"https://localhost:7152/{scrabmle}";
+
+        public string Histograme => histgrame == String.Empty
+     ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
+     : $"https://localhost:7152/{histgrame}";
+
+        public string HistogrameOrginae => histgrameorginal == String.Empty
+     ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
+     : $"https://localhost:7152/{histgrameorginal}";
     }
 }

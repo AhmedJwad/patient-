@@ -1,48 +1,32 @@
-﻿using Aspose.Imaging;
-using Braintree;
+﻿using AForge.Imaging.Filters;
+using Aspose.Imaging;
+using dotnetCHARTING;
 using Emgu.CV.Structure;
 using Emgu.CV;
-using Grpc.Core;
-using Gst;
 using HealthCare.API.Data;
 using HealthCare.API.Data.Entities;
 using HealthCare.API.Helpers;
 using HealthCare.API.Models;
 using HealthCare.Common.Enums;
-using ImageProcessor.Imaging.Helpers;
+using Intersoft.Crosslight.UI.DataVisualization;
 using LazZiya.ImageResize;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MoyskleyTech.ImageProcessing.Form.Control;
-using SixLabors.ImageSharp.Formats.Tiff;
-using System;
+using MoyskleyTech.ImageProcessing.Image;
+using Pango;
 using System.Collections;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Net.Http;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
-using VisioForge.Libs.AForge.Imaging.Filters;
-using VisioForge.Libs.DirectShowLib;
+using System.Web.Helpers;
 using VisioForge.Libs.MediaFoundation.OPM;
-using VisioForge.MediaFramework.GStreamer.Base;
-using ColorPalette = System.Drawing.Imaging.ColorPalette;
+using Xamarin.Forms;
 using DateTime = System.DateTime;
 using PixelFormat = System.Drawing.Imaging.PixelFormat;
 using Rectangle = System.Drawing.Rectangle;
-using Uri = System.Uri;
-using GES;
-using Aspose.Imaging.FileFormats.OpenDocument.Objects.Graphic;
-using SixLabors.ImageSharp;
-using VisioForge.Libs.TagLib;
-using VisioForge.MediaFramework.FFMPEGCore.Instance;
-using System.Security.Cryptography;
-using GLib;
-using System.Diagnostics.Metrics;
-using MoyskleyTech.ImageProcessing.Image;
+using System;
 
 namespace HealthCare.API.Controllers
 {
@@ -708,11 +692,11 @@ namespace HealthCare.API.Controllers
             return RedirectToAction(nameof(DetailsHistory), new { id = detail.History.Id });
         }
 
-        public async Task<IActionResult> ConverttoRGB(int? Id)
+        public async Task<IActionResult> ConverttoRGB(int? Id )
         {
             double[,] red, green, blue;
             if (Id == null)
-            {
+            {  
                 return NotFound();
             }
 
@@ -772,15 +756,15 @@ namespace HealthCare.API.Controllers
                 }
             }
 
-            rbmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\red" + ImageFormat.Png + ".jpg"));
-            gbmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\green" + ImageFormat.Png + ".jpg"));
-            bbmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\blue" + ImageFormat.Png + ".jpg"));
+            rbmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\red" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+            gbmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\green" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+            bbmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\blue" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
             // bmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\normal" + ImageFormat.Png + ".jpg"));
-            string path = ($"images\\red" + ImageFormat.Png + ".jpg");
-            string path1 = ($"images\\green" + ImageFormat.Png + ".jpg");
-            string path2 = ($"images\\blue" + ImageFormat.Png + ".jpg");
-            bmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\normal" + ImageFormat.Png + ".jpg"));
-            string path4 = ($"wwwroot\\images\\normal" + ImageFormat.Png + ".jpg");
+            string path = ($"images\\red" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
+            string path1 = ($"images\\green" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
+            string path2 = ($"images\\blue" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
+            bmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\normal" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+            string path4 = ($"wwwroot\\images\\normal" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
             model.rbmp = path;
             model.gbmp = path1;
             model.bbmp = path2;
@@ -798,9 +782,9 @@ namespace HealthCare.API.Controllers
                 rasterCachedImage.BinarizeFixed(100);
 
                 // Save the image
-                rasterCachedImage.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\blackandwhite" + ImageFormat.Png + ".jpg"));
+                rasterCachedImage.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\blackandwhite" +System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
             }
-            string path5 = ($"images\\blackandwhite" + ImageFormat.Png + ".jpg");
+            string path5 = ($"images\\blackandwhite" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
             model.binaryimage = path5;
             System.Drawing.Bitmap temp = bmp;
             System.Drawing.Bitmap bmap = (System.Drawing.Bitmap)temp.Clone();
@@ -818,8 +802,8 @@ namespace HealthCare.API.Controllers
             Random rnd = new Random();
             int a = rnd.Next();
 
-            bmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\blackandwhite1" + ImageFormat.Png + ".jpg"));
-            string path3 = ($"images\\blackandwhite1" + ImageFormat.Png + ".jpg");
+            bmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\blackandwhite1" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+            string path3 = ($"images\\blackandwhite1" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
 
             model.imagenormal = path3;
 
@@ -853,8 +837,8 @@ namespace HealthCare.API.Controllers
             string ByteString = Convert.ToString(buffer[20], 2).PadLeft(8, '0');
             Marshal.Copy(buffer, 0, pointer, buffer.Length);
             bitmap.UnlockBits(ImageData);
-            bitmap.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\binaryimage" + ImageFormat.Png + ".jpg"));
-            string path6 = ($"images\\binaryimage" + ImageFormat.Png + ".jpg");
+            bitmap.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\binaryimage" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+            string path6 = ($"images\\binaryimage" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
             model.binaryorginale = path6;
             //end convert to binary
             //convert to 8 bit         
@@ -949,6 +933,7 @@ namespace HealthCare.API.Controllers
             }
             var Ahmedjawad = $"{first}{second}{third}{foutth}{five}{six}{seven}{eight}";
             str = Ahmedjawad;
+           
             // str = AhmedjawyourByteStringad ;           
             first = '0';
             string result = StringToBinary(str);
@@ -962,14 +947,13 @@ namespace HealthCare.API.Controllers
            .Select(g => new string(g.Select(x => x.Char).ToArray()));
             byte[] bytes = bytesAsStrings.Select(s => Convert.ToByte(s, 2)).ToArray();
 
-
+         
             int width1 = 800;
             int height1 = 600;            
             string bytetobitmap = "";
 
 
-            SaveBitmap(bytetobitmap, Almershady.Width, Almershady.Height, bytes11);
-
+            SaveBitmap(bytetobitmap, Almershady.Width, Almershady.Height, bytes11);          
             System.Drawing.Bitmap newbmp = new System.Drawing.Bitmap(Almershady.Width, Almershady.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
             // Create a BitmapData and lock all pixels to be written 
@@ -983,19 +967,235 @@ namespace HealthCare.API.Controllers
             newbmp.UnlockBits(bmpData);
 
             // Do something with your image, e.g. save it to disc
-            newbmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\orginalimage" + ImageFormat.Png + ".jpg"));
-            string path8 = ($"images\\orginalimage" + ImageFormat.Png + ".jpg");
+            newbmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\orginalimage" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+            string path8 = ($"images\\orginalimage" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
             string path9 = ($"images\\Png" + ".jpg");
             model.t = path8;
             model.scrabmle = path9;
-            Ahmed.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\bit8" + ImageFormat.Png + ".jpg"));
+            Ahmed.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\bit8" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
 
             //end convert to 8 bit 
+            //histogram
+           
+            var httpClient1 = new HttpClient();
+            var stream1 = await httpClient.GetStreamAsync(model.Scramble);
+            System.Drawing.Bitmap almershady2 = new System.Drawing.Bitmap(stream1);          
+            Histogram(bmp);           
+            Histogram2(Almershady);
+            drawxandy(almershady2);
+            HistogramEqualization equalization = new HistogramEqualization();
+            equalization.ApplyInPlace(almershady2);
+            almershady2.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\histogram" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+            string path11 = ($"images\\histogram3" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
+            string path12 = ($"images\\histogram2" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
+            model.histgrame = path11;
+            model.histgrameorginal=path12;
+        
+          
+
+            //end histogram
             return View(model);
         }
 
-        
-        public static string StringtoBinary(string data)
+        public void drawxandy(System.Drawing.Bitmap bitmap)
+        {
+            bitmap = new System.Drawing.Bitmap(900, 700, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+            System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(bitmap);
+            g.Clear(System.Drawing.Color.LightGray);
+
+            // set attr
+            g.SmoothingMode =System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Bicubic;
+
+            // draw X and Y axes
+            System.Drawing.Pen pen = new System.Drawing.Pen(System.Drawing.Color.Black, 1);
+            g.DrawLine(pen, new System.Drawing.Point(100, 100), new System.Drawing.Point(100, 600));
+            g.DrawLine(pen, new System.Drawing.Point(100, 600), new System.Drawing.Point(800, 600));
+
+            System.Drawing.SolidBrush brush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
+            System.Drawing.Font font = new System.Drawing.Font("Lucida Console", 14, System.Drawing.FontStyle.Bold);
+
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Bicubic;
+
+            // grid numbeers on x axis
+            for (int i = 0; i < bitmap.Width; i++)
+            {
+                g.DrawString(i.ToString(), font, brush, 1000 * (i + 1), 620);
+            }
+
+            // grid numbeers on y axis
+            for (int i = 0; i < 6; i++)
+            {
+                g.DrawString(i.ToString(), font, brush, 70, 600 - (100 * i));
+            }
+
+            // label 1
+            font = new System.Drawing.Font("Lucida Console", 14, System.Drawing.FontStyle.Bold);
+            g.DrawString("Line - X axis", font, brush, 100, 650);
+
+            // label 2
+            font = new System.Drawing.Font("Lucida Console", 32, System.Drawing.FontStyle.Bold);
+            g.DrawString("PORCO El.01", font, brush, 550, 150);
+
+            // label 3
+            font = new System.Drawing.Font("Lucida Console", 24, System.Drawing.FontStyle.Regular);
+            g.DrawString("PORCO El.01", font, brush, 550, 200);
+
+            // save as .bmp file
+            bitmap.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\drawingxandy" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+        }
+
+        public void Histogram2(System.Drawing.Bitmap bmp)
+        {
+            
+            int[] histogram_r = new int[256];
+            float max = 0;
+
+            for (int i = 0; i < bmp.Width; i++)
+            {
+                for (int j = 0; j < bmp.Height; j++)
+                {
+                    int redValue = bmp.GetPixel(i, j).R;
+                    histogram_r[redValue]++;
+                    if (max < histogram_r[redValue])
+                        max = histogram_r[redValue];
+                }
+            }
+
+            int histHeight = 128;
+            System.Drawing.SolidBrush brush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
+            System.Drawing.Font font = new System.Drawing.Font("Lucida Console", 14, System.Drawing.FontStyle.Bold);
+
+            System.Drawing.Bitmap img = new System.Drawing.Bitmap(256, histHeight + 10);
+            using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(img))
+            {
+                for (int i = 0; i < histogram_r.Length; i++)
+                {
+                    float pct = histogram_r[i] / max;   // What percentage of the max is this value?
+                    g.DrawLine(Pens.Black,
+                        new System.Drawing.Point(i, img.Height - 5),
+                        new System.Drawing.Point(i, img.Height - 5 - (int)(pct * histHeight  ))  // Use that percentage of the height
+                        );
+                   
+                }
+            }
+           
+
+            img.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\histogram3" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+        }       
+
+
+        public async Task <ActionResult> ColumnChart()
+        {
+          
+            patientimageviewmodel model = new patientimageviewmodel
+            {              
+            };
+          
+            var httpClient = new HttpClient();
+            var stream = await httpClient.GetStreamAsync(model.ImageFullPath);         
+           System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(model.ImageFullPath);            
+            int[] histogram_r = new int[256];
+            float max = 0;
+
+            for (int i = 0; i < bmp.Width; i++)
+            {
+                for (int j = 0; j < bmp.Height; j++)
+                {
+                    int redValue = bmp.GetPixel(i, j).R;
+                    histogram_r[redValue]++;
+                    if (max < histogram_r[redValue])
+                        max = histogram_r[redValue];
+                }
+            }
+
+            int histHeight = 128;
+            System.Drawing.Bitmap img = new System.Drawing.Bitmap(256, histHeight + 10);
+            ArrayList xvalue = new ArrayList();
+            ArrayList Yvalue = new ArrayList();
+            using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(img))
+            {
+                for (int i = 0; i < histogram_r.Length; i++)
+                {
+                    float pct = histogram_r[i] / max;   // What percentage of the max is this value?
+                    g.DrawLine(Pens.Black,
+                        new System.Drawing.Point(i , img.Height - 5),
+                        new System.Drawing.Point(i , img.Height - 5 - (int)(pct * histHeight))  // Use that percentage of the height
+                        );
+                }
+            }
+            Dictionary<System.Drawing.Color, int> histo = new Dictionary<System.Drawing.Color, int>();
+            for (int x = 0; x < bmp.Width; x++)
+            {
+                for (int y = 0; y < bmp.Height; y++)
+                {
+                    // Get pixel color 
+                    System.Drawing.Color c = bmp.GetPixel(x, y);
+                    // If it exists in our 'histogram' increment the corresponding value, or add new
+                    if (histo.ContainsKey(c))
+                        histo[c] = histo[c] + 1;
+                    else
+                        histo.Add(c, 1);
+                }
+            }
+            var chart = img;
+
+            foreach (var item in histo)
+            {
+                xvalue.Add(item);               
+              
+
+            }
+
+                //foreach (var item in customerdegree)
+                //{
+                //    xvalue.Add(item.Customer.FullName);
+                //    Yvalue.Add(item.Customer.CustomerDegrees.Count() );
+
+                //}
+                new System.Web.Helpers.Chart(width: 500, height: 400, theme: ChartTheme.Green)
+                .AddTitle("chart for customer degree [column chart]")
+                .AddSeries("default", chartType: "Column", xValue: xvalue, yValues: Yvalue)
+                .Write("bmp");
+            return null;
+
+        }
+        public void Histogram(System.Drawing.Bitmap bmp)
+        {         
+          
+            int[] histogram_r = new int[256];
+            float max = 0;
+
+            for (int i = 0; i < bmp.Width; i++)
+            {
+                for (int j = 0; j < bmp.Height; j++)
+                {
+                    int redValue = bmp.GetPixel(i, j).R;
+                    histogram_r[redValue]++;
+                    if (max < histogram_r[redValue])
+                        max = histogram_r[redValue];
+                }
+            }
+
+            int histHeight = 128;
+            System.Drawing.Bitmap img = new System.Drawing.Bitmap(256, histHeight + 10);
+            using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(img))
+            {
+                for (int i = 0; i < histogram_r.Length; i++)
+                {
+                    float pct = histogram_r[i] / max;   // What percentage of the max is this value?
+                    g.DrawLine(Pens.Black,
+                        new System.Drawing.Point(i, img.Height - 5),
+                        new System.Drawing.Point(i, img.Height - 5 - (int)(pct * histHeight ))  // Use that percentage of the height
+                        );
+                }
+            }
+            img.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\histogram2" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+        }
+   
+
+       public static string StringtoBinary(string data)
         {
             string sb;
 
@@ -1010,8 +1210,7 @@ namespace HealthCare.API.Controllers
             {
                 //26299
                 for (int i = 0; i <=256 ; i++)
-                {
-                    sb.Append(Convert.ToString((c * i * 8), 2));
+                {                   
                     for (int j = 0; j <=255;  j++)
                     {
                         sb.Append(Convert.ToString((c * j * 8), 2));
@@ -1058,7 +1257,7 @@ namespace HealthCare.API.Controllers
                                 PixelFormat.Format24bppRgb, new IntPtr(ptr)))
                     {
 
-                        image.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\{fileName}" + ImageFormat.Png + ".jpg"));
+                        image.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\{fileName}" +System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
                     }
                 }
             }
