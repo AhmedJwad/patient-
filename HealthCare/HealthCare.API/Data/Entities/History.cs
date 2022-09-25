@@ -33,13 +33,15 @@ namespace HealthCare.API.Data.Entities
         [Display(Name = "Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}")]
         public DateTime DateLocal => Date.ToLocalTime();
-       
-        
+
+
+        [JsonIgnore]
         public Patient patient { get; set; }
 
-       
+        [JsonIgnore]
         public User user { get; set; }
 
+       
         public ICollection<Detail> Details { get; set; }
 
         [Display(Name = "# Details")]

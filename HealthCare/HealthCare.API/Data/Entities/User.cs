@@ -1,6 +1,7 @@
 ﻿using HealthCare.Common.Enums;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace HealthCare.API.Data.Entities
 {
@@ -37,10 +38,12 @@ namespace HealthCare.API.Data.Entities
         [Display(Name = "User")]
         public string FullName => $"{FirstName} {LastName}";
 
+        //[JsonIgnore]      
+        public ICollection<Patient> Patients { get; set; }
+
         [Display(Name = "# Patients")]
         public int PatientsCount => Patients == null ? 0 : Patients.Count;
-
-        public ICollection<Patient> Patients { get; set; }
-        public ICollection<History> histories { get; set; }
+      
+       
     }
 }

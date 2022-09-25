@@ -9,7 +9,7 @@ using Microsoft.Extensions.Azure;
 using Microsoft.IdentityModel.Tokens;
 using System.Configuration;
 using System.Text;
-
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,7 +36,7 @@ builder.Services.AddIdentity<User, IdentityRole>(x =>
 
 
 builder.Services.AddAuthentication()
-                .AddCookie()
+                .AddCookie()                
                 .AddJwtBearer(cfg =>
                 {
                     
@@ -60,6 +60,8 @@ builder.Services.AddScoped<IBlobHelper, BlobHelper>();
 builder.Services.AddScoped<IconverterHelper, ConverterHelper>();
 builder.Services.AddScoped<IMailHelper, MailHelper>();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 var app = builder.Build();
 SeedData();

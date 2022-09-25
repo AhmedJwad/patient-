@@ -21,15 +21,10 @@ namespace HealthCare.API.Data.Entities
         [Display(Name = "Adress")]
         [MaxLength(50, ErrorMessage = "The field {0} cannot have more than {1} characters.")]
         [Required(ErrorMessage = "The field {0} is required.")]
-        public string Address { get; set; }
-        [JsonIgnore]
-        public BloodType bloodType { get; set; }
-
-        [JsonIgnore]
-        public City City { get; set; }
-        [JsonIgnore]
-        public Natianality Natianality { get; set; }
-        [JsonIgnore]
+        public string Address { get; set; }       
+        public BloodType bloodType { get; set; }      
+        public City City { get; set; }       
+        public Natianality Natianality { get; set; }      
         public gendre  gendre { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}")]
@@ -54,7 +49,7 @@ namespace HealthCare.API.Data.Entities
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-      
+        [JsonIgnore]
         public User User { get; set; }
         public int Age => DateLocal == null ? 0 : DateTime.Today.Year - DateLocal.Year;
 
@@ -71,8 +66,9 @@ namespace HealthCare.API.Data.Entities
 
         [Display(Name = "# histories")]
         public int HistoriesCount => histories == null ? 0 : histories.Count;
+  
         public ICollection<PatientPhoto>patientPhotos { get; set; }
-        
+       
         public ICollection<History> histories { get; set; }
 
     }

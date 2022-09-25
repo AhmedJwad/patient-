@@ -14,6 +14,7 @@ namespace HealthCare.API.Data.Entities
 
         [Display(Name = "Diagonisic")]
         [Required(ErrorMessage = "The field {0} is required.")]
+       
         public diagonisic diagonisic { get; set; }
 
         [Display(Name = "Description")]

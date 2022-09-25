@@ -57,19 +57,19 @@
             },
             "Aspose.Imaging": {
               "target": "Package",
-              "version": "[22.8.0, )"
+              "version": "[22.9.0, )"
             },
             "Azure.Storage.Blobs": {
               "target": "Package",
-              "version": "[12.3.0, )"
+              "version": "[12.13.1, )"
             },
             "Azure.Storage.Files.Shares": {
               "target": "Package",
-              "version": "[12.1.0, )"
+              "version": "[12.11.0, )"
             },
             "Azure.Storage.Queues": {
               "target": "Package",
-              "version": "[12.2.0, )"
+              "version": "[12.11.1, )"
             },
             "Braintree": {
               "target": "Package",
@@ -89,7 +89,7 @@
             },
             "Grpc.Net.Client": {
               "target": "Package",
-              "version": "[2.47.0, )"
+              "version": "[2.48.0, )"
             },
             "ImageProcessor": {
               "target": "Package",
@@ -105,7 +105,7 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[3.3.0, )"
+              "version": "[3.4.1, )"
             },
             "Microsoft.AspNet.WebPages": {
               "target": "Package",
@@ -113,7 +113,7 @@
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[6.0.7, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.AspNetCore.Http.Abstractions": {
               "target": "Package",
@@ -121,29 +121,29 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.7, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
               "target": "Package",
-              "version": "[6.0.7, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.7, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[6.0.7, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.7, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.Extensions.Azure": {
               "target": "Package",
-              "version": "[1.0.0, )"
+              "version": "[1.5.0, )"
             },
             "Microsoft.Extensions.Configuration.Binder": {
               "target": "Package",
@@ -151,7 +151,7 @@
             },
             "Microsoft.Extensions.Configuration.EnvironmentVariables": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[6.0.1, )"
             },
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
@@ -159,11 +159,11 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "MimeKit": {
               "target": "Package",
-              "version": "[3.3.0, )"
+              "version": "[3.4.1, )"
             },
             "MoyskleyTech.ImageProcessing": {
               "target": "Package",
@@ -179,7 +179,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.3.0, )"
+              "version": "[6.4.0, )"
             },
             "System.Drawing.Common": {
               "target": "Package",

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace HealthCare.API.Data.Entities
 {
@@ -11,6 +12,7 @@ namespace HealthCare.API.Data.Entities
         [Required(ErrorMessage = "The field {0} is required.")]
         public string Description { get; set; }
 
+        [JsonIgnore]
         public ICollection<Patient> Patients { get; set; }  
     }
 }

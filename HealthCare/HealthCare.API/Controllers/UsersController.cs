@@ -27,6 +27,8 @@ using DateTime = System.DateTime;
 using PixelFormat = System.Drawing.Imaging.PixelFormat;
 using Rectangle = System.Drawing.Rectangle;
 using System;
+using Chart = System.Web.Helpers.Chart;
+using VisioForge.Libs.DirectShowLib;
 
 namespace HealthCare.API.Controllers
 {
@@ -722,7 +724,7 @@ namespace HealthCare.API.Controllers
 
 
 
-            System.Drawing.Bitmap Almershady = new System.Drawing.Bitmap(stream);
+            System.Drawing.Bitmap Almershady = new System.Drawing.Bitmap(stream);           
             bmp = new System.Drawing.Bitmap(Almershady, new System.Drawing.Size(350, 300));
 
             int w;
@@ -981,8 +983,7 @@ namespace HealthCare.API.Controllers
             var stream1 = await httpClient.GetStreamAsync(model.Scramble);
             System.Drawing.Bitmap almershady2 = new System.Drawing.Bitmap(stream1);          
             Histogram(bmp);           
-            Histogram2(Almershady);
-            drawxandy(almershady2);
+            Histogram2(Almershady);          
             HistogramEqualization equalization = new HistogramEqualization();
             equalization.ApplyInPlace(almershady2);
             almershady2.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\histogram" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
@@ -997,54 +998,7 @@ namespace HealthCare.API.Controllers
             return View(model);
         }
 
-        public void drawxandy(System.Drawing.Bitmap bitmap)
-        {
-            bitmap = new System.Drawing.Bitmap(900, 700, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
-            System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(bitmap);
-            g.Clear(System.Drawing.Color.LightGray);
-
-            // set attr
-            g.SmoothingMode =System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Bicubic;
-
-            // draw X and Y axes
-            System.Drawing.Pen pen = new System.Drawing.Pen(System.Drawing.Color.Black, 1);
-            g.DrawLine(pen, new System.Drawing.Point(100, 100), new System.Drawing.Point(100, 600));
-            g.DrawLine(pen, new System.Drawing.Point(100, 600), new System.Drawing.Point(800, 600));
-
-            System.Drawing.SolidBrush brush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
-            System.Drawing.Font font = new System.Drawing.Font("Lucida Console", 14, System.Drawing.FontStyle.Bold);
-
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Bicubic;
-
-            // grid numbeers on x axis
-            for (int i = 0; i < bitmap.Width; i++)
-            {
-                g.DrawString(i.ToString(), font, brush, 1000 * (i + 1), 620);
-            }
-
-            // grid numbeers on y axis
-            for (int i = 0; i < 6; i++)
-            {
-                g.DrawString(i.ToString(), font, brush, 70, 600 - (100 * i));
-            }
-
-            // label 1
-            font = new System.Drawing.Font("Lucida Console", 14, System.Drawing.FontStyle.Bold);
-            g.DrawString("Line - X axis", font, brush, 100, 650);
-
-            // label 2
-            font = new System.Drawing.Font("Lucida Console", 32, System.Drawing.FontStyle.Bold);
-            g.DrawString("PORCO El.01", font, brush, 550, 150);
-
-            // label 3
-            font = new System.Drawing.Font("Lucida Console", 24, System.Drawing.FontStyle.Regular);
-            g.DrawString("PORCO El.01", font, brush, 550, 200);
-
-            // save as .bmp file
-            bitmap.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\drawingxandy" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
-        }
+       
 
         public void Histogram2(System.Drawing.Bitmap bmp)
         {
@@ -1076,91 +1030,19 @@ namespace HealthCare.API.Controllers
                     g.DrawLine(Pens.Black,
                         new System.Drawing.Point(i, img.Height - 5),
                         new System.Drawing.Point(i, img.Height - 5 - (int)(pct * histHeight  ))  // Use that percentage of the height
-                        );
-                   
+                        );                 
+
                 }
             }
-           
 
+           
+           
+          
             img.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\histogram3" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
         }       
 
 
-        public async Task <ActionResult> ColumnChart()
-        {
-          
-            patientimageviewmodel model = new patientimageviewmodel
-            {              
-            };
-          
-            var httpClient = new HttpClient();
-            var stream = await httpClient.GetStreamAsync(model.ImageFullPath);         
-           System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(model.ImageFullPath);            
-            int[] histogram_r = new int[256];
-            float max = 0;
-
-            for (int i = 0; i < bmp.Width; i++)
-            {
-                for (int j = 0; j < bmp.Height; j++)
-                {
-                    int redValue = bmp.GetPixel(i, j).R;
-                    histogram_r[redValue]++;
-                    if (max < histogram_r[redValue])
-                        max = histogram_r[redValue];
-                }
-            }
-
-            int histHeight = 128;
-            System.Drawing.Bitmap img = new System.Drawing.Bitmap(256, histHeight + 10);
-            ArrayList xvalue = new ArrayList();
-            ArrayList Yvalue = new ArrayList();
-            using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(img))
-            {
-                for (int i = 0; i < histogram_r.Length; i++)
-                {
-                    float pct = histogram_r[i] / max;   // What percentage of the max is this value?
-                    g.DrawLine(Pens.Black,
-                        new System.Drawing.Point(i , img.Height - 5),
-                        new System.Drawing.Point(i , img.Height - 5 - (int)(pct * histHeight))  // Use that percentage of the height
-                        );
-                }
-            }
-            Dictionary<System.Drawing.Color, int> histo = new Dictionary<System.Drawing.Color, int>();
-            for (int x = 0; x < bmp.Width; x++)
-            {
-                for (int y = 0; y < bmp.Height; y++)
-                {
-                    // Get pixel color 
-                    System.Drawing.Color c = bmp.GetPixel(x, y);
-                    // If it exists in our 'histogram' increment the corresponding value, or add new
-                    if (histo.ContainsKey(c))
-                        histo[c] = histo[c] + 1;
-                    else
-                        histo.Add(c, 1);
-                }
-            }
-            var chart = img;
-
-            foreach (var item in histo)
-            {
-                xvalue.Add(item);               
-              
-
-            }
-
-                //foreach (var item in customerdegree)
-                //{
-                //    xvalue.Add(item.Customer.FullName);
-                //    Yvalue.Add(item.Customer.CustomerDegrees.Count() );
-
-                //}
-                new System.Web.Helpers.Chart(width: 500, height: 400, theme: ChartTheme.Green)
-                .AddTitle("chart for customer degree [column chart]")
-                .AddSeries("default", chartType: "Column", xValue: xvalue, yValues: Yvalue)
-                .Write("bmp");
-            return null;
-
-        }
+      
         public void Histogram(System.Drawing.Bitmap bmp)
         {         
           
