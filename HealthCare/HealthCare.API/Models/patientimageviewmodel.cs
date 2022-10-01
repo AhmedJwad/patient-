@@ -34,7 +34,11 @@ namespace HealthCare.API.Models
         public string histgrame { get; set; }
 
         public string histgrameorginal { get; set; }
-        
+        public double Entropyorginal { get; set; }
+        public double Entropyscample { get; set; }
+
+        public double NPCR { get; set; }
+
         [Display(Name = "Photo")]
         public string ImageFullPath => ImageId == String.Empty
             ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
