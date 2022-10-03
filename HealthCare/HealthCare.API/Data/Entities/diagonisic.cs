@@ -14,7 +14,7 @@ namespace HealthCare.API.Data.Entities
         [Required(ErrorMessage = "The field {0} is required.")]
         public string Description { get; set; }
 
-        [JsonIgnore]
+       [JsonIgnore]
         public ICollection<Detail> details { get; set; }
 	
     }

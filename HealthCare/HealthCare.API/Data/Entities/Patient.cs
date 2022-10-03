@@ -21,11 +21,8 @@ namespace HealthCare.API.Data.Entities
         [Display(Name = "Adress")]
         [MaxLength(50, ErrorMessage = "The field {0} cannot have more than {1} characters.")]
         [Required(ErrorMessage = "The field {0} is required.")]
-        public string Address { get; set; }       
-        public BloodType bloodType { get; set; }      
-        public City City { get; set; }       
-        public Natianality Natianality { get; set; }      
-        public gendre  gendre { get; set; }
+        public string Address { get; set; }              
+       
 
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}")]
         [Display(Name = "Birth of Date")]
@@ -70,6 +67,10 @@ namespace HealthCare.API.Data.Entities
         public ICollection<PatientPhoto>patientPhotos { get; set; }
        
         public ICollection<History> histories { get; set; }
+        public City City { get; set; }
+        public Natianality Natianality { get; set; }
+        public gendre gendre { get; set; }
+        public BloodType bloodType { get; set; }
 
     }
 }

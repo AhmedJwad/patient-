@@ -7,14 +7,13 @@ namespace HealthCare.API.Data.Entities
     {
         public int Id { get; set; }
 
-        [Display(Name = "Histories")]
-        [JsonIgnore]
+        [Display(Name = "Histories")]       
         [Required(ErrorMessage = "The field {0} is required.")]
+        [JsonIgnore]
         public History History { get; set; }
 
         [Display(Name = "Diagonisic")]
-        [Required(ErrorMessage = "The field {0} is required.")]
-       
+        [Required(ErrorMessage = "The field {0} is required.")]       
         public diagonisic diagonisic { get; set; }
 
         [Display(Name = "Description")]
