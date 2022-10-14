@@ -31,6 +31,11 @@ using Chart = System.Web.Helpers.Chart;
 using VisioForge.Libs.DirectShowLib;
 using Intersoft.Crosslight;
 using Emgu.CV.OCR;
+using System.Diagnostics;
+using MessagePack.Formatters;
+using VisioForge.MediaFramework.FFMPEGCore.Arguments;
+using VisioForge.Libs.ZXing.QrCode.Internal;
+using Microsoft.DotNet.Scaffolding.Shared.CodeModifier.CodeChange;
 
 namespace HealthCare.API.Controllers
 {
@@ -412,6 +417,7 @@ namespace HealthCare.API.Controllers
         {
             if (ModelState.IsValid)
             {
+              
                 Guid ImageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "patients");
                 Patient patient = await _context.patients.Include(x => x.patientPhotos)
                     .FirstOrDefaultAsync(x => x.Id == model.PatientId);
@@ -420,9 +426,10 @@ namespace HealthCare.API.Controllers
                 {
                     patient.patientPhotos = new List<PatientPhoto>();
                 }
+               
                 patient.patientPhotos.Add(new PatientPhoto
-                {
-                    ImageId = ImageId,
+                {                  
+                ImageId = ImageId,
                 });
 
                 _context.patients.Update(patient);
@@ -726,7 +733,7 @@ namespace HealthCare.API.Controllers
 
 
 
-            System.Drawing.Bitmap Almershady = new System.Drawing.Bitmap(stream);             
+            System.Drawing.Bitmap Almershady = new System.Drawing.Bitmap(stream);         
             bmp = new System.Drawing.Bitmap(Almershady, new System.Drawing.Size(350, 300));
 
             int w;
@@ -981,7 +988,7 @@ namespace HealthCare.API.Controllers
            
             var httpClient1 = new HttpClient();
             var stream1 = await httpClient.GetStreamAsync(model.Scramble);
-            System.Drawing.Bitmap almershady2 = new System.Drawing.Bitmap(stream1);          
+            System.Drawing.Bitmap almershady2 = new System.Drawing.Bitmap(stream1);           
             Histogram(bmp);           
             Histogram2(Almershady);
           
@@ -992,16 +999,7 @@ namespace HealthCare.API.Controllers
             string path12 = ($"images\\histogram2" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
             model.histgrame = path11;
             model.histgrameorginal=path12;
-            //end histogram
-            // Entropy
-            byte[] imagetobyte1 = BitmapToByteArray(bmp);
-            byte[] imagetobyte2 = BitmapToByteArray(Almershady);
-            double orginal = Entropy(imagetobyte1);
-            double scramble = Entropy(imagetobyte2);
-
-            model.Entropyorginal = orginal;
-            model.Entropyscample = scramble;
-            //end  Entropy
+            //end histogram            
             //NPCR         
             var httpClient2 = new HttpClient();
             var stream2 = await httpClient.GetStreamAsync(model.Scramble);               
@@ -1009,10 +1007,53 @@ namespace HealthCare.API.Controllers
             int Tollerance = 0;
             model.NPCR = CompareImages(scramble2, bmp , Tollerance);
             //End NPCR 
+            // Entropy           
+            byte[] imagetobyte1 = BitmapToByteArray(bmp);
+            byte[] imagetobyte2 = BitmapToByteArray(Almershady);
+            double orginal = Entropy(imagetobyte1);
+            double scramble = Entropy(imagetobyte2);
+
+            model.Entropyorginal = orginal;
+            model.Entropyscample = scramble;
+            chaotic(Almershady);
+            //end  Entropy
 
             return View(model);
         }
-      
+
+        public void chaotic(System.Drawing.Bitmap bmp)
+        {
+            double x = 0.99;
+            int ih = bmp.Height;
+            int iw = bmp.Width;
+            System.Drawing.Color c = new System.Drawing.Color();
+            for (int i = 0; i < 100; i++)
+            {
+                x = 4 * x * (1 - x);
+            }
+            for (int j = 0; j < ih; j++)
+            {
+                for (int i = 0; i < iw; i++)
+                {
+                    c = bmp.GetPixel(i, j);
+                    int chaos = 0, g;
+                    string k ;
+                    for (int w = 0; w < 8; w++)
+                    {
+                        x = 4 * x * (1 - x);
+                        if (x >= 0.5) g = 1;
+                        else g = 0;
+                        k = Guid.NewGuid().ToString("n");
+                        chaos = ((chaos << 1) | g);
+                    }
+                    //c = 
+                    bmp.SetPixel(i, j, System.Drawing.Color.FromArgb(c.R ^ (int)chaos,
+                                                     c.G ^ (int)chaos,
+                                                     c.B ^ (int)chaos));
+                }
+            }            
+
+        }
         public  double CompareImages(System.Drawing.Bitmap InputImage1, System.Drawing.Bitmap InputImage2, int Tollerance)
         {
           
@@ -1060,6 +1101,7 @@ namespace HealthCare.API.Controllers
             double result = Difference * 100 / UsedSize;
             return result; 
         }
+        
         public static unsafe Double Entropy(byte[] data)
         {
             int* rgi = stackalloc int[0x100], pi = rgi + 0x100;
@@ -1070,7 +1112,7 @@ namespace HealthCare.API.Controllers
             Double H = 0.0, cb = data.Length;
             while (--pi >= rgi)
                 if (*pi > 0)
-                    H += *pi * Math.Log(*pi / cb, 2.0);
+                    H += *pi * Math.Log(*pi / cb, 1.963);
 
             return -H / cb;
         }
