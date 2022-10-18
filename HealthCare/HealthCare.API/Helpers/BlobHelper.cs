@@ -4,6 +4,7 @@ using System.Drawing.Imaging;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using VisioForge.Libs.MediaFoundation.OPM;
+using HealthCare.Common.Enums;
 
 namespace HealthCare.API.Helpers
 {
@@ -95,6 +96,6 @@ namespace HealthCare.API.Helpers
 
             return result;
         }
-
+       
     }
 }

@@ -1015,12 +1015,162 @@ namespace HealthCare.API.Controllers
 
             model.Entropyorginal = orginal;
             model.Entropyscample = scramble;
-            chaotic(Almershady);
             //end  Entropy
+
+            //chaotic
+            chaotic(Almershady);
+            //end chaotic
+
+            //generate image k1 k2 k3 
+            var k = $"{0}{0}{1}{1}{1}{1}{0}{1}";
+            string randomimage= k;
+           string newimage = StringToBinary(randomimage);
+            var bytesAsStrings12 = newimage.Select((c, i) => new { Char = c, Index = i })
+           .GroupBy(x => x.Index / 8)
+           .Select(g => new string(g.Select(x => x.Char).ToArray()));
+            byte[] bytes12 = bytesAsStrings11.Select(s => Convert.ToByte(s, 2)).ToArray();
+            int width = 350;
+            int height = 300;
+            SaveBitmap2(bytetobitmap, width, height, bytes12);
+            string pathgenerateimage = ($"images\\randomimagePng" + ".jpg");
+            model.generateimage = pathgenerateimage;
+            var httpClient3 = new HttpClient();
+            var stream3 = await httpClient.GetStreamAsync(model.Generateimage);
+            System.Drawing.Bitmap generateimagebitmap = new System.Drawing.Bitmap(stream3);
+            changerrowtocolumn(generateimagebitmap);
+            string pathgenerateimagebitmap= ($"images\\changerowtocolumnPng" + ".jpg");
+            model.changerowandcolumnimage = pathgenerateimagebitmap;
+            var httpClient4 = new HttpClient();
+            var stream4 = await httpClient.GetStreamAsync(model.Changerowandcolumnimage);
+            System.Drawing.Bitmap changerowandcolumn = new System.Drawing.Bitmap(stream4);
+           
+            System.Drawing.Bitmap Xorimageoperation = BitwiseBlend(Almershady, changerowandcolumn,
+                  BitwiseBlendType.Xor, BitwiseBlendType.Xor
+                                     , BitwiseBlendType.Xor);
+            Xorimageoperation.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\Xorimageoperation" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+            //end generate image 
 
             return View(model);
         }
+        public static System.Drawing.Bitmap BitwiseBlend(System.Drawing.Bitmap sourceBitmap, System.Drawing.Bitmap blendBitmap,
+                                     BitwiseBlendType blendTypeBlue, BitwiseBlendType
+                                     blendTypeGreen, BitwiseBlendType blendTypeRed)
+        {
+            BitmapData sourceData = sourceBitmap.LockBits(new Rectangle(0, 0,
+                                    sourceBitmap.Width, sourceBitmap.Height),
+                                    ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
 
+
+            byte[] pixelBuffer = new byte[sourceData.Stride * sourceData.Height];
+            Marshal.Copy(sourceData.Scan0, pixelBuffer, 0, pixelBuffer.Length);
+            sourceBitmap.UnlockBits(sourceData);
+
+
+            BitmapData blendData = blendBitmap.LockBits(new Rectangle(0, 0,
+                                    blendBitmap.Width, blendBitmap.Height),
+                                    ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+
+
+            byte[] blendBuffer = new byte[blendData.Stride * blendData.Height];
+            Marshal.Copy(blendData.Scan0, blendBuffer, 0, blendBuffer.Length);
+            blendBitmap.UnlockBits(blendData);
+
+
+            int blue = 0, green = 0, red = 0;
+
+
+            for (int k = 0; (k + 4 < pixelBuffer.Length) &&
+                            (k + 4 < blendBuffer.Length); k += 4)
+            {
+              
+                if (blendTypeBlue == BitwiseBlendType.Xor)
+                {
+                    blue = pixelBuffer[k] ^ blendBuffer[k];
+                }
+
+
+                if (blendTypeGreen == BitwiseBlendType.Xor)
+                {
+                    green = pixelBuffer[k + 1] ^ blendBuffer[k + 1];
+                }
+                              
+                if (blendTypeRed == BitwiseBlendType.Xor)
+                {
+                    red = pixelBuffer[k + 2] ^ blendBuffer[k + 2];
+                }
+
+
+                if (blue < 0)
+                { blue = 0; }
+                else if (blue > 255)
+                { blue = 255; }
+
+
+                if (green < 0)
+                { green = 0; }
+                else if (green > 255)
+                { green = 255; }
+
+
+                if (red < 0)
+                { red = 0; }
+                else if (red > 255)
+                { red = 255; }
+
+
+                pixelBuffer[k] = (byte)blue;
+                pixelBuffer[k + 1] = (byte)green;
+                pixelBuffer[k + 2] = (byte)red;
+            }
+
+
+            System.Drawing.Bitmap resultBitmap = new System.Drawing.Bitmap(sourceBitmap.Width, sourceBitmap.Height);
+
+
+            BitmapData resultData = resultBitmap.LockBits(new Rectangle(0, 0,
+                                    resultBitmap.Width, resultBitmap.Height),
+                                    ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+
+
+            Marshal.Copy(pixelBuffer, 0, resultData.Scan0, pixelBuffer.Length);
+            resultBitmap.UnlockBits(resultData);
+
+
+            return resultBitmap;
+        }
+
+        public void changerrowtocolumn(System.Drawing.Bitmap bmp)
+        {
+            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+            BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            // Get the address of the first line.
+            IntPtr ptr = bmpData.Scan0;
+
+            // Declare an array to hold the bytes of the bitmap.
+            int bytes = bmpData.Stride * bmp.Height;
+            byte[] rgbValues = new byte[bytes];
+            byte[] r = new byte[bytes / 3];
+            byte[] g = new byte[bytes / 3];
+            byte[] b = new byte[bytes / 3];
+
+            // Copy the RGB values into the array.
+            Marshal.Copy(ptr, rgbValues, 0, bytes);
+
+            int count = 0;
+            int stride = bmpData.Stride;
+
+            for (int column = 0; column < bmpData.Height; column++)
+            {
+                for (int row = 0; row < bmpData.Width; row++)
+                {
+                    b[count] = (byte)(rgbValues[(column * stride) + (row * 3)]);
+                    g[count] = (byte)(rgbValues[(column * stride) + (row * 3) + 1]);
+                    r[count++] = (byte)(rgbValues[(column * stride) + (row * 3) + 2]);
+                }
+            }
+            bmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\changerowtocolumn" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+        }
         public void chaotic(System.Drawing.Bitmap bmp)
         {
             double x = 0.99;
@@ -1228,6 +1378,38 @@ namespace HealthCare.API.Controllers
             return new string('0', 8 - bin.Length) +  bin  ;
         }
 
+        public void SaveBitmap2(string fileName, int width, int height, byte[] imageData)
+        {
+
+            byte[] data = new byte[width * height * 4];
+
+            int o = 0;
+
+            for (int i = 0; i < width * height; i++)
+            {
+                byte value = imageData[i];
+
+
+                data[o++] = value;
+                data[o++] = value;
+                data[o++] = value;
+                data[o++] = 0;
+            }
+
+            unsafe
+            {
+                fixed (byte* ptr = data)
+                {
+
+                    using (System.Drawing.Bitmap image = new System.Drawing.Bitmap(width, height, width * 4,
+                                PixelFormat.Format24bppRgb, new IntPtr(ptr)))
+                    {
+
+                        image.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\randomimage" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+                    }
+                }
+            }
+        }
 
         public void SaveBitmap(string fileName, int width, int height, byte[] imageData)
         {

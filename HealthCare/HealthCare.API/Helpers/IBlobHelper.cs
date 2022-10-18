@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using HealthCare.Common.Enums;
+using System.Drawing;
 
 namespace HealthCare.API.Helpers
 {
@@ -12,8 +13,7 @@ namespace HealthCare.API.Helpers
 
         Task DeleteBlobAsync(Guid id, string containerName);
         Bitmap ToGrayscale(Bitmap bmp);
-
-
+      
 
     }
 }

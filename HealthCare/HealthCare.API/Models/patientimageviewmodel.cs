@@ -39,6 +39,10 @@ namespace HealthCare.API.Models
 
         public double NPCR { get; set; }
 
+        public string generateimage { get; set; }
+
+        public string changerowandcolumnimage { get; set; }
+
         [Display(Name = "Photo")]
         public string ImageFullPath => ImageId == String.Empty
             ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
@@ -77,5 +81,12 @@ namespace HealthCare.API.Models
         public string HistogrameOrginae => histgrameorginal == String.Empty
      ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
      : $"https://localhost:7152/{histgrameorginal}";
+        public string Generateimage => generateimage == String.Empty
+     ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
+     : $"https://localhost:7152/{generateimage}";
+
+        public string Changerowandcolumnimage => changerowandcolumnimage == String.Empty
+    ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
+    : $"https://localhost:7152/{changerowandcolumnimage}";
     }
 }
