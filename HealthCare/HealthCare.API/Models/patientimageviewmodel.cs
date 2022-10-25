@@ -36,12 +36,15 @@ namespace HealthCare.API.Models
         public string histgrameorginal { get; set; }
         public double Entropyorginal { get; set; }
         public double Entropyscample { get; set; }
-
         public double corrvertical { get; set; }
         public double corrhorizontal { get; set; }
-
         public double corrdiagnol { get; set; }
+        public double corrverticalxorimage { get; set; }
+        public double corrhorizontalxorimage { get; set; }
+        public double corrdiagnolxorimage { get; set; }
         public double NPCR { get; set; }
+
+        public double NPCRXorimage { get; set; }
         public double Xorentropy { get; set; }
 
         public string generateimage { get; set; }

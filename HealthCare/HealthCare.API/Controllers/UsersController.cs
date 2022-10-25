@@ -1045,17 +1045,13 @@ namespace HealthCare.API.Controllers
             model.changerowandcolumnimage = pathgenerateimagebitmap;
             var httpClient4 = new HttpClient();
             var stream4 = await httpClient.GetStreamAsync(model.Changerowandcolumnimage);
-            System.Drawing.Bitmap changerowandcolumn = new System.Drawing.Bitmap(stream4);
-           
+            System.Drawing.Bitmap changerowandcolumn = new System.Drawing.Bitmap(stream4);           
             System.Drawing.Bitmap Xorimageoperation = BitwiseBlend(Almershady, changerowandcolumn,
                   BitwiseBlendType.Xor, BitwiseBlendType.Xor
                                      , BitwiseBlendType.Xor);
             Xorimageoperation.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\Xorimageoperation" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
             string Xorpath = ($"images\\XorimageoperationPng" + ".jpg");
-
-            model.xorbetweenscrambledimageandkimage = Xorpath;
-
-           
+            model.xorbetweenscrambledimageandkimage = Xorpath;           
             //end generate image 
 
             //coffecient correlation 
@@ -1067,24 +1063,36 @@ namespace HealthCare.API.Controllers
             var stream6 = await httpClient.GetStreamAsync(model.ImageFullPath);
             System.Drawing.Bitmap corellationcoffecient2 = new System.Drawing.Bitmap(stream6);
             byte[] imagetobyte4 = BitmapToByteArray(corellationcoffecient2);
-
             int[] bytesAsInts = imagetobyte3.Select(y => (int)y).ToArray();
             int[] bytesAsInts1 = imagetobyte4.Select(y => (int)y).ToArray();
             int n=bytesAsInts.Length;            
             float Ahmed22 = correlationCoefficienthorizontal(bytesAsInts, bytesAsInts1,   n);
             float Ahmed23 = correlationCoefficientVertical(bytesAsInts, bytesAsInts1, n);
-
             double[] corr = toDoubleArray(imagetobyte3);
             double[] corr1 = toDoubleArray(imagetobyte4);
             double corr2 = Correlation(corr, corr1);
-
             model.corrhorizontal = Ahmed22;
             model.corrvertical = Ahmed23;
             model.corrdiagnol = corr2;
+            //coffecient correlation  for saramble image and xorimage
+            var httpClient10 = new HttpClient();
+            var stream10 = await httpClient10.GetStreamAsync(model.Xorimage);
+            System.Drawing.Bitmap corellationcoffecient10 = new System.Drawing.Bitmap(stream10);
+            byte[] imagetobyte10 = BitmapToByteArray(corellationcoffecient10);
+            int[] bytesAsIntsxor = imagetobyte10.Select(x => (int)x).ToArray();
+            float Ahmed24 = correlationCoefficienthorizontal(bytesAsInts, bytesAsIntsxor, n);
+            float Ahmed25 = correlationCoefficientVertical(bytesAsInts, bytesAsIntsxor, n);
+            float Ahmed26 = correlationCoefficientxor(bytesAsInts, bytesAsIntsxor, n);
+            double[] corr4 = toDoubleArray(imagetobyte10);
+            double corr6 = Correlation1(corr, corr4);
+            model.corrhorizontalxorimage = Ahmed24;
+            model.corrverticalxorimage = Ahmed25;
+            model.corrdiagnolxorimage = corr6;
+            //end coffecient correlation  for saramble image and xorimage 
             //end coffecient correlation
 
             //histgrame between scramble image and xoroperationimageand kimage 
-                    var httpClient12 = new HttpClient();
+            var httpClient12 = new HttpClient();
                     var stream12 = await httpClient12.GetStreamAsync(model.Xorimage);
                     System.Drawing.Bitmap oxrimage = new System.Drawing.Bitmap(stream12);
                     Histogram3(oxrimage);
@@ -1097,7 +1105,45 @@ namespace HealthCare.API.Controllers
             double oximage = Entropy2(xorimage);
             model.Xorentropy = oximage;
             //end entropy between Scramble image and xoroperation image 
+
+            //NPCR between scramble image and Xorimage 
+            int Tollerance1 = 0;
+            model.NPCRXorimage= CompareImages(oxrimage, scramble2,  Tollerance1);
+            //End NPCR between scramble image and Xorimage 
+            
             return View(model);
+        }
+       
+        static float correlationCoefficientxor(int[] X, int[] Y,
+                                                   int n)
+        {
+            int sum_X = 0, sum_Y = 0, sum_XY = 0;
+            int squareSum_X = 0, squareSum_Y = 0;
+
+            for (int i = 0; i < n; i++)
+            {
+                // sum of elements of array X.
+                sum_X = sum_X + X[i];
+
+                // sum of elements of array Y.
+                sum_Y = sum_Y + Y[i];
+
+                // sum of X[i] * Y[i].
+                sum_XY = sum_XY + X[i] * Y[i];
+
+                // sum of square of array elements.
+                squareSum_X = squareSum_X + X[i] * X[i];
+                squareSum_Y = squareSum_Y + Y[i] * Y[i];
+            }
+
+            // use formula for calculating correlation 
+            // coefficient.
+            float corr = (float)(n * sum_XY - sum_X * sum_Y) /
+                         (float)(Math.Sqrt((n * squareSum_X -
+                         sum_X * sum_X) * (n * squareSum_Y -
+                         sum_Y * sum_Y)));                        
+
+            return corr;
         }
         public static double[] toDoubleArray(byte[] byteArr)
         {
@@ -1108,8 +1154,39 @@ namespace HealthCare.API.Controllers
             }
             return arr;
         }
-     
 
+        public double Correlation1(double[] array1, double[] array2)
+        {
+            double[] array_xy = new double[array1.Length];
+            double[] array_xp2 = new double[array1.Length];
+            double[] array_yp2 = new double[array1.Length];
+            for (int i = 0; i < array1.Length; i++)
+                array_xy[i] = array1[i] * array2[i];
+            for (int i = 0; i < array1.Length; i++)
+                array_xp2[i] = Math.Pow(array1[i], 2.00);
+            for (int i = 0; i < array1.Length; i++)
+                array_yp2[i] = Math.Pow(array2[i], 2.00);
+            double sum_x = 0.0;
+            double sum_y = 0.0;
+            foreach (double n in array1)
+                sum_x += n;
+            foreach (double n in array2)
+                sum_y += n;
+            double sum_xy = 0;
+            foreach (double n in array_xy)
+                sum_xy += n;
+            double sum_xpow2 = 0;
+            foreach (double n in array_xp2)
+                sum_xpow2 += n;
+            double sum_ypow2 = 0;
+            foreach (double n in array_yp2)
+                sum_ypow2 += n;
+            double Ex2 = Math.Pow(sum_x, 2.00);
+            double Ey2 = Math.Pow(sum_y, 2.00);
+
+            return (array1.Length * sum_xy - sum_x * sum_y) /
+                   Math.Sqrt((array1.Length * sum_xpow2 - Ex2) * (array1.Length * sum_ypow2 - Ey2));
+        }
         public double Correlation(double[] array1, double[] array2)
         {
             double[] array_xy = new double[array1.Length];

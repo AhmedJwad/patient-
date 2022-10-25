@@ -222,4 +222,46 @@
 
     </tbody>
 </table>
-<br />
+<hr />
+<h1> The NPCR values between pixels inScrambled image and xor operation image</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Scrambled Image</th>
+            <th scope="col">xor operation image</th>
+            <th scope="col">NPCR</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row"> <img src="@Model.Scramble" width="350" height="300" /> </th>
+            <th scope="row"><img src="@Model.Xorimage" width="350" height="300" /></th>
+            <td>@Model.NPCRXorimage</td>
+
+        </tr>
+
+    </tbody>
+</table>
+@*correlation coffecient *@
+<h1> The Correlation cofficient rate between pixel in the Scrambled image and xor operation image </h1>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Scrambled Image</th>
+            <th scope="col">xor operation image</th>
+            <th scope="col">The Correlation cofficient(H)</th>
+            <th scope="col">The Correlation cofficient(V)</th>
+            <th scope="col">The Correlation cofficient(D)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th><img src="@Model.Scramble" width="250" height="200" /></th>
+            <td><img src="@Model.Xorimage" width="250" height="200" /></td>
+            <td>@Model.corrhorizontalxorimage</td>
+            <td>@Model.corrverticalxorimage</td>
+            <td>@Model.corrdiagnolxorimage</td>
+        </tr>
+    </tbody>
+</table>
+<hr />
