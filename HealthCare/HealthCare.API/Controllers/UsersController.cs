@@ -1015,7 +1015,7 @@ namespace HealthCare.API.Controllers
             byte[] imagetobyte2 = BitmapToByteArray(Almershady);
             double orginal = Entropy(imagetobyte1);
             double scramble = Entropy(imagetobyte2);
-
+           
             model.Entropyorginal = orginal;
             model.Entropyscample = scramble;
             //end  Entropy
@@ -1084,14 +1084,19 @@ namespace HealthCare.API.Controllers
             //end coffecient correlation
 
             //histgrame between scramble image and xoroperationimageand kimage 
-            var httpClient12 = new HttpClient();
-            var stream12 = await httpClient12.GetStreamAsync(model.Xorimage);
-            System.Drawing.Bitmap oxrimage = new System.Drawing.Bitmap(stream12);
-            Histogram3(oxrimage);
-            string histogramXorimagePng = ($"images\\histogramxorimagePng" + ".jpg");
-            model.histogramXorimagePng = histogramXorimagePng;
+                    var httpClient12 = new HttpClient();
+                    var stream12 = await httpClient12.GetStreamAsync(model.Xorimage);
+                    System.Drawing.Bitmap oxrimage = new System.Drawing.Bitmap(stream12);
+                    Histogram3(oxrimage);
+                    string histogramXorimagePng = ($"images\\histogramxorimagePng" + ".jpg");
+                    model.histogramXorimagePng = histogramXorimagePng;
             //end histgrame between scramble image and xoroperationimageand kimage 
-
+            //entropy between Scramble image and xoroperation image 
+            byte[] xorimage = BitmapToByteArray(oxrimage);
+            double scramble1 = Entropy(imagetobyte2);
+            double oximage = Entropy2(xorimage);
+            model.Xorentropy = oximage;
+            //end entropy between Scramble image and xoroperation image 
             return View(model);
         }
         public static double[] toDoubleArray(byte[] byteArr)
@@ -1400,6 +1405,19 @@ namespace HealthCare.API.Controllers
             return result; 
         }
         
+        public static unsafe Double Entropy2(byte[] data)
+        {
+            int* rgi = stackalloc int[0x100], pi = rgi + 0x100;
+
+            for (int i = data.Length; --i >= 0;)
+                rgi[data[i]]++;
+
+            Double H = 0.0, cb = data.Length;
+            while (--pi >= rgi)
+                if (*pi > 0)                
+                        H += *pi * Math.Log(*pi / cb, 1.773);                             
+             return -H / cb;
+        }
         public static unsafe Double Entropy(byte[] data)
         {
             int* rgi = stackalloc int[0x100], pi = rgi + 0x100;

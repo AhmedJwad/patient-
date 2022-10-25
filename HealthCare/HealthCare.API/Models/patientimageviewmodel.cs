@@ -42,6 +42,7 @@ namespace HealthCare.API.Models
 
         public double corrdiagnol { get; set; }
         public double NPCR { get; set; }
+        public double Xorentropy { get; set; }
 
         public string generateimage { get; set; }
 
