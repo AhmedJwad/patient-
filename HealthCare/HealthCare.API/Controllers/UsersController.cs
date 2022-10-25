@@ -1071,6 +1071,10 @@ namespace HealthCare.API.Controllers
             double[] corr = toDoubleArray(imagetobyte3);
             double[] corr1 = toDoubleArray(imagetobyte4);
             double corr2 = Correlation(corr, corr1);
+
+            model.corrhorizontal = Ahmed22;
+            model.corrvertical = Ahmed23;
+            model.corrdiagnol = corr2;
             //end coffecient correlation
 
             return View(model);
@@ -1116,7 +1120,7 @@ namespace HealthCare.API.Controllers
             double Ey2 = Math.Pow(sum_y, 2.00);
 
             return (array1.Length * sum_xy - sum_x * sum_y) /
-                   Math.Sqrt((array1.Length * sum_xpow2 - Ex2) * (array1.Length * sum_ypow2 - Ey2));
+                   Math.Sqrt((array1.Length * sum_xpow2 - Ex2) * (array1.Length * sum_ypow2 - Ey2))*10;
         }
        public static float correlationCoefficienthorizontal(int[] X1, int[] X2 ,
                                                    int n)

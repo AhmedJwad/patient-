@@ -65,50 +65,36 @@
         <img src="@Model.T"
              class="w-100 shadow-1-strong rounded mb-4"
              alt="Boat on Calm Water" />
-    </div>     
-
-    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-        <p>
-            <img src="@Url.Action("ColumnChart")" alt=" chart" />
-        </p>
     </div>
 </div>
- 
-<center><h4>Histogram Image</h4></center>
+<hr />
+    @*Histogram Image *@
+<h1><center> Histogram Image </center></h1>
+    <table class="table">       
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Original Image</th>
+                <th scope="col">Histogram Original Image</th>
+                <th scope="col">Scrambled Image</th>
+                <th scope="col">Histogram Scrambled Image</th>               
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th><img src="@Model.ImageFullPath" width="250" height="200" /></th>
+                <td>
+                    <img src="@Model.HistogrameOrginae" width="250" height="200" />                         
+                </td>
+                <td>
+                    <img src="@Model.Scramble" width="250" height="200"/>
+                </td>
+                <td> <img src="@Model.HistogrameOrginae" width="250" height="200"</td>               
+            </tr>
+        </tbody>
+    </table>
 <hr style="width:100%;text-align:left;margin-left:0">
 
-<div class="row">
-   
-    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
 
-        <img src="@Model.Scramble"
-             class="w-100 shadow-1-strong rounded mb-4"
-             alt="Boat on Calm Water" />
-    </div>
-    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-
-        <img src="@Model.Histograme" width="350" height="300"
-             class="w-100 shadow-1-strong rounded mb-4"
-             alt="Boat on Calm Water" Canvas.Top="10" Canvas.Left="10" />
-
-    </div>    
-       
-</div>
-<div class="row">   
-
-    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-
-        <img src="@Model.T"
-             class="w-100 shadow-1-strong rounded mb-4"
-             alt="Boat on Calm Water" />
-    </div>
-    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">       
-        <img src="@Model.HistogrameOrginae" width="350" height="300"
-             class="w-100 shadow-1-strong rounded mb-4"
-             alt="Boat on Calm Water" />      
-       
-    </div>        
-</div>
 <table class="table">
     <thead>
         <tr>
@@ -148,6 +134,29 @@
 
         </tr>      
 
+    </tbody>
+</table>
+<hr />
+@*correlation coffecient *@
+<h1> The Correlation cofficient rate between pixel in the original and Scrambled Images </h1>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Original Image</th>
+            <th scope="col">Scrambled Image</th>
+            <th scope="col">The Correlation cofficient(H)</th>
+            <th scope="col">The Correlation cofficient(V)</th>
+            <th scope="col">The Correlation cofficient(D)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th ><img src="@Model.ImageFullPath" width="250" height="200" /></th>
+            <td><img src="@Model.Scramble" width="250" height="200" /></td>
+            <td>@Model.corrhorizontal</td>
+            <td>@Model.corrvertical</td>
+            <td>@Model.corrdiagnol</td>           
+        </tr>       
     </tbody>
 </table>
 
