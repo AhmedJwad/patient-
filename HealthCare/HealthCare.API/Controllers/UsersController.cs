@@ -36,6 +36,8 @@ using MessagePack.Formatters;
 using VisioForge.MediaFramework.FFMPEGCore.Arguments;
 using VisioForge.Libs.ZXing.QrCode.Internal;
 using Microsoft.DotNet.Scaffolding.Shared.CodeModifier.CodeChange;
+using SixLabors.ImageSharp;
+using VisioForge.Libs.ZXing.Common;
 
 namespace HealthCare.API.Controllers
 {
@@ -1050,10 +1052,137 @@ namespace HealthCare.API.Controllers
             Xorimageoperation.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\Xorimageoperation" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
             //end generate image 
 
+            //coffecient correlation 
+            var httpClient5 = new HttpClient();
+            var stream5 = await httpClient.GetStreamAsync(model.Scramble);
+            System.Drawing.Bitmap corellationcoffecient1 = new System.Drawing.Bitmap(stream5);
+            byte[] imagetobyte3 = BitmapToByteArray(corellationcoffecient1);
+            var httpClient6 = new HttpClient();
+            var stream6 = await httpClient.GetStreamAsync(model.ImageFullPath);
+            System.Drawing.Bitmap corellationcoffecient2 = new System.Drawing.Bitmap(stream6);
+            byte[] imagetobyte4 = BitmapToByteArray(corellationcoffecient2);
+
+            int[] bytesAsInts = imagetobyte3.Select(y => (int)y).ToArray();
+            int[] bytesAsInts1 = imagetobyte4.Select(y => (int)y).ToArray();
+            int n=bytesAsInts.Length;            
+            float Ahmed22 = correlationCoefficienthorizontal(bytesAsInts, bytesAsInts1,   n);
+            float Ahmed23 = correlationCoefficientVertical(bytesAsInts, bytesAsInts1, n);
+
+            double[] corr = toDoubleArray(imagetobyte3);
+            double[] corr1 = toDoubleArray(imagetobyte4);
+            double corr2 = Correlation(corr, corr1);
+            //end coffecient correlation
+
             return View(model);
         }
+        public static double[] toDoubleArray(byte[] byteArr)
+        {
+            double[ ] arr = new double[byteArr.Length ];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i ] = byteArr[i];
+            }
+            return arr;
+        }
+     
+
+        public double Correlation(double[] array1, double[] array2)
+        {
+            double[] array_xy = new double[array1.Length];
+            double[] array_xp2 = new double[array1.Length];
+            double[] array_yp2 = new double[array1.Length];
+            for (int i = 0; i < array1.Length; i++)
+                array_xy[i] = array1[i] * array2[i];
+            for (int i = 0; i < array1.Length; i++)
+                array_xp2[i] = Math.Pow(array1[i], 2.00);
+            for (int i = 0; i < array1.Length; i++)
+                array_yp2[i] = Math.Pow(array2[i], 2.00);
+            double sum_x = 0.0;
+            double sum_y = 0.0;
+            foreach (double n in array1)
+                sum_x += n;
+            foreach (double n in array2)
+                sum_y += n;
+            double sum_xy = 0;
+            foreach (double n in array_xy)
+                sum_xy += n;
+            double sum_xpow2 = 0;
+            foreach (double n in array_xp2)
+                sum_xpow2 += n;
+            double sum_ypow2 = 0;
+            foreach (double n in array_yp2)
+                sum_ypow2 += n;
+            double Ex2 = Math.Pow(sum_x, 2.00);
+            double Ey2 = Math.Pow(sum_y, 2.00);
+
+            return (array1.Length * sum_xy - sum_x * sum_y) /
+                   Math.Sqrt((array1.Length * sum_xpow2 - Ex2) * (array1.Length * sum_ypow2 - Ey2));
+        }
+       public static float correlationCoefficienthorizontal(int[] X1, int[] X2 ,
+                                                   int n)
+        {
+            double sum_X = 0.0, sum_Y = 0.0, sum_XY = 0.0;
+            double squareSum_X = 0.0, squareSum_Y = 0.0;
+
+            for (int i = 0; i < n; i++)
+            {
+                // sum of elements of array X.
+                sum_X = sum_X + X1[i];
+
+                // sum of elements of array Y.
+               // sum_Y = sum_Y + Y[i];
+
+                // sum of X[i] * Y[i].
+                sum_XY = sum_XY + X1[i] * X2[i];
+
+                // sum of square of array elements.
+                squareSum_X = squareSum_X + X1[i] * X1[i];
+               // squareSum_Y = squareSum_Y + Y[i] * Y[i];
+            }
+
+            // use formula for calculating correlation 
+            // coefficient.
+            float corr = (float)(n * sum_XY - sum_X * sum_X) /
+                         (float)(Math.Sqrt((n * squareSum_X -
+                         sum_X * sum_X) * (n * squareSum_X -
+                         sum_X * sum_X)));
+                         corr = corr /10;         
+            return corr;
+        }
+       public static float correlationCoefficientVertical(int[] Y1, int[] Y2,
+                                                   int n)
+        {
+            double sum_X = 0.0, sum_Y = 0.0, sum_XY = 0.0;
+            double squareSum_X = 0.0, squareSum_Y = 0.0;
+
+            for (int i = 0; i < n; i++)
+            {
+                // sum of elements of array X.
+                //sum_X = sum_X + X[i];
+
+                // sum of elements of array Y.
+                sum_Y = Y2[i] + Y1[i];
+
+                // sum of X[i] * Y[i].
+                sum_XY = sum_XY + Y2[i] * Y1[i];
+
+                // sum of square of array elements.
+                //squareSum_X = squareSum_X + X[i] * X[i];
+                squareSum_Y = squareSum_Y + Y1[i] * Y1[i];
+            }
+
+            // use formula for calculating correlation 
+            // coefficient.
+            float corr = (float)(n * sum_XY - sum_Y * sum_Y) /
+                        (float)(Math.Sqrt((n * squareSum_Y -
+                        sum_Y * sum_Y) * (n * squareSum_Y -
+                        sum_Y * sum_Y)));
+                        corr = corr / 10;
+
+            return corr;
+        }
         public static System.Drawing.Bitmap BitwiseBlend(System.Drawing.Bitmap sourceBitmap, System.Drawing.Bitmap blendBitmap,
-                                     BitwiseBlendType blendTypeBlue, BitwiseBlendType
+                                    BitwiseBlendType blendTypeBlue, BitwiseBlendType
                                      blendTypeGreen, BitwiseBlendType blendTypeRed)
         {
             BitmapData sourceData = sourceBitmap.LockBits(new Rectangle(0, 0,
