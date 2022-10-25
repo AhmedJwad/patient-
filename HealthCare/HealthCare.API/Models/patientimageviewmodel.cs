@@ -47,6 +47,10 @@ namespace HealthCare.API.Models
 
         public string changerowandcolumnimage { get; set; }
 
+        public string xorbetweenscrambledimageandkimage { get; set; }
+
+        public string histogramXorimagePng { get; set; }
+
         [Display(Name = "Photo")]
         public string ImageFullPath => ImageId == String.Empty
             ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
@@ -92,5 +96,14 @@ namespace HealthCare.API.Models
         public string Changerowandcolumnimage => changerowandcolumnimage == String.Empty
     ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
     : $"https://localhost:7152/{changerowandcolumnimage}";
+
+        public string Xorimage => xorbetweenscrambledimageandkimage == String.Empty
+    ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
+    : $"https://localhost:7152/{xorbetweenscrambledimageandkimage}";
+
+        public string HistogramXorimagePng => histogramXorimagePng == String.Empty
+    ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
+    : $"https://localhost:7152/{histogramXorimagePng}";
+
     }
 }

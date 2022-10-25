@@ -1000,7 +1000,8 @@ namespace HealthCare.API.Controllers
             string path11 = ($"images\\histogram3" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
             string path12 = ($"images\\histogram2" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
             model.histgrame = path11;
-            model.histgrameorginal=path12;
+            model.histgrameorginal=path12;         
+
             //end histogram            
             //NPCR         
             var httpClient2 = new HttpClient();
@@ -1050,6 +1051,11 @@ namespace HealthCare.API.Controllers
                   BitwiseBlendType.Xor, BitwiseBlendType.Xor
                                      , BitwiseBlendType.Xor);
             Xorimageoperation.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\Xorimageoperation" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+            string Xorpath = ($"images\\XorimageoperationPng" + ".jpg");
+
+            model.xorbetweenscrambledimageandkimage = Xorpath;
+
+           
             //end generate image 
 
             //coffecient correlation 
@@ -1076,6 +1082,15 @@ namespace HealthCare.API.Controllers
             model.corrvertical = Ahmed23;
             model.corrdiagnol = corr2;
             //end coffecient correlation
+
+            //histgrame between scramble image and xoroperationimageand kimage 
+            var httpClient12 = new HttpClient();
+            var stream12 = await httpClient12.GetStreamAsync(model.Xorimage);
+            System.Drawing.Bitmap oxrimage = new System.Drawing.Bitmap(stream12);
+            Histogram3(oxrimage);
+            string histogramXorimagePng = ($"images\\histogramxorimagePng" + ".jpg");
+            model.histogramXorimagePng = histogramXorimagePng;
+            //end histgrame between scramble image and xoroperationimageand kimage 
 
             return View(model);
         }
@@ -1399,7 +1414,46 @@ namespace HealthCare.API.Controllers
 
             return -H / cb;
         }
+        public void Histogram3(System.Drawing.Bitmap bmp)
+        {
 
+            int[] histogram_r = new int[256];
+            float max = 0;
+
+            for (int i = 0; i < bmp.Width; i++)
+            {
+                for (int j = 0; j < bmp.Height; j++)
+                {
+                    int redValue = bmp.GetPixel(i, j).R;
+                    histogram_r[redValue]++;
+                    if (max < histogram_r[redValue])
+                        max = histogram_r[redValue];
+                }
+            }
+
+            int histHeight = 128;
+            System.Drawing.SolidBrush brush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
+            System.Drawing.Font font = new System.Drawing.Font("Lucida Console", 14, System.Drawing.FontStyle.Bold);
+
+            System.Drawing.Bitmap img = new System.Drawing.Bitmap(256, histHeight + 10);
+            using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(img))
+            {
+                for (int i = 0; i < histogram_r.Length; i++)
+                {
+                    float pct = histogram_r[i] / max;   // What percentage of the max is this value?
+                    g.DrawLine(Pens.Black,
+                        new System.Drawing.Point(i, img.Height - 5),
+                        new System.Drawing.Point(i, img.Height - 5 - (int)(pct * histHeight))  // Use that percentage of the height
+                        );
+
+                }
+            }
+
+
+
+
+            img.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\histogramxorimage" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+        }
         public void Histogram2(System.Drawing.Bitmap bmp)
         {
             
