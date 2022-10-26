@@ -1083,7 +1083,7 @@ namespace HealthCare.API.Controllers
             float Ahmed24 = correlationCoefficienthorizontal(bytesAsInts, bytesAsIntsxor, n);
             float Ahmed25 = correlationCoefficientVertical(bytesAsInts, bytesAsIntsxor, n);
             float Ahmed26 = correlationCoefficientxor(bytesAsInts, bytesAsIntsxor, n);
-            double[] corr4 = toDoubleArray(imagetobyte10);
+            double[] corr4 = toDoubleArray1(imagetobyte10);
             double corr6 = Correlation1(corr, corr4);
             model.corrhorizontalxorimage = Ahmed24;
             model.corrverticalxorimage = Ahmed25;
@@ -1145,12 +1145,21 @@ namespace HealthCare.API.Controllers
 
             return corr;
         }
-        public static double[] toDoubleArray(byte[] byteArr)
+        public static double[] toDoubleArray1(byte[] byteArr)
         {
             double[ ] arr = new double[byteArr.Length ];
-            for (int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < 256; i++)
             {
                 arr[i ] = byteArr[i];
+            }
+            return arr;
+        }
+        public static double[] toDoubleArray(byte[] byteArr)
+        {
+            double[] arr = new double[byteArr.Length];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i] = byteArr[i];
             }
             return arr;
         }
@@ -1185,7 +1194,7 @@ namespace HealthCare.API.Controllers
             double Ey2 = Math.Pow(sum_y, 2.00);
 
             return (array1.Length * sum_xy - sum_x * sum_y) /
-                   Math.Sqrt((array1.Length * sum_xpow2 - Ex2) * (array1.Length * sum_ypow2 - Ey2));
+                   Math.Sqrt((array1.Length * sum_xpow2 - Ex2) * (array1.Length * sum_ypow2 - Ey2))*10;
         }
         public double Correlation(double[] array1, double[] array2)
         {
