@@ -1018,12 +1018,10 @@ namespace HealthCare.API.Controllers
            
             model.Entropyorginal = orginal;
             model.Entropyscample = scramble;
-            //end  Entropy
-
+            //end  Entropy           
             //chaotic
             chaotic(Almershady);
             //end chaotic
-
             //generate image k1 k2 k3 
             var k = $"{0}{0}{1}{1}{1}{1}{0}{1}";
             string randomimage= k;
@@ -1110,7 +1108,9 @@ namespace HealthCare.API.Controllers
             int Tollerance1 = 0;
             model.NPCRXorimage= CompareImages(oxrimage, scramble2,  Tollerance1);
             //End NPCR between scramble image and Xorimage 
-            
+            //chaotic
+            chaotic5D(scramble2);
+            //end chaotic
             return View(model);
         }
        
@@ -1410,6 +1410,58 @@ namespace HealthCare.API.Controllers
             }
             bmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\changerowtocolumn" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
         }
+        public void chaotic5D(System.Drawing.Bitmap bmp)
+        {
+            int a = 6, b = 6, f = 6;
+            double d = 0.1,e = 0.1;
+            double x = 0.99;
+            double y = 0.99;
+            double z = 0.99;
+
+            double[] x1 = new double[a];
+            double[] x2 = new double[b];
+            double[] x3 = new double[f];
+            double[] x4 = new double[(int)d];
+            double[] x5 = new double[(int)e];
+            int ih = bmp.Height;
+            int iw = bmp.Width;
+            System.Drawing.Color c = new System.Drawing.Color();
+            for (int i = 0; i < 100; i++)
+            {
+                x = 6 - 0.1 * 0.1 - 6 + 6 * 6;
+                y = 6 - 0.1 * 6 * 6 + 6 * 6;
+                z = 0.1 - 6 * 6 - 6 + 6 * 6;
+
+                //x = 4 * x * (1 - x);
+            }
+           
+            for (int j = 0; j < ih; j++)
+            {
+                for (int i = 0; i < iw; i++)
+                {
+                    c = bmp.GetPixel(i, j);
+                    int chaos = 0, g;
+                    string k ;
+                    for (int w = 0; w < 8; w++)
+                    {
+                        x = 6 - 0.1 * 0.1 - 6 + 6 * 6;
+                        y =  6 - 0.1 * 6 * 6 + 6 * 6; ;
+                        z =  0.1 - 6 * 6 - 6 + 6 * 6; ;
+                       // x = 4 * x * (1 - x);
+                        if (x  >= 0.5 || y>=0.5 || z>=0.5) g  = 1;
+                        else g = 0;
+                        k = Guid.NewGuid().ToString("n");
+                        chaos = ((chaos << 1) | g);
+                    }
+                    //c = 
+                    bmp.SetPixel(i, j, System.Drawing.Color.FromArgb(c.R ^ (int)chaos,
+                                                     c.G ^ (int)chaos,
+                                                     c.B ^ (int)chaos));
+                }
+            }
+            bmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\choatic5d" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+
+        }
         public void chaotic(System.Drawing.Bitmap bmp)
         {
             double x = 0.99;
@@ -1426,7 +1478,7 @@ namespace HealthCare.API.Controllers
                 {
                     c = bmp.GetPixel(i, j);
                     int chaos = 0, g;
-                    string k ;
+                    string k;
                     for (int w = 0; w < 8; w++)
                     {
                         x = 4 * x * (1 - x);
@@ -1440,7 +1492,7 @@ namespace HealthCare.API.Controllers
                                                      c.G ^ (int)chaos,
                                                      c.B ^ (int)chaos));
                 }
-            }            
+            }
 
         }
         public  double CompareImages(System.Drawing.Bitmap InputImage1, System.Drawing.Bitmap InputImage2, int Tollerance)

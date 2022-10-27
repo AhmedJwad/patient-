@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Db5gv0BOi+/aE0Elij4jONNhjoasd8VklhSGCFp6DKU=",
+  "Hash": "hL01wd7jBBb2hi4+ycA60Hi5lL6mSQDCBbbpvVKOHK0=",
   "Source": "HealthCare.API",
   "BasePath": "_content/HealthCare.API",
   "Mode": "Default",
@@ -170,6 +170,23 @@
       "OriginalItemSpec": "wwwroot\\images\\bytetoimagePng.jpg"
     },
     {
+      "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\changerowtocolumnPng.jpg",
+      "SourceId": "HealthCare.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\",
+      "BasePath": "_content/HealthCare.API",
+      "RelativePath": "images/changerowtocolumnPng.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\changerowtocolumnPng.jpg"
+    },
+    {
       "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\drawingxandyPng.jpg",
       "SourceId": "HealthCare.API",
       "SourceType": "Discovered",
@@ -306,6 +323,23 @@
       "OriginalItemSpec": "wwwroot\\images\\histogramPng.jpg"
     },
     {
+      "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\histogramxorimagePng.jpg",
+      "SourceId": "HealthCare.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\",
+      "BasePath": "_content/HealthCare.API",
+      "RelativePath": "images/histogramxorimagePng.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\histogramxorimagePng.jpg"
+    },
+    {
       "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\noimage.png",
       "SourceId": "HealthCare.API",
       "SourceType": "Discovered",
@@ -374,6 +408,23 @@
       "OriginalItemSpec": "wwwroot\\images\\Png.jpg"
     },
     {
+      "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\randomimagePng.jpg",
+      "SourceId": "HealthCare.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\",
+      "BasePath": "_content/HealthCare.API",
+      "RelativePath": "images/randomimagePng.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\randomimagePng.jpg"
+    },
+    {
       "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\redPng.jpg",
       "SourceId": "HealthCare.API",
       "SourceType": "Discovered",
@@ -389,6 +440,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\redPng.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\XorimageoperationPng.jpg",
+      "SourceId": "HealthCare.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\",
+      "BasePath": "_content/HealthCare.API",
+      "RelativePath": "images/XorimageoperationPng.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\XorimageoperationPng.jpg"
     },
     {
       "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images1e83b1d5-98f8-41ec-8d7d-178cae7a3391",

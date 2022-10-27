@@ -23,7 +23,7 @@ namespace HealthCare.API.Data
             await CheckCitiesypeAsync();
             await CheckGendreAsync();
             await CheckRoleAsync();
-            await CheckUserAsync("Ahmed", "Almershady", "Ali@yopmail.com", "350 634 2747", "Babylon", UserType.Admin);
+            await CheckUserAsync("Ahmed", "Almershady", "Ahmednet380@gmail.com", "350 634 2747", "Babylon", UserType.Admin);
             await CheckUserAsync("Ahmed", "Almershady", "Ahmednet751@gmail.com", "350 634 2747", "Hilla", UserType.Admin);
             await CheckUserAsync("Ahmed", "Jwad", "Amm380@yahoo.com", "350 634 2747", "Baghdad", UserType.User);
             await CheckUserAsync("Ahmed", "Kadhum", "Ahmed@yopmail.com", "350 634 2747", "Babil", UserType.User);
@@ -45,9 +45,9 @@ namespace HealthCare.API.Data
                     LastName = lastname,
                     Email = email,
                     PhoneNumber = phonenumber,
-                    Address = address,
+                    Address = address,                   
                     userType = userType,
-                    UserName = email,
+                    UserName = email,                 
                    
                 };
                await _userHelper.AddUserAsync(user, "123456");

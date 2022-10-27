@@ -1,5 +1,6 @@
 ﻿using HealthCare.Common.Enums;
 using Microsoft.AspNetCore.Identity;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
@@ -16,7 +17,7 @@ namespace HealthCare.API.Data.Entities
         [Display(Name = "Last Name")]
         [MaxLength(50, ErrorMessage = "The field {0} cannot have more than {1} characters.")]
         [Required(ErrorMessage = "The field {0} is required.")]
-        public string LastName { get; set; }
+        public string LastName { get; set; }            
 
         [Display(Name = "Adress")]
         [MaxLength(100, ErrorMessage = "The field {0} cannot have more than {1} characters.")]
