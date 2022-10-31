@@ -55,6 +55,8 @@ namespace HealthCare.API.Models
 
         public string histogramXorimagePng { get; set; }
 
+        public string chaotic5d { get; set; }
+
         [Display(Name = "Photo")]
         public string ImageFullPath => ImageId == String.Empty
             ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
@@ -108,6 +110,9 @@ namespace HealthCare.API.Models
         public string HistogramXorimagePng => histogramXorimagePng == String.Empty
     ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
     : $"https://localhost:7152/{histogramXorimagePng}";
+        public string Chaotic5d => chaotic5d == String.Empty
+   ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
+   : $"https://localhost:7152/{chaotic5d}";
 
     }
 }

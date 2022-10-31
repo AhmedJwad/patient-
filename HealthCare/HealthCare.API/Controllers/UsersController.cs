@@ -1110,6 +1110,8 @@ namespace HealthCare.API.Controllers
             //End NPCR between scramble image and Xorimage 
             //chaotic
             chaotic5D(scramble2);
+            string pathchaotic5d = ($"images\\choatic5dPng" + ".jpg");
+            model.chaotic5d = pathchaotic5d;
             //end chaotic
             return View(model);
         }
@@ -1450,7 +1452,7 @@ namespace HealthCare.API.Controllers
                        // x = 4 * x * (1 - x);
                         if (x  >= 0.5 || y>=0.5 || z>=0.5) g  = 1;
                         else g = 0;
-                        k = Guid.NewGuid().ToString("n");
+                        
                         chaos = ((chaos << 1) | g);
                     }
                     //c = 
