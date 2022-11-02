@@ -38,6 +38,8 @@ using VisioForge.Libs.ZXing.QrCode.Internal;
 using Microsoft.DotNet.Scaffolding.Shared.CodeModifier.CodeChange;
 using SixLabors.ImageSharp;
 using VisioForge.Libs.ZXing.Common;
+using HealthCare.Common.Models;
+using AForge.Math.Geometry;
 
 namespace HealthCare.API.Controllers
 {
@@ -1113,9 +1115,212 @@ namespace HealthCare.API.Controllers
             string pathchaotic5d = ($"images\\choatic5dPng" + ".jpg");
             model.chaotic5d = pathchaotic5d;
             //end chaotic
+            //generate image from scramble image and key image
+            System.Drawing.Bitmap generateImage =HealthCare.API.Models.ColorCalculator.ArithmeticBlend(Almershady, changerowandcolumn,
+                                    ColorCalculationType.Amplitude);
+            generateImage.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\generateImagefromscambleandkeyimage" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+            string generateImagefromscambleandkeyimage = ($"images\\generateImagefromscambleandkeyimagePng" + ".jpg");
+            model.generateImagefromscarmableandkeyimage = generateImagefromscambleandkeyimage;
+            //end generate image from scramble image and key image
+            //SwapColorsRGB
+            var httpClient13 = new HttpClient();
+            var stream13 = await httpClient13.GetStreamAsync(model.GenerateImagefromscarmableandkeyimage);
+            System.Drawing.Bitmap SwapColorsRGB = new System.Drawing.Bitmap(stream13);
+            byte fixedValue = 0;
+            System.Drawing.Bitmap SwapColorsRGBtoserver = SwapColors(SwapColorsRGB, ColourSwapType.SwapBlueAndGreenFixRed
+                , ColourSwapType.SwapBlueAndRedFixGreen, ColourSwapType.SwapBlueAndRed, ColourSwapType.SwapRedAndGreenFixBlue, fixedValue);
+            SwapColorsRGBtoserver.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\SwapColorsRGBtoserver" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+            string SwapColorsRGBtoserverstring = ($"images\\SwapColorsRGBtoserverPng" + ".jpg");
+            model.swappingARGB = SwapColorsRGBtoserverstring;
+            //EndSwapColorsRGB
             return View(model);
         }
-       
+     public static System.Drawing.Bitmap SwapColors(System.Drawing.Bitmap sourceImage,ColourSwapType swapType                                   
+                  , ColourSwapType swapType2 , ColourSwapType swapType3, ColourSwapType swapType4, byte fixedValue = 0)
+        {
+            List<ArgbPixel> pixelListSource = GetPixelListFromBitmap(sourceImage);
+
+
+            List<ArgbPixel> pixelListResult = null;
+
+
+            switch (swapType)
+            {
+                case ColourSwapType.ShiftRight:
+                    {
+                        pixelListResult = (from t in pixelListSource
+                                           select new ArgbPixel
+                                           {
+                                               blue = t.red,
+                                               red = t.green,
+                                               green = t.blue,
+                                               alpha = t.alpha
+                                           }).ToList();
+                        break;
+                    }
+                case ColourSwapType.ShiftLeft:
+                    {
+                        pixelListResult = (from t in pixelListSource
+                                           select new ArgbPixel
+                                           {
+                                               blue = t.green,
+                                               red = t.blue,
+                                               green = t.red,
+                                               alpha = t.alpha
+                                           }).ToList();
+                        break;
+                    }
+                case ColourSwapType.SwapBlueAndRed:
+                    {
+                        pixelListResult = (from t in pixelListSource
+                                           select new ArgbPixel
+                                           {
+                                               blue = t.red,
+                                               red = t.blue,
+                                               green = t.green,
+                                               alpha = t.alpha
+                                           }).ToList();
+                        break;
+                    }
+
+         case ColourSwapType.SwapBlueAndRedFixGreen:
+                    {
+                        pixelListResult = (from t in pixelListSource
+                                           select new ArgbPixel
+                                           {
+                                               blue = t.red,
+                                               red = t.blue,
+                                               green = fixedValue,
+                                               alpha = t.alpha
+                                           }).ToList();
+                        break;
+                    }
+                case ColourSwapType.SwapBlueAndGreen:
+                    {
+                        pixelListResult = (from t in pixelListSource
+                                           select new ArgbPixel
+                                           {
+                                               blue = t.green,
+                                               red = t.red,
+                                               green = t.blue,
+                                               alpha = t.alpha
+                                           }).ToList();
+                        break;
+                    }
+                case ColourSwapType.SwapBlueAndGreenFixRed:
+                    {
+                        pixelListResult = (from t in pixelListSource
+                                           select new ArgbPixel
+                                           {
+                                               blue = t.green,
+                                               red = fixedValue,
+                                               green = t.blue,
+                                               alpha = t.alpha
+                                           }).ToList();
+                        break;
+                    }
+                case ColourSwapType.SwapRedAndGreen:
+                    {
+                        pixelListResult = (from t in pixelListSource
+                                           select new ArgbPixel
+                                           {
+                                               blue = t.blue,
+                                               red = t.green,
+                                               green = t.red,
+                                               alpha = t.alpha
+                                           }).ToList();
+                        break;
+                    }
+                case ColourSwapType.SwapRedAndGreenFixBlue:
+                    {
+                        pixelListResult = (from t in pixelListSource
+                                           select new ArgbPixel
+                                           {
+                                               blue = fixedValue,
+                                               red = t.green,
+                                               green = t.red,
+                                               alpha = t.alpha
+                                           }).ToList();
+                        break;
+                    }
+            }
+
+
+           System.Drawing.Bitmap resultBitmap = GetBitmapFromPixelList(pixelListResult,
+                                    sourceImage.Width, sourceImage.Height);
+
+
+            return resultBitmap;
+        }
+        private static List<ArgbPixel> GetPixelListFromBitmap(System.Drawing.Bitmap sourceImage)
+        {
+            BitmapData sourceData = sourceImage.LockBits(new Rectangle(0, 0,
+                        sourceImage.Width, sourceImage.Height),
+                        ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+
+
+            byte[] sourceBuffer = new byte[sourceData.Stride * sourceData.Height];
+            Marshal.Copy(sourceData.Scan0, sourceBuffer, 0, sourceBuffer.Length);
+            sourceImage.UnlockBits(sourceData);
+
+
+            List<ArgbPixel> pixelList = new List<ArgbPixel>(sourceBuffer.Length / 4);
+
+
+            using (MemoryStream memoryStream = new MemoryStream(sourceBuffer))
+            {
+                memoryStream.Position = 0;
+                BinaryReader binaryReader = new BinaryReader(memoryStream);
+
+
+                while (memoryStream.Position + 4 <= memoryStream.Length)
+                {
+                    ArgbPixel pixel = new ArgbPixel(binaryReader.ReadBytes(4));
+                    pixelList.Add(pixel);
+                }
+
+
+                binaryReader.Close();
+            }
+
+
+            return pixelList;
+        }
+        private static System.Drawing.Bitmap GetBitmapFromPixelList(List<ArgbPixel> pixelList, int width, int height)
+        {
+            System.Drawing.Bitmap resultBitmap = new System.Drawing.Bitmap(width, height, PixelFormat.Format32bppArgb);
+
+
+            BitmapData resultData = resultBitmap.LockBits(new Rectangle(0, 0,
+                        resultBitmap.Width, resultBitmap.Height),
+                        ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+
+
+            byte[] resultBuffer = new byte[resultData.Stride * resultData.Height];
+
+
+            using (MemoryStream memoryStream = new MemoryStream(resultBuffer))
+            {
+                memoryStream.Position = 0;
+                BinaryWriter binaryWriter = new BinaryWriter(memoryStream);
+
+
+                foreach (ArgbPixel pixel in pixelList)
+                {
+                    binaryWriter.Write(pixel.GetColorBytes());
+                }
+
+
+                binaryWriter.Close();
+            }
+
+
+            Marshal.Copy(resultBuffer, 0, resultData.Scan0, resultBuffer.Length);
+            resultBitmap.UnlockBits(resultData);
+
+
+            return resultBitmap;
+        }
         static float correlationCoefficientxor(int[] X, int[] Y,
                                                    int n)
         {
@@ -1293,6 +1498,7 @@ namespace HealthCare.API.Controllers
 
             return corr;
         }
+        
         public static System.Drawing.Bitmap BitwiseBlend(System.Drawing.Bitmap sourceBitmap, System.Drawing.Bitmap blendBitmap,
                                     BitwiseBlendType blendTypeBlue, BitwiseBlendType
                                      blendTypeGreen, BitwiseBlendType blendTypeRed)

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "p3LbRoWgR4aK5cZ3e9tag9/uQTxG8DzAKwMExF8K1dw=",
+  "Hash": "kjFkUQ8VCF/e7gINQLzbGfboxjkHZhnaehGrHFcYskg=",
   "Source": "HealthCare.API",
   "BasePath": "_content/HealthCare.API",
   "Mode": "Default",
@@ -49,23 +49,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
-    },
-    {
-      "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\8bitPng.jpg",
-      "SourceId": "HealthCare.API",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\",
-      "BasePath": "_content/HealthCare.API",
-      "RelativePath": "images/8bitPng.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\8bitPng.jpg"
     },
     {
       "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\binaryimagePng.jpg",
@@ -153,23 +136,6 @@
       "OriginalItemSpec": "wwwroot\\images\\bluePng.jpg"
     },
     {
-      "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\bytetoimagePng.jpg",
-      "SourceId": "HealthCare.API",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\",
-      "BasePath": "_content/HealthCare.API",
-      "RelativePath": "images/bytetoimagePng.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\bytetoimagePng.jpg"
-    },
-    {
       "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\changerowtocolumnPng.jpg",
       "SourceId": "HealthCare.API",
       "SourceType": "Discovered",
@@ -204,12 +170,12 @@
       "OriginalItemSpec": "wwwroot\\images\\choatic5dPng.jpg"
     },
     {
-      "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\drawingxandyPng.jpg",
+      "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\generateImagefromscambleandkeyimagePng.jpg",
       "SourceId": "HealthCare.API",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\",
       "BasePath": "_content/HealthCare.API",
-      "RelativePath": "images/drawingxandyPng.jpg",
+      "RelativePath": "images/generateImagefromscambleandkeyimagePng.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -218,7 +184,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\drawingxandyPng.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\generateImagefromscambleandkeyimagePng.jpg"
     },
     {
       "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\gopher_head-min.png",
@@ -457,6 +423,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\redPng.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\SwapColorsRGBtoserverPng.jpg",
+      "SourceId": "HealthCare.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\",
+      "BasePath": "_content/HealthCare.API",
+      "RelativePath": "images/SwapColorsRGBtoserverPng.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\SwapColorsRGBtoserverPng.jpg"
     },
     {
       "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\XorimageoperationPng.jpg",

@@ -1,6 +1,8 @@
 ﻿using HealthCare.API.Data;
 using HealthCare.API.Data.Entities;
 using HealthCare.API.Models;
+using HealthCare.Common.Enums;
+using System.Drawing;
 
 namespace HealthCare.API.Helpers
 {
@@ -14,6 +16,8 @@ namespace HealthCare.API.Helpers
             _context = context;
            _combosHelper = combosHelper;
         }
+
+        
 
         public async Task<Detail> ToDetailAsync(DetailViewModel model, bool isNew)
         {

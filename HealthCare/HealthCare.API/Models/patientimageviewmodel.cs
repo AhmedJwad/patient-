@@ -57,6 +57,10 @@ namespace HealthCare.API.Models
 
         public string chaotic5d { get; set; }
 
+        public string generateImagefromscarmableandkeyimage { get; set; }
+
+        public string swappingARGB { get; set; }
+
         [Display(Name = "Photo")]
         public string ImageFullPath => ImageId == String.Empty
             ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
@@ -113,6 +117,13 @@ namespace HealthCare.API.Models
         public string Chaotic5d => chaotic5d == String.Empty
    ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
    : $"https://localhost:7152/{chaotic5d}";
+
+      public string GenerateImagefromscarmableandkeyimage => generateImagefromscarmableandkeyimage == String.Empty
+   ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
+   : $"https://localhost:7152/{generateImagefromscarmableandkeyimage}";
+        public string SwappingARGB => swappingARGB == String.Empty
+   ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
+   : $"https://localhost:7152/{swappingARGB}";
 
     }
 }
