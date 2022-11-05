@@ -71,6 +71,8 @@ namespace HealthCare.API.Data.Entities
         public Natianality Natianality { get; set; }
         public gendre gendre { get; set; }
         public BloodType bloodType { get; set; }
+        public UserPatient userPatient { get; set; }
+        public ICollection<Agenda> Agendas { get; set; }
 
     }
 }

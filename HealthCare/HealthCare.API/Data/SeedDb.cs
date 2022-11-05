@@ -61,7 +61,8 @@ namespace HealthCare.API.Data
         private async Task CheckRoleAsync()
         {
             await _userHelper.CheckRoleAsync(UserType.Admin.ToString());
-            await _userHelper.CheckRoleAsync(UserType.User.ToString());    
+            await _userHelper.CheckRoleAsync(UserType.User.ToString());
+            await _userHelper.CheckRoleAsync(UserType.patient.ToString());
         }
 
         private async Task CheckCitiesypeAsync()

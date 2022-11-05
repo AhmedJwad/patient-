@@ -1,4 +1,5 @@
 ﻿using HealthCare.API.Data.Entities;
+using HealthCare.Common.Enums;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -19,7 +20,8 @@ namespace HealthCare.API.Data
         public DbSet<gendre> gendres { get; set; }        
         public DbSet<History> histories { get; set; }
         public DbSet<Detail> details { get; set; }
-        
+        public DbSet<UserPatient> UserPatients { get; set; }     
+        public DbSet<Agenda> agendas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

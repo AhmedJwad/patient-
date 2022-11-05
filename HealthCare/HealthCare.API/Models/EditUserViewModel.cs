@@ -1,4 +1,5 @@
 ﻿using HealthCare.Common.Enums;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace HealthCare.API.Models
@@ -42,5 +43,10 @@ namespace HealthCare.API.Models
         public string ImageFullPath => ImageId == Guid.Empty
            ? $"https://localhost:7152/images/noimage.png"
            : $"https://imagesahmed.blob.core.windows.net/users/{ImageId}";
+        [Required(ErrorMessage = "The field {0} is mandatory.")]
+        [Display(Name = "Register as")]
+        [Range(1, int.MaxValue, ErrorMessage = "You must select a role.")]
+        public int RoleId { get; set; }
+        public IEnumerable<SelectListItem> Roles { get; set; }
     }
 }

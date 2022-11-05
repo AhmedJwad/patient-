@@ -38,13 +38,15 @@ namespace HealthCare.API.Data.Entities
 
         [Display(Name = "User")]
         public string FullName => $"{FirstName} {LastName}";
+        public ICollection<UserPatient> UserPatients { get; set; }
 
         //[JsonIgnore]      
         public ICollection<Patient> Patients { get; set; }
 
         [Display(Name = "# Patients")]
         public int PatientsCount => Patients == null ? 0 : Patients.Count;
-      
-       
+        public ICollection<Agenda> Agendas { get; set; }
+
+
     }
 }

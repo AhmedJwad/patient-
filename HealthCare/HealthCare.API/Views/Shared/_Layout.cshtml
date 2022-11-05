@@ -47,12 +47,24 @@
                             <li class="nav-item">                           
                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="IndexUserPatients">Patients users</a>
+                            </li>
                         }
                           @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
                         {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Patients">Patients</a>
                         </li>
+                        }
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("patient"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="UserPatients">My medical history</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="MyAgenda">My Agenda</a>
+                            </li>
                         }
                     </ul>
                      <ul class="nav navbar-nav navbar-right">

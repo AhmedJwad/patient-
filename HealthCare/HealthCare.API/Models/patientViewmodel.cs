@@ -47,6 +47,11 @@ namespace HealthCare.API.Models
         public int GendreId { get; set; }
         public IEnumerable<SelectListItem> Gendres { get; set; }
 
+        [Display(Name = "User of patient")]
+        [Range(1, int.MaxValue, ErrorMessage = "You must select a Gendre.")]
+        public int UserpatientId { get; set; }
+        public IEnumerable<SelectListItem> UserPatients { get; set; }
+
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}")]
         [Display(Name = "Birth of Date")]
         [Required(ErrorMessage = "The field {0} is required.")]

@@ -9,6 +9,7 @@ namespace HealthCare.Common.Enums
     public enum UserType
     {
         Admin ,
-        User
+        User,
+        patient
     }
 }

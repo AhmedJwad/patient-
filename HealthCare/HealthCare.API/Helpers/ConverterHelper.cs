@@ -55,6 +55,7 @@ namespace HealthCare.API.Helpers
                 gendre=await  _context.gendres.FindAsync(model.GendreId),
                 Natianality=await _context.natianalities.FindAsync(model.NationalityId),
                 City=await _context.Cities.FindAsync(model.CityId),
+                userPatient=await _context.UserPatients.FindAsync(model.UserpatientId),
                 EPCNNumber=model.EPCNNumber,
                 Date=model.Date,
                 MobilePhone=model.MobilePhone,
@@ -86,6 +87,8 @@ namespace HealthCare.API.Helpers
                 UserId = patient.User.Id,
                 patientPhotos=patient.patientPhotos,
                 Date = patient.Date,    
+                UserpatientId=patient.userPatient.Id,
+                UserPatients=_combosHelper.GetUserPatients(),
             };
         }
 

@@ -61,8 +61,118 @@ namespace HealthCare.API.Controllers
             _converterhleper = converterhleper;
             _blobHelper = blobHelper;
         }
+        public async Task<IActionResult> IndexUserPatients()
+        {
+            return View(await _context.Users.Include(x => x.UserPatients).ThenInclude(x=>x.Patients)
+               .Where(x => x.userType == UserType.patient).ToListAsync());
+        }
+        public IActionResult AddUserPatient()
+        {
+            UserViewModel model = new()
+            {
+                Id = Guid.NewGuid().ToString(),
+
+            };
+
+            return View(model);
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddUserPatient(UserViewModel model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                Guid imageId = Guid.Empty;
+                if (model.ImageFile != null)
+                {
+                    imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "users");
+
+                }
+                User user = await _converterhleper.ToUserAsync(model, imageId, true);
+                user.userType = UserType.patient;
+                await _userhelper.AddUserAsync(user, "123456");
+                await _userhelper.AddUsertoRoleAsync(user, UserType.patient.ToString());
+                var userpatient = new UserPatient
+                {
+                    User = user,
+                    Patients = new List<Patient>(),
+                };
+                _context.UserPatients.Add(userpatient);
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(IndexUserPatients));
+            }
+            return View(model);
+        }
+        public async Task<IActionResult> EditUserPatient(string Id)
+        {
+            if (string.IsNullOrEmpty(Id))
+            {
+                return NotFound();
+            }
+            User user = await _userhelper.GetUserAsync(Guid.Parse(Id));
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            UserViewModel model = _converterhleper.ToUserViewModel(user);
 
 
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditUserPatient(UserViewModel model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                Guid imageId = model.ImageId;
+                if (model.ImageFile != null)
+                {
+                    imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "users");
+                }
+
+
+                User user = await _converterhleper.ToUserAsync(model, imageId, false);
+                await _userhelper.UpdateUserAsync(user);
+                return RedirectToAction(nameof(IndexUserPatients));
+            }
+
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> DeleteUserPatient(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+
+            User user = await _userhelper.GetUserAsync(Guid.Parse(id));
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            if (user.ImageId != Guid.Empty)
+            {
+                await _blobHelper.DeleteBlobAsync(user.ImageId, "users");
+            }
+            UserPatient userpatient = await _context.UserPatients.Include(x => x.User)
+                .FirstOrDefaultAsync(x => x.User.Id == id);
+            _context.Remove(userpatient);
+            await _userhelper.DeleteUserAsync(user);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(IndexUserPatients));
+        }
+
+       
         public async Task<IActionResult> Patients()
         {
             User user = await _userhelper.GetUserAsync(User.Identity.Name);
@@ -182,8 +292,8 @@ namespace HealthCare.API.Controllers
             {
                 return NotFound();
             }
-            User user = await _context.Users.Include(x => x.Patients)
-                .ThenInclude(p => p.patientPhotos)
+            User user = await _context.Users.Include(x => x.Patients).ThenInclude(x => x.userPatient).ThenInclude(x => x.User)
+                .Include(x => x.Patients).ThenInclude(p => p.patientPhotos)
                 .Include(x => x.Patients).ThenInclude(p => p.bloodType)
                 .Include(x => x.Patients).ThenInclude(p => p.Natianality)
                 .Include(x => x.Patients).ThenInclude(p => p.gendre)
@@ -218,6 +328,7 @@ namespace HealthCare.API.Controllers
                 Cities = _combosHelper.GetCities(),
                 Gendres = _combosHelper.Getgendres(),
                 Nationaliteis = _combosHelper.GetNationalities(),
+                UserPatients= _combosHelper.GetUserPatients(),
             };
             return View(model);
         }
@@ -293,7 +404,7 @@ namespace HealthCare.API.Controllers
                 return NotFound();
             }
 
-            Patient patient = await _context.patients.Include(x => x.User)
+            Patient patient = await _context.patients.Include(x => x.User).Include(u=>u.userPatient)
                 .Include(x => x.patientPhotos).Include(x => x.City).Include(x => x.bloodType)
                 .Include(x => x.Natianality).Include(x => x.gendre).FirstOrDefaultAsync(x => x.Id == Id);
             if (patient == null)

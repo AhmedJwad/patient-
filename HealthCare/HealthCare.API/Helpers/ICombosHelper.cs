@@ -8,9 +8,8 @@ namespace HealthCare.API.Helpers
         IEnumerable<SelectListItem> GetCities();
         IEnumerable<SelectListItem> GetNationalities();
         IEnumerable<SelectListItem> Getgendres();
-
         IEnumerable<SelectListItem> GetCombodiagnosic();
-
-
+        IEnumerable<SelectListItem> GetComboRoles();
+        IEnumerable<SelectListItem> GetUserPatients();
     }
 }

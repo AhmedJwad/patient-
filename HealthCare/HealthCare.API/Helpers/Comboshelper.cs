@@ -55,7 +55,7 @@ namespace HealthCare.API.Helpers
             });
             return list;
         }
-
+      
         public IEnumerable<SelectListItem> Getgendres()
         {
             List<SelectListItem> list = _context.gendres.Select(x => new SelectListItem
@@ -85,5 +85,30 @@ namespace HealthCare.API.Helpers
             });
             return list;
         }
+        public IEnumerable<SelectListItem> GetComboRoles()
+        {
+            var list = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "0", Text = "(Select a role...)" },
+                new SelectListItem { Value = "1", Text = "Doctor" },
+                new SelectListItem { Value = "2", Text = "Patient" }
+            };
+            return list;
+        }
+        public IEnumerable<SelectListItem> GetUserPatients()
+        {
+            List<SelectListItem> list = _context.UserPatients.Select(x => new SelectListItem
+            {
+                Text = x.User.Email,
+                Value = $"{x.Id}"
+            }).OrderBy(x => x.Text).ToList();
+            list.Insert(0, new SelectListItem
+            {
+                Text = "[Select a User as patients...]",
+                Value = "0"
+            });
+            return list;
+        }
+
     }
 }

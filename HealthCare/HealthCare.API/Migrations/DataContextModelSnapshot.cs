@@ -17,10 +17,45 @@ namespace HealthCare.API.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.7")
+                .HasAnnotation("ProductVersion", "6.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("HealthCare.API.Data.Entities.Agenda", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsMine")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("pathientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("userId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("pathientId");
+
+                    b.HasIndex("userId");
+
+                    b.ToTable("agendas");
+                });
 
             modelBuilder.Entity("HealthCare.API.Data.Entities.BloodType", b =>
                 {
@@ -246,6 +281,9 @@ namespace HealthCare.API.Migrations
                     b.Property<int?>("gendreId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("userPatientId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
@@ -257,6 +295,8 @@ namespace HealthCare.API.Migrations
                     b.HasIndex("bloodTypeId");
 
                     b.HasIndex("gendreId");
+
+                    b.HasIndex("userPatientId");
 
                     b.ToTable("patients");
                 });
@@ -366,6 +406,24 @@ namespace HealthCare.API.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("HealthCare.API.Data.Entities.UserPatient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserPatients");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -501,6 +559,21 @@ namespace HealthCare.API.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("HealthCare.API.Data.Entities.Agenda", b =>
+                {
+                    b.HasOne("HealthCare.API.Data.Entities.Patient", "pathient")
+                        .WithMany("Agendas")
+                        .HasForeignKey("pathientId");
+
+                    b.HasOne("HealthCare.API.Data.Entities.User", "user")
+                        .WithMany("Agendas")
+                        .HasForeignKey("userId");
+
+                    b.Navigation("pathient");
+
+                    b.Navigation("user");
+                });
+
             modelBuilder.Entity("HealthCare.API.Data.Entities.Detail", b =>
                 {
                     b.HasOne("HealthCare.API.Data.Entities.History", "History")
@@ -527,7 +600,7 @@ namespace HealthCare.API.Migrations
                         .HasForeignKey("patientId");
 
                     b.HasOne("HealthCare.API.Data.Entities.User", "user")
-                        .WithMany("histories")
+                        .WithMany()
                         .HasForeignKey("userId");
 
                     b.Navigation("patient");
@@ -557,6 +630,10 @@ namespace HealthCare.API.Migrations
                         .WithMany("Patients")
                         .HasForeignKey("gendreId");
 
+                    b.HasOne("HealthCare.API.Data.Entities.UserPatient", "userPatient")
+                        .WithMany("Patients")
+                        .HasForeignKey("userPatientId");
+
                     b.Navigation("City");
 
                     b.Navigation("Natianality");
@@ -566,6 +643,8 @@ namespace HealthCare.API.Migrations
                     b.Navigation("bloodType");
 
                     b.Navigation("gendre");
+
+                    b.Navigation("userPatient");
                 });
 
             modelBuilder.Entity("HealthCare.API.Data.Entities.PatientPhoto", b =>
@@ -577,6 +656,15 @@ namespace HealthCare.API.Migrations
                         .IsRequired();
 
                     b.Navigation("patient");
+                });
+
+            modelBuilder.Entity("HealthCare.API.Data.Entities.UserPatient", b =>
+                {
+                    b.HasOne("HealthCare.API.Data.Entities.User", "User")
+                        .WithMany("UserPatients")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -662,6 +750,8 @@ namespace HealthCare.API.Migrations
 
             modelBuilder.Entity("HealthCare.API.Data.Entities.Patient", b =>
                 {
+                    b.Navigation("Agendas");
+
                     b.Navigation("histories");
 
                     b.Navigation("patientPhotos");
@@ -669,9 +759,16 @@ namespace HealthCare.API.Migrations
 
             modelBuilder.Entity("HealthCare.API.Data.Entities.User", b =>
                 {
+                    b.Navigation("Agendas");
+
                     b.Navigation("Patients");
 
-                    b.Navigation("histories");
+                    b.Navigation("UserPatients");
+                });
+
+            modelBuilder.Entity("HealthCare.API.Data.Entities.UserPatient", b =>
+                {
+                    b.Navigation("Patients");
                 });
 #pragma warning restore 612, 618
         }

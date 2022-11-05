@@ -15,14 +15,16 @@ namespace HealthCare.API.Controllers
         private readonly IuserHelper _userhelper;
         private readonly IBlobHelper _blobHelper;
         private readonly IMailHelper _mailHelper;
+        private readonly ICombosHelper _combosHelper;
 
         public AccountController(DataContext context, IuserHelper userhelper , IBlobHelper blobHelper , 
-            IMailHelper mailHelper)
+            IMailHelper mailHelper , ICombosHelper combosHelper)
         {
             _context = context;
             _userhelper = userhelper;
             _blobHelper = blobHelper;
             _mailHelper = mailHelper;
+           _combosHelper = combosHelper;
         }
 
         public IActionResult Login()
@@ -74,7 +76,7 @@ namespace HealthCare.API.Controllers
         {
             AddUserViewModel model = new AddUserViewModel
             {
-               
+                Roles = _combosHelper.GetComboRoles(),
             };
 
             return View(model);
@@ -92,7 +94,22 @@ namespace HealthCare.API.Controllers
                 {
                     imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "users");
                 }
-                User user = await _userhelper.AddUserAsync(model, imageId, UserType.User);
+                User user = await _userhelper.GetUserAsync(model.Username);
+                if (model.RoleId==1)
+                {
+                    user = await _userhelper.AddUserAsync(model, imageId, UserType.User);
+                }
+               else
+                {
+                    user = await _userhelper.AddUserAsync(model, imageId, UserType.patient);
+                    var userpatient = new UserPatient
+                    {
+                        User = user,
+                        Patients = new List<Patient>(),
+                    };
+                    _context.UserPatients.Add(userpatient);
+                    await _context.SaveChangesAsync();
+                }
 
                 if(user==null)
                 {

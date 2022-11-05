@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace HealthCare.API.Models
 {
@@ -21,5 +22,6 @@ namespace HealthCare.API.Models
         [MinLength(6, ErrorMessage = "The field {0} must have a minimum length of {1} characters.")]
         [Compare("Password", ErrorMessage = "The password and password confirmation are not the same.")]
         public string PasswordConfirm { get; set; }
+      
     }
 }
