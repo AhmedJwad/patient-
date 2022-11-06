@@ -1,0 +1,56 @@
+﻿@model HealthCare.API.Data.Entities.History
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    HealthCare.API.Data.Entities.Detail Ahmed = new HealthCare.API.Data.Entities.Detail();
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Procedimientos</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover table-responsive table-striped" id="MyTable">
+                    <thead>
+
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Details.FirstOrDefault().Description)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Details.FirstOrDefault().diagonisic.Description)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+
+                            @foreach (var item in Model.Details)
+
+                            {
+
+                                string selectedRow = "";
+                                if (item.Id == (int?)ViewData["DetailsID"])
+                                {
+                                    selectedRow = "success";
+                                }
+                                <tr class="@selectedRow">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.diagonisic.Description)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                </tr>
+                            }
+
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

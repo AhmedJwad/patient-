@@ -1,7 +1,9 @@
 ﻿using HealthCare.API.Data;
 using HealthCare.API.Data.Entities;
 using HealthCare.API.Helpers;
+using HealthCare.API.Migrations;
 using HealthCare.API.Models;
+using Intersoft.Crosslight;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -56,7 +58,7 @@ namespace HealthCare.API.Controllers
         }
 
         [Authorize(Roles = "patient")]
-        public async Task<IActionResult> DetailsUserPatient(string Id)
+        public async Task<IActionResult> DetailsUserPatient(string Id  )
         {
             if (string.IsNullOrEmpty(Id))
             {
@@ -74,8 +76,23 @@ namespace HealthCare.API.Controllers
             {
                 return NotFound();
             }
+            int id = 0;
+
+            if (id != null)
+            {
+                ViewData["DetailsID"] = id;         
+            }
+            
             return View(user);
         }
+
+        public ActionResult GetDetails(int? id)
+        {
+            var details = _context.details.FirstOrDefault(x => x.Id == id);
+            return PartialView("_DetailsHistory", details);
+        }
+
+
 
     }
 }

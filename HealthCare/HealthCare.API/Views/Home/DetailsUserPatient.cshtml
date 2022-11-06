@@ -43,14 +43,7 @@
         </div>
     </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Udit User</a>
-    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-    {
-        <a asp-action="Index" class="btn btn-success">Back to List</a>
-    }
 
-</div>
 <br />
 
 <div class="row">
@@ -154,14 +147,11 @@
             </div>
             <div class="panel-body">
                 <table class="table table-hover table-responsive table-striped" id="MyTable">
-                    <thead>
+                    <thead>                       
                         <tr>
                             <th>
                                 @Html.DisplayNameFor(model => model.UserPatients.FirstOrDefault().Patients.FirstOrDefault().histories.FirstOrDefault().DateLocal)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.UserPatients.FirstOrDefault().Patients.FirstOrDefault().histories.FirstOrDefault().user.FullName)
-                            </th>
+                            </th>                          
                             <th>
                                 @Html.DisplayNameFor(model => model.UserPatients.FirstOrDefault().Patients.FirstOrDefault().histories.FirstOrDefault().allergies)
                             </th>
@@ -176,20 +166,18 @@
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.UserPatients.FirstOrDefault().Patients.FirstOrDefault().histories.FirstOrDefault().DetailsCount)
-                            </th>
-                         
+                            </th>                           
+                          
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model.UserPatients.FirstOrDefault().Patients.FirstOrDefault().histories)
                         {
-                            <tr>
+                           
+                            <tr >
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.DateLocal)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.user.FullName)
-                                </td>
+                                    @Html.DisplayFor(modelItem => item.Date)
+                                </td>                               
                                 <td>
                                     @Html.DisplayFor(modelItem => item.allergies)
                                 </td>
@@ -203,49 +191,30 @@
                                     @Html.DisplayFor(modelItem => item.Result)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.DetailsCount)
-                                </td>
-                              
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-@*history*@
-
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Procedimientos</h3>
-            </div>
-            <div class="panel-body">
-                <table class="table table-hover table-responsive table-striped" id="MyTable">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.UserPatients.FirstOrDefault().Patients.FirstOrDefault().histories.FirstOrDefault().Details.FirstOrDefault().diagonisic.Description)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.UserPatients.FirstOrDefault().Patients.FirstOrDefault().histories.FirstOrDefault().Details.FirstOrDefault().Description)
-                            </th>                          
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.UserPatients.FirstOrDefault().Patients.FirstOrDefault().histories.FirstOrDefault().Details)
-                        {
-                            <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.diagonisic.Description)
+                                        @Html.DisplayFor(modelItem => item.DetailsCount)
                                 </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Description)
-                                </td>
-                            </tr>
+                                </td>                                                       
+                            </tr>                     
+                        <th>Diagonisic</th>
+                        <th>Description</th>
+                             @foreach (var details in item.Details)
+                                        {
+                                            string selectedRow = "";
+                                           if (details.Id == (int?)ViewData["CourseID"])
+                                            {
+                                                selectedRow = "success";
+                                            }
+                                            <tr class="@selectedRow">                                              
+                                                <td>
+                                                    @details.diagonisic.Description
+                                                </td>
+                                                <td>
+                                                    @details.Description
+                                                </td>                                                
+                                            </tr>
+                                        }
+   
                         }
                     </tbody>
                 </table>
@@ -254,9 +223,9 @@
     </div>
 </div>
 
-@*end history*@
 
 <partial name="_DeleteDialog" />
+
 
 @section Scripts {
     @{

@@ -119,6 +119,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/Home/_historyDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfaGlzdG9yeURldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/nationalities/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcbmF0aW9uYWxpdGllc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
