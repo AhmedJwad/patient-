@@ -109,6 +109,22 @@ namespace HealthCare.API.Helpers
             });
             return list;
         }
+        public IEnumerable<SelectListItem> GetPatient(string userId)
+        {
+            var list = _context.patients
+              .Where(x => x.User.Id == userId).Select(p => new SelectListItem
+              {
+                  Text = p.FirstName + p.LastName,
+                  Value = $"{p.Id}"
+              }).OrderBy(p => p.Text).ToList();
 
+            list.Insert(0, new SelectListItem
+            {
+                Text = "(Select a patient...)",
+                Value = "0"
+            });
+
+            return list;
+        }
     }
 }

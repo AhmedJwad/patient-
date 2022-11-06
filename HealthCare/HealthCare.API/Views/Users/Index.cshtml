@@ -67,6 +67,7 @@
                             <td>
                                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
                                 <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Patients</a>
+                                <a asp-action="Agenda" asp-route-id="@item.Id" class="btn btn-info">Agenda</a>
                                 <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog">Delete</button>
                             </td>
                         </tr>

@@ -51,15 +51,105 @@ namespace HealthCare.API.Controllers
         private readonly ICombosHelper _combosHelper;
         private readonly IconverterHelper _converterhleper;
         private readonly IBlobHelper _blobHelper;
+        private readonly IconverterHelper _converterhelper;
 
         public UsersController(DataContext context, IuserHelper userhelper, ICombosHelper combosHelper,
-            IconverterHelper converterhleper, IBlobHelper blobHelper)
+            IconverterHelper converterhleper, IBlobHelper blobHelper , IconverterHelper converterhelper)
         {
             _context = context;
             _userhelper = userhelper;
             _combosHelper = combosHelper;
             _converterhleper = converterhleper;
             _blobHelper = blobHelper;
+            _converterhelper = converterhelper;
+        }
+        public async Task<IActionResult> Agenda(string Id)
+        {
+            User user = await _context.Users.Include(x => x.Agendas).Include(x => x.Patients)
+                 .FirstOrDefaultAsync(x => x.Id == Id);
+            return View(user);
+        }
+        public async Task<IActionResult> AddDays(string Id)
+        {
+            User user = await _context.Users.Include(x => x.Agendas)
+               .FirstOrDefaultAsync(x => x.Id == Id);
+            await _converterhelper.AddDays(7, Id);
+            return RedirectToAction(nameof(Agenda), new { Id = user.Id });
+        }
+        public async Task<IActionResult> Assing(int? Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            Agenda agenda = await _context.agendas.Include(x => x.user)
+                .FirstOrDefaultAsync(x => x.Id == Id);
+            if (agenda == null)
+            {
+                return NotFound();
+            }
+            AgendaViewModel model = new AgendaViewModel
+            {
+
+                UserId = agenda.user.Id,
+                Date = DateTime.Now.Date,
+                patients = _combosHelper.GetPatient(agenda.user.Id),
+
+            };
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Assing(AgendaViewModel model)
+        {
+            User user = await _context.Users
+          .Include(x => x.Agendas)
+          .FirstOrDefaultAsync(x => x.Id == model.UserId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            var agenda = await _context.agendas.FindAsync(model.Id);
+            if (agenda != null)
+            {
+                agenda.IsAvailable = false;
+                agenda.IsMine = true;
+                agenda.user = await _context.Users.FindAsync(model.UserId);
+                agenda.pathient = await _context.patients.FindAsync(model.patientId);
+                agenda.Description = model.Description;
+                _context.agendas.Update(agenda);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Agenda), new { id = agenda.user.Id });
+            }
+
+
+            model.patients = _combosHelper.GetPatient(model.UserId);
+            return View(model);
+        }
+        public async Task<IActionResult> Unassign(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var agenda = await _context.agendas
+                .Include(a => a.user)
+                .Include(a => a.pathient)
+                .FirstOrDefaultAsync(o => o.Id == id.Value);
+            if (agenda == null)
+            {
+                return NotFound();
+            }
+
+            agenda.IsAvailable = true;
+            agenda.pathient = null;
+            agenda.Description = null;
+
+            _context.agendas.Update(agenda);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Agenda), new { id = agenda.user.Id });
         }
         public async Task<IActionResult> IndexUserPatients()
         {

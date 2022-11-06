@@ -11,5 +11,6 @@ namespace HealthCare.API.Helpers
         IEnumerable<SelectListItem> GetCombodiagnosic();
         IEnumerable<SelectListItem> GetComboRoles();
         IEnumerable<SelectListItem> GetUserPatients();
+        IEnumerable<SelectListItem> GetPatient(string userId);
     }
 }

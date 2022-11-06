@@ -11,6 +11,7 @@ namespace HealthCare.API.Helpers
         Task<Patient> ToPatientAsync(patientViewmodel model, bool isNew);
         patientViewmodel ToPatientViewModel(Patient patient);
         Task<Detail> ToDetailAsync(DetailViewModel model, bool isNew);
-        DetailViewModel ToDetailViewModel(Detail detail);     
+        DetailViewModel ToDetailViewModel(Detail detail);
+        Task AddDays(int day, string id);
     }
 }

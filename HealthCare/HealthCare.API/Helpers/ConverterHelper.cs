@@ -2,6 +2,7 @@
 using HealthCare.API.Data.Entities;
 using HealthCare.API.Models;
 using HealthCare.Common.Enums;
+using Microsoft.EntityFrameworkCore;
 using System.Drawing;
 
 namespace HealthCare.API.Helpers
@@ -122,6 +123,50 @@ namespace HealthCare.API.Helpers
                 FirstName = user.FirstName,
                 UserType = user.userType,               
             };
+        }
+        public async Task AddDays(int day, string id)
+        {
+            DateTime initialDate;
+
+            User user = await _context.Users.Include(x => x.Agendas)
+               .FirstOrDefaultAsync(x => x.Id == id);
+            var agenda = _context.agendas.FirstOrDefault();
+            if (!_context.agendas.Any())
+            {
+                initialDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 0, 0);
+            }
+            else
+            {
+
+                initialDate = new DateTime(agenda.Date.Year, agenda.Date.Month, agenda.Date.AddDays(1).Day, 8, 0, 0);
+            }
+
+            var finalDate = initialDate.AddDays(day);
+            while (initialDate < finalDate)
+            {
+                if (initialDate.DayOfWeek != DayOfWeek.Friday)
+                {
+                    var finalDate2 = initialDate.AddHours(10);
+                    while (initialDate < finalDate2)
+                    {
+                        _context.agendas.Add(new Agenda
+                        {
+                            user = user,
+                            Date = initialDate.ToUniversalTime(),
+                            IsAvailable = true
+                        });
+
+                        initialDate = initialDate.AddMinutes(30);
+                    }
+
+                    initialDate = initialDate.AddHours(14);
+                }
+                else
+                {
+                    initialDate = initialDate.AddDays(1);
+                }
+            }
+            await _context.SaveChangesAsync();
         }
     }
 }

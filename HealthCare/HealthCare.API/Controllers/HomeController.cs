@@ -86,12 +86,82 @@ namespace HealthCare.API.Controllers
             return View(user);
         }
 
-        public ActionResult GetDetails(int? id)
+        [Authorize(Roles = "patient")]
+        public async Task<IActionResult> MyAgenda()
         {
-            var details = _context.details.FirstOrDefault(x => x.Id == id);
-            return PartialView("_DetailsHistory", details);
-        }
 
+            User user = await _userhelper.GetUserAsync(User.Identity.Name);
+
+            var agenda = await _context.agendas.Include(x => x.user).Include(x => x.pathient)
+                .Where(a => a.Date >= DateTime.Today)
+                .ToListAsync();
+
+            var list = new List<AgendaViewModel>(agenda.Select(a => new AgendaViewModel
+            {
+                Date = a.Date,
+                Id = a.Id,
+                IsAvailable = a.IsAvailable,
+                user = a.user,
+                pathient = a.pathient,
+                Description = a.Description,
+
+
+            })).ToList();
+            list.Where(a => a.user != null && a.user.Email.ToLower().Equals(User.Identity.Name.ToLower())
+            ).All(a => { a.IsMine = true; return true; });
+
+
+            return View(list);
+        }
+        [Authorize(Roles = "patient")]
+        public async Task<IActionResult> Assing(int? Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            Agenda agenda = await _context.agendas.Include(x => x.user)
+                .FirstOrDefaultAsync(x => x.Id == Id);
+            UserPatient userpationt = await _context.UserPatients.Include(u => u.Patients)
+                  .FirstOrDefaultAsync(u => u.User.Email.ToLower().Equals(User.Identity.Name.ToLower()));
+            if (agenda == null)
+            {
+                return NotFound();
+            }
+            AgendaViewModel model = new AgendaViewModel
+            {
+
+                UserId = agenda.user.Id,
+                Date = DateTime.Now.Date,
+                patientId = userpationt.Patients.FirstOrDefault().Id,
+                IsMine = true,
+
+            };
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Assing(AgendaViewModel model)
+        {
+            UserPatient userpationt = await _context.UserPatients.Include(u => u.Patients)
+                .FirstOrDefaultAsync(u => u.User.Email.ToLower().Equals(User.Identity.Name.ToLower()));
+
+            var agenda = await _context.agendas.FindAsync(model.Id);
+            if (agenda != null)
+            {
+                agenda.IsAvailable = false;
+                agenda.user = await _context.Users.FindAsync(model.UserId);
+                agenda.pathient = await _context.patients.FindAsync(userpationt.Patients.FirstOrDefault().Id);
+                agenda.Description = model.Description;
+                _context.agendas.Update(agenda);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(MyAgenda));
+            }
+
+
+            return View(model);
+        }
 
 
     }
