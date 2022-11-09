@@ -2,6 +2,7 @@
 using HealthCare.API.Data.Entities;
 using HealthCare.API.Helpers;
 using HealthCare.API.Models.Request;
+using HealthCare.API.Models.Response;
 using HealthCare.Common.Enums;
 using HealthCare.Common.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -15,7 +16,7 @@ using User = HealthCare.API.Data.Entities.User;
 namespace HealthCare.API.Controllers.API
 {
     [ApiController]
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+   [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
@@ -41,31 +42,138 @@ namespace HealthCare.API.Controllers.API
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUsers(string id)
+        public async Task<ActionResult<User>> GetUser(string id)
         {
-            User user = await _context.Users
-                 .Include(x => x.Patients)
-                 .ThenInclude(x => x.City)
-                 .Include(x => x.Patients)
-                 .ThenInclude(x => x.Natianality)
-                 .Include(x => x.Patients)
-                 .ThenInclude(x => x.bloodType)
-                 .Include(x => x.Patients)
-                 .ThenInclude(x => x.gendre)
-                 .Include(x => x.Patients)
-                 .ThenInclude(x => x.patientPhotos)
-                 .Include(x => x.Patients)
-                 .ThenInclude(x => x.histories)
-                 .ThenInclude(x => x.Details)
-                 .ThenInclude(x => x.diagonisic)
-                 .FirstOrDefaultAsync(x => x.Id == id);
-
-            if (user == null)
+            var response = await _context.Users
+                .Include(x => x.Patients)
+                .ThenInclude(x => x.City)
+                .Include(x => x.Patients)
+                .ThenInclude(x => x.Natianality)
+                .Include(x => x.Patients)
+                .ThenInclude(x => x.bloodType)
+                .Include(x => x.Patients)
+                .ThenInclude(x => x.gendre)
+                .Include(x => x.Patients)
+                .ThenInclude(x => x.patientPhotos)
+                .Include(x => x.Patients)
+                .ThenInclude(x => x.histories)
+                .ThenInclude(x => x.Details)
+                .ThenInclude(x => x.diagonisic)  
+                .Include(x=>x.Patients).ThenInclude(x=>x.userPatient).ThenInclude(x=>x.User)
+               .FirstOrDefaultAsync(x => x.Id == id);
+            var user = new userResponse
             {
-                return NotFound();
-            }
+                id= response.Id,
+                firstName= response.FirstName,
+                lastName= response.LastName,
+                address= response.Address,
+                userType= response.userType,
+                imageId= response.ImageId,
+                phoneNumber = response.PhoneNumber,    
+                email=response.Email,
+                userName = response.UserName,
+                patients= response.Patients?.Select(p=> new Patientresponse
+               {
+                   Id=p.Id,
+                   FirstName=p.FirstName,
+                   LastName=p.LastName,
+                   Date=p.Date,
+                   Description=p.Description,
+                   Address=p.Address,
+                   MobilePhone=p.MobilePhone,
+                   EPCNNumber=p.EPCNNumber,
+                   bloodType=tobloodType(p.bloodType),                   
+                   City=tocity(p.City),
+                   gendre=togendre(p.gendre),
+                   Natianality=tonatinality(p.Natianality),
+                   userPatient=touserpatient(p.userPatient),
+                   patientPhotos=p.patientPhotos?.Select(pi=> new PatientPhotoResponse
+                   {
+                       Id=pi.Id,
+                       ImageId = pi.ImageId,
+                       imageFullPath = pi.ImageFullPath,
+                   }).ToList(),
+                   histories=p.histories?.Select(h=> new HitoryResponse
+                   {
+                       Id=p.Id,
+                       illnesses=h.illnesses,
+                       allergies=h.allergies,
+                       Date=h.Date,
+                       Result=h.Result,
+                       surgeries=h.surgeries,
+                       Details=h.Details?.Select(d=> new DetailsResponse
+                       {
+                          Id=d.Id,
+                          Description=d.Description,
+                           diagonisic = todiagnoiscresponse(d.diagonisic)
+                           
+                       }).ToList(),
+                   }).ToList(),
+               }).ToList(),
+            };
+            
+          
+          
+            return Ok(user);
+        }
 
-            return user;
+        private diagonisicResponse todiagnoiscresponse(diagonisic diagonisic)
+        {
+            return new diagonisicResponse
+            {
+                Id = diagonisic.Id,
+                Description = diagonisic.Description
+            };
+        }
+
+        private UserPatientResponse touserpatient(UserPatient userPatient)
+        {
+            return new UserPatientResponse
+            {
+            Id = userPatient.Id,
+            FirstName = userPatient.User.FirstName,
+            LastName = userPatient.User.LastName,
+            Address = userPatient.User.Address,
+            PhoneNumber = userPatient.User.PhoneNumber,
+            Email = userPatient.User.Email,       
+                          
+           };
+        }
+
+        private NatianalityResponse tonatinality(Natianality natianality)
+        {
+            return new NatianalityResponse
+            {
+                Id= natianality.Id,
+                Description=natianality.Description,    
+            };
+        }
+
+        private gendreResponse togendre(gendre gendre)
+        {
+            return new gendreResponse
+            {
+                Id = gendre.Id,
+                Description = gendre.Description,
+            };
+        }
+
+        private CityResponce tocity(City city)
+        {
+            return new CityResponce
+            {
+                Id=city.Id,
+                Description=city.Description,
+            };
+        }
+
+        private BloodTypeResponse tobloodType(BloodType bloodType)
+        {
+            return new BloodTypeResponse
+            {
+                Id = bloodType.Id,
+                Description = bloodType.Description,
+            };
         }
 
         [HttpPost]
@@ -171,5 +279,6 @@ namespace HealthCare.API.Controllers.API
 
             return NoContent();
         }
+    
     }
 }
