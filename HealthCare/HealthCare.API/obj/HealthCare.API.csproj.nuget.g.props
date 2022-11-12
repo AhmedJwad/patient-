@@ -20,6 +20,7 @@
     <Import Project="$(NuGetPackageRoot)swashbuckle.aspnetcore\6.4.0\build\Swashbuckle.AspNetCore.props" Condition="Exists('$(NuGetPackageRoot)swashbuckle.aspnetcore\6.4.0\build\Swashbuckle.AspNetCore.props')" />
     <Import Project="$(NuGetPackageRoot)microsoft.entityframeworkcore\6.0.9\buildTransitive\net6.0\Microsoft.EntityFrameworkCore.props" Condition="Exists('$(NuGetPackageRoot)microsoft.entityframeworkcore\6.0.9\buildTransitive\net6.0\Microsoft.EntityFrameworkCore.props')" />
     <Import Project="$(NuGetPackageRoot)microsoft.entityframeworkcore.design\6.0.9\build\net6.0\Microsoft.EntityFrameworkCore.Design.props" Condition="Exists('$(NuGetPackageRoot)microsoft.entityframeworkcore.design\6.0.9\build\net6.0\Microsoft.EntityFrameworkCore.Design.props')" />
+    <Import Project="$(NuGetPackageRoot)entityframework\6.4.4\buildTransitive\netcoreapp3.0\EntityFramework.props" Condition="Exists('$(NuGetPackageRoot)entityframework\6.4.4\buildTransitive\netcoreapp3.0\EntityFramework.props')" />
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgVisioForge_DotNet_Core_TRIAL Condition=" '$(PkgVisioForge_DotNet_Core_TRIAL)' == '' ">C:\Users\alnaseem\.nuget\packages\visioforge.dotnet.core.trial\15.1.12</PkgVisioForge_DotNet_Core_TRIAL>
@@ -29,5 +30,6 @@
     <PkgMicrosoft_CodeAnalysis_AnalyzerUtilities Condition=" '$(PkgMicrosoft_CodeAnalysis_AnalyzerUtilities)' == '' ">C:\Users\alnaseem\.nuget\packages\microsoft.codeanalysis.analyzerutilities\3.3.0</PkgMicrosoft_CodeAnalysis_AnalyzerUtilities>
     <PkgMicrosoft_EntityFrameworkCore_Tools Condition=" '$(PkgMicrosoft_EntityFrameworkCore_Tools)' == '' ">C:\Users\alnaseem\.nuget\packages\microsoft.entityframeworkcore.tools\6.0.9</PkgMicrosoft_EntityFrameworkCore_Tools>
     <PkgIntersoft_Crosslight Condition=" '$(PkgIntersoft_Crosslight)' == '' ">C:\Users\alnaseem\.nuget\packages\intersoft.crosslight\6.0.5000.975</PkgIntersoft_Crosslight>
+    <PkgEntityFramework Condition=" '$(PkgEntityFramework)' == '' ">C:\Users\alnaseem\.nuget\packages\entityframework\6.4.4</PkgEntityFramework>
   </PropertyGroup>
 </Project>

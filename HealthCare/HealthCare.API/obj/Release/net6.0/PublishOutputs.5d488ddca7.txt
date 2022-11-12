@@ -134,6 +134,7 @@ C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\refs\netstandard.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\refs\System.AppContext.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\refs\System.Buffers.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\refs\System.CodeDom.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\refs\System.Collections.Concurrent.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\refs\System.Collections.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\refs\System.Collections.Immutable.dll
@@ -151,6 +152,7 @@ C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\refs\System.Data.Common.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\refs\System.Data.DataSetExtensions.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\refs\System.Data.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\refs\System.Data.SqlClient.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\refs\System.Diagnostics.Contracts.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\refs\System.Diagnostics.Debug.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\refs\System.Diagnostics.DiagnosticSource.dll
@@ -313,6 +315,8 @@ C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\DlhSoft.HierarchicalData.LightWPF.Controls.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\dotnetcharting.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Emgu.CV.Platform.NetStandard.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\EntityFramework.SqlServer.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\EntityFramework.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Grpc.Core.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Grpc.Core.Api.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Grpc.Net.Client.dll
@@ -404,12 +408,14 @@ C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\System.CodeDom.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\System.Composition.AttributedModel.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\System.Composition.Convention.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\System.Composition.Hosting.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\System.Composition.Runtime.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\System.Composition.TypedParts.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\System.Configuration.ConfigurationManager.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\System.Data.SqlClient.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\System.Drawing.Common.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\System.IO.Hashing.dll
@@ -601,6 +607,11 @@ C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\runtimes\win-arm64\native\sni.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\runtimes\win-x64\native\sni.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\runtimes\win-x86\native\sni.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 C:\Users\alnaseem\source\repos\patient\HealthCare\HealthCare.API\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll

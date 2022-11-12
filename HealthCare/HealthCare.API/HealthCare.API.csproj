@@ -60,6 +60,7 @@
     <PackageReference Include="DlhSoft.GanttChartLightLibrary" Version="4.3.45.15" />
     <PackageReference Include="dotnetCHARTING" Version="10.3.0" />
     <PackageReference Include="Emgu.CV" Version="4.5.5.4823" />
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Grpc.Core" Version="2.46.3" />
     <PackageReference Include="Grpc.Net.Client" Version="2.48.0" />
     <PackageReference Include="ImageProcessor" Version="2.9.1" />

@@ -126,16 +126,16 @@ namespace HealthCare.API.Controllers.API
             };
         }
 
-        private UserPatientResponse touserpatient(UserPatient userPatient)
+        private UserPatientResponse touserpatient(UserPatient UserPatient)
         {
             return new UserPatientResponse
             {
-            Id = userPatient.Id,
-            FirstName = userPatient.User.FirstName,
-            LastName = userPatient.User.LastName,
-            Address = userPatient.User.Address,
-            PhoneNumber = userPatient.User.PhoneNumber,
-            Email = userPatient.User.Email,       
+            Id = UserPatient.Id,
+            FirstName = UserPatient.User.FirstName,
+            LastName = UserPatient.User.LastName,
+            Address = UserPatient.User.Address,
+            PhoneNumber = UserPatient.User.PhoneNumber,
+            Email = UserPatient.User.Email,       
                           
            };
         }
