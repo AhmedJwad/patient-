@@ -8,13 +8,10 @@ namespace HealthCare.Common.Enums
 {
     public enum ColourSwapType
     {
-        ShiftRight,
-        ShiftLeft,
-        SwapBlueAndRed,
-        SwapBlueAndRedFixGreen,
-        SwapBlueAndGreen,
-        SwapBlueAndGreenFixRed,
-        SwapRedAndGreen,
-        SwapRedAndGreenFixBlue
+     
+        RGB,
+        RBG,
+        BRG,
+        GBR,
     }
 }
