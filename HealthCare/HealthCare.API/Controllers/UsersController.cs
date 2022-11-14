@@ -1800,22 +1800,20 @@ namespace HealthCare.API.Controllers
             double y = 0.99;
             double z = 0.99;
 
-            double[] x1 = new double[a];
-            double[] x2 = new double[b];
-            double[] x3 = new double[f];
-            double[] x4 = new double[(int)d];
-            double[] x5 = new double[(int)e];
+            int x1 = 1;
+            int  x2 = 1;
+            int x3 =Convert.ToInt32(z);
+            int  x4 = 1;
+            int x5 = 1;
             int ih = bmp.Height;
-            int iw = bmp.Width;
+           int iw = bmp.Width;
             System.Drawing.Color c = new System.Drawing.Color();
-            for (int i =0; i < 100; i++)
-            {
-                x = 6 - 0.1 * 0.1 - 6 + 6 * 6;
-                y = 6 - 0.1 * 6 * 6 + 6 * 6;
-                z = 0.1 - 6 * 6 - 6 + 6 * 6;
+            //for (int i =0; i < 255; i++)
+            //{
+              
 
-                //x = 4 * x * (1 - x);
-            }
+            //    //x = 4 * x * (1 - x);
+            //}
            
             for (int j = 0; j < ih; j++)
             {
@@ -1824,21 +1822,24 @@ namespace HealthCare.API.Controllers
                     c = bmp.GetPixel(i, j);
                     int chaos = 0, g;
                     string k ;
-                    for (int w = 0; w < 8; w++)
+                    for (int w =0; w < 256; w++)
                     {
-                        x = 6 - 0.1 * 0.1 - 6 + 6 * 6;
-                        y =  6 - 0.1 * 6 * 6 + 6 * 6; ;
-                        z =  0.1 - 6 * 6 - 6 + 6 * 6; ;
-                       // x = 4 * x * (1 - x);
-                        if (x  >= 0.5 || y>=0.5 || z>=0.5) g  = 1;
+                        x1 = ((x2 - x4) * (x5 - x1 + x1) * a);
+                        x2 = ((x3 - x5) * (x1 - x2 + x2) * b);
+                        x3 = ((x4 - x1) * (x2 - x3 + x3) * f);
+                        x4 = ((x5 - x2) * (x3 - x4 + x4) * (int)d);
+                        x5 = ((x4 - x3) * (x4 - x5 + x5 )* (int)e);
+                        // x = 4 * x * (1 - x);
+                        if (x1 >= 0.5 || x2 >= 0.5 || x3 >= 0.5 || x4>=0.5 || x5>=0.5) g  = 1;
                         else g = 0;
                         
                         chaos = ((chaos << 1) | g);
                     }
+                    Random rand = new Random();
                     //c = 
                     bmp.SetPixel(i, j, System.Drawing.Color.FromArgb(c.R ^ (int)chaos,
                                                      c.G ^ (int)chaos,
-                                                     c.B ^ (int)chaos));
+                                                     c.B ^ (int)chaos, rand.Next(0,256)));
                 }
             }
             bmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\choatic5d" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
