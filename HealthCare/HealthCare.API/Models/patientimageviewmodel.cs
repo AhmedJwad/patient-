@@ -61,6 +61,8 @@ namespace HealthCare.API.Models
 
         public string swappingARGB { get; set; }
 
+        public string rgbstring { get; set; }
+
         [Display(Name = "Photo")]
         public string ImageFullPath => ImageId == String.Empty
             ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
@@ -124,6 +126,10 @@ namespace HealthCare.API.Models
         public string SwappingARGB => swappingARGB == String.Empty
    ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
    : $"https://localhost:7152/{swappingARGB}";
+
+       public string Rgbstring => rgbstring == String.Empty
+   ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
+   : $"https://localhost:7152/{rgbstring}";
 
     }
 }

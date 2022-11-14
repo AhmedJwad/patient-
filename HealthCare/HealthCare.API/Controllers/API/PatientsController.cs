@@ -3,6 +3,7 @@ using HealthCare.API.Data.Entities;
 using HealthCare.API.Helpers;
 using HealthCare.API.Migrations;
 using HealthCare.API.Models.Request;
+using HealthCare.API.Models.Response;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -26,6 +27,125 @@ namespace HealthCare.API.Controllers.API
            _userhelper = userhelper;
            _blobHelper = blobHelper;
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Patient>> GetPatient(int id)
+        {
+            Patient patient = await _context.patients
+                .Include(x=>x.patientPhotos)
+                .Include(x => x.City)
+                .Include(x => x.bloodType)
+                .Include(x => x.gendre)
+                .Include(x => x.Natianality)
+                .Include(x=>x.userPatient).ThenInclude(x=>x.User)
+                .Include(x=>x.histories)
+                .ThenInclude(x => x.Details)
+                .ThenInclude(x => x.diagonisic)
+                .FirstOrDefaultAsync(x => x.Id == id);
+            var response = new Patientresponse
+            {
+                Id = patient.Id,
+                FirstName = patient.FirstName,
+                LastName = patient.LastName,
+                Date = patient.Date,
+                Description = patient.Description,
+                Address = patient.Address,
+                EPCNNumber = patient.EPCNNumber,
+                MobilePhone = patient.MobilePhone,
+                histories = patient.histories?.Select(h => new HitoryResponse
+                {
+                    Id = h.Id,
+                    Date = h.Date,
+                    Details = h.Details?.Select(d => new DetailsResponse
+                    {
+                        Id = d.Id,
+                        Description = d.Description,
+                        diagonisic=todiagnosic(d.diagonisic),
+                    }).ToList(),
+                    allergies = h.allergies,
+                    surgeries = h.surgeries,
+                    illnesses = h.illnesses,
+                    Result = h.Result,                    
+                }).ToList(),
+                patientPhotos = patient.patientPhotos?.Select(ph => new PatientPhotoResponse
+                {
+                    Id = ph.Id,
+                    ImageId = ph.ImageId,
+                    imageFullPath = ph.ImageFullPath,
+                }).ToList(),
+                bloodType = tobloodtype(patient.bloodType),
+                City = tocity(patient.City),
+                gendre = togendre(patient.gendre),
+                Natianality = tonationality(patient.Natianality),
+                userPatient = toUserPatient(patient.userPatient),
+            };
+
+            if (patient == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(response);
+        }
+
+        private diagonisicResponse todiagnosic(diagonisic diagonisic)
+        {
+            return new diagonisicResponse
+            {
+                Id=diagonisic.Id,
+                Description=diagonisic.Description,
+            };
+        }
+
+        private UserPatientResponse toUserPatient(UserPatient userPatient)
+        {
+            return new UserPatientResponse
+            {
+                Id = userPatient.Id,
+                Address = userPatient.User.Address,
+                FirstName = userPatient.User.FirstName,
+                LastName = userPatient.User.LastName,
+                PhoneNumber = userPatient.User.PhoneNumber,
+                Email = userPatient.User.Email,
+            };
+        }
+
+        private NatianalityResponse tonationality(Natianality natianality)
+        {
+            return new NatianalityResponse
+            {
+                Id = natianality.Id,
+                Description = natianality.Description,
+            };
+        }
+
+        private gendreResponse togendre(gendre gendre)
+        {
+            return new gendreResponse
+            {
+                Id = gendre.Id,
+                Description = gendre.Description
+            };
+        }
+
+        private CityResponce tocity(City city)
+        {
+            return new CityResponce
+            {
+                Id=city.Id,
+                Description=city.Description,
+            };
+        }
+
+        private BloodTypeResponse tobloodtype(BloodType bloodType)
+        {
+            return new BloodTypeResponse
+            {
+                Id = bloodType.Id,
+                Description = bloodType.Description,
+            };
+        }
+
         [HttpPost]
         public async Task<ActionResult<Patient>>postPatient(Patientrequest request)
         {
