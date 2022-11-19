@@ -1327,11 +1327,44 @@ namespace HealthCare.API.Controllers
             //end generate image from scramble image and key image
 
             //generate 4 bit tp image          
-            System.Drawing.Bitmap rgb = Almershady;
-            SwapColors(rgb, ColourSwapType.RGB);
-            SwapColors(rgb, ColourSwapType.RBG);
-            SwapColors(rgb, ColourSwapType.BRG);
-            SwapColors(rgb, ColourSwapType.GBR);
+            System.Drawing.Bitmap rgb = Almershady;          
+            List<ArgbPixel> pixelListSource = GetPixelListFromBitmap(Almershady);
+
+    
+            List<ArgbPixel> pixelListResult = new List<ArgbPixel>();
+
+           pixelListResult.Add(new ArgbPixel
+            {
+                red = 00,
+                green = 01,
+                blue = 10,
+                alpha = 11
+            });
+            foreach (var item in pixelListResult)
+            {
+                if(item.red==00)
+                {
+                    SwapColors(rgb, ColourSwapType.RGB);
+                }
+                if(item.green==01)
+                {
+                    SwapColors(rgb, ColourSwapType.RBG);
+                }
+               if (item.blue == 10)
+                {
+                    SwapColors(rgb, ColourSwapType.BRG);
+                }
+                if (item.alpha == 11)
+                {
+                    SwapColors(rgb, ColourSwapType.BRG);
+                }
+            }         
+             
+                 
+                  
+           
+         
+          
             rgb.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\rgb" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
             model.rgbstring = ($"images\\rgbPng" + ".jpg");
             //end generate 4 bit tp image
@@ -1359,13 +1392,13 @@ namespace HealthCare.API.Controllers
 
 
             List<ArgbPixel> pixelListResult = null;
-
-           
+          
 
             switch (swapType)
             {
                 case ColourSwapType.RGB:
                     {
+
                         pixelListResult = (from t in pixelListSource
                                            select new ArgbPixel
                                            {

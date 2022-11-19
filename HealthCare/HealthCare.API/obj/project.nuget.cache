@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "34dK/AlyDO7cn1bATfFhtzBK3tXu8DwkOf8xxdXd3mV97I0pzf4GSPIghAQgTgUPVd1brJm+qefIh1PjEfXcEg==",
+  "dgSpecHash": "i7m2Nd4xzM8ZhfEPiGP60UNXx3hmOQnrHMji7Z0NpDL//mrBrABOYT9GpLZBKpL15dPyInBBlVnQjBLtlMMMVw==",
   "success": true,
   "projectFilePath": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\HealthCare.API.csproj",
   "expectedPackageFiles": [
@@ -261,7 +261,11 @@
     "C:\\Users\\alnaseem\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.3.0\\system.xml.xpath.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\alnaseem\\.nuget\\packages\\visioforge.dotnet.core.trial\\15.1.12\\visioforge.dotnet.core.trial.15.1.12.nupkg.sha512",
     "C:\\Users\\alnaseem\\.nuget\\packages\\windowsazure.storage\\9.3.3\\windowsazure.storage.9.3.3.nupkg.sha512",
-    "C:\\Users\\alnaseem\\.nuget\\packages\\xamarin.forms\\5.0.0.2515\\xamarin.forms.5.0.0.2515.nupkg.sha512"
+    "C:\\Users\\alnaseem\\.nuget\\packages\\xamarin.forms\\5.0.0.2515\\xamarin.forms.5.0.0.2515.nupkg.sha512",
+    "C:\\Users\\alnaseem\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.11\\microsoft.netcore.app.host.win-x64.6.0.11.nupkg.sha512",
+    "C:\\Users\\alnaseem\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.11\\microsoft.aspnetcore.app.ref.6.0.11.nupkg.sha512",
+    "C:\\Users\\alnaseem\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.11\\microsoft.windowsdesktop.app.ref.6.0.11.nupkg.sha512",
+    "C:\\Users\\alnaseem\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.11\\microsoft.netcore.app.ref.6.0.11.nupkg.sha512"
   ],
   "logs": [
     {
