@@ -1328,11 +1328,8 @@ namespace HealthCare.API.Controllers
 
             //generate 4 bit tp image          
             System.Drawing.Bitmap rgb = Almershady;          
-            List<ArgbPixel> pixelListSource = GetPixelListFromBitmap(Almershady);
-
-    
+            List<ArgbPixel> pixelListSource = GetPixelListFromBitmap(Almershady);    
             List<ArgbPixel> pixelListResult = new List<ArgbPixel>();
-
            pixelListResult.Add(new ArgbPixel
             {
                 red = 00,
@@ -1358,13 +1355,8 @@ namespace HealthCare.API.Controllers
                 {
                     SwapColors(rgb, ColourSwapType.BRG);
                 }
-            }         
-             
-                 
-                  
-           
-         
-          
+            }   
+                   
             rgb.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\rgb" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
             model.rgbstring = ($"images\\rgbPng" + ".jpg");
             //end generate 4 bit tp image
@@ -1855,25 +1847,20 @@ namespace HealthCare.API.Controllers
                     c = bmp.GetPixel(i, j);
                     int chaos = 0, g;
                     string k ;
-                    for (int w =0; w < 256; w++)
-                    {
+                
                         x1 = ((x2 - x4) * (x5 - x1 + x1) * a);
                         x2 = ((x3 - x5) * (x1 - x2 + x2) * b);
                         x3 = ((x4 - x1) * (x2 - x3 + x3) * f);
                         x4 = ((x5 - x2) * (x3 - x4 + x4) * (int)d);
                         x5 = ((x4 - x3) * (x4 - x5 + x5 )* (int)e);
-                        // x = 4 * x * (1 - x);
-                        if (x1 >= 0.5 || x2 >= 0.5 || x3 >= 0.5 || x4>=0.5 || x5>=0.5) g  = 1;
-                        else g = 0;
-                        
-                        chaos = ((chaos << 1) | g);
-                    }
-                    Random rand = new Random();
+                    // x = 4 * x * (1 - x);
+                     
                     //c = 
-                    bmp.SetPixel(i, j, System.Drawing.Color.FromArgb(c.R ^ (int)chaos,
-                                                     c.G ^ (int)chaos,
-                                                     c.B ^ (int)chaos, rand.Next(0,256)));
-                }
+                    bmp.SetPixel(i, j, System.Drawing.Color.FromArgb(c.R ^ (int)x1,
+                                                     c.G ^ (int)x2,
+                                                     c.B ^ (int)x3,
+                                                     c.A ^ (int)x4));
+        }
             }
             bmp.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\choatic5d" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
 
