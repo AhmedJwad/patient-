@@ -63,6 +63,10 @@ namespace HealthCare.API.Models
 
         public string rgbstring { get; set; }
 
+        public string scrambleandcolorswap { get; set; }
+
+        public string xorbetweenscrambleandchaotic5d { get; set; }
+
         [Display(Name = "Photo")]
         public string ImageFullPath => ImageId == String.Empty
             ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
@@ -130,6 +134,13 @@ namespace HealthCare.API.Models
        public string Rgbstring => rgbstring == String.Empty
    ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
    : $"https://localhost:7152/{rgbstring}";
+        public string Scrambleandcolorswap => scrambleandcolorswap == String.Empty
+  ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
+  : $"https://localhost:7152/{scrambleandcolorswap}";
+
+        public string Xorbetweenscrambleandchaotic5d => xorbetweenscrambleandchaotic5d == String.Empty
+ ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
+ : $"https://localhost:7152/{xorbetweenscrambleandchaotic5d}";
 
     }
 }

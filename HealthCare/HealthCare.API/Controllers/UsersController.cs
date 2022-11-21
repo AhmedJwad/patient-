@@ -910,6 +910,160 @@ namespace HealthCare.API.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(DetailsHistory), new { id = detail.History.Id });
         }
+        public async Task<IActionResult> colorwapimageandxorimagemetrics(int? Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            PatientPhoto patientPhoto = await _context.patientPhotos.Include(x => x.patient)
+                .FirstOrDefaultAsync(x => x.Id == Id);
+            if (patientPhoto == null)
+            {
+                return NotFound();
+            }
+            patientimageviewmodel model = new patientimageviewmodel
+            {
+                Id = patientPhoto.Id,
+                ImageId = patientPhoto.ImageId.ToString(),
+                patient = patientPhoto.patient,
+            };
+            string pathScramble = ($"images\\rgbPng" + ".jpg");
+            model.swappingARGB = pathScramble;
+            var httpClient2 = new HttpClient();
+            var stream2 = await httpClient2.GetStreamAsync(model.SwappingARGB);
+            System.Drawing.Bitmap scramble2 = new System.Drawing.Bitmap(stream2);
+            model.scrambleandcolorswap = ($"images\\scrambleandcolorswapPng" + ".jpg");
+            var httpClient = new HttpClient();
+            var stream = await httpClient.GetStreamAsync(model.Scrambleandcolorswap);
+            System.Drawing.Bitmap Almershady = new System.Drawing.Bitmap(stream);
+
+
+            //histogram
+
+            Histogram(scramble2);
+            Histogram3(Almershady);
+            string path11 = ($"images\\histogramxorimage" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
+            string path12 = ($"images\\histogramorginalimage" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
+            model.histgrame = path11;
+            model.histgrameorginal = path12;
+
+            //end histogram            
+            //NPCR
+
+            int Tollerance = 0;
+            model.NPCR = CompareImages(scramble2, Almershady, Tollerance);
+            //End NPCR 
+            // Entropy           
+            byte[] imagetobyte1 = BitmapToByteArray(scramble2);
+            byte[] imagetobyte2 = BitmapToByteArray(Almershady);
+            double orginal = Entropy(imagetobyte1);
+            double scramble = Entropy(imagetobyte2);
+            model.Entropyorginal = orginal;
+            model.Entropyscample = scramble;
+            //end  Entropy
+            //coffecient correlation 
+            var httpClient5 = new HttpClient();
+            var stream5 = await httpClient5.GetStreamAsync(model.SwappingARGB);
+            System.Drawing.Bitmap corellationcoffecient1 = new System.Drawing.Bitmap(stream5);
+            byte[] imagetobyte3 = BitmapToByteArray(corellationcoffecient1);
+            var httpClient6 = new HttpClient();
+            var stream6 = await httpClient6.GetStreamAsync(model.Scrambleandcolorswap);
+            System.Drawing.Bitmap corellationcoffecient2 = new System.Drawing.Bitmap(stream6);
+            byte[] imagetobyte4 = BitmapToByteArray(corellationcoffecient2);
+            int[] bytesAsInts = imagetobyte3.Select(y => (int)y).ToArray();
+            int[] bytesAsInts1 = imagetobyte4.Select(y => (int)y).ToArray();
+            int n = bytesAsInts.Length;
+            float Ahmed22 = correlationCoefficienthorizontal(bytesAsInts, bytesAsInts1, n);
+            float Ahmed23 = correlationCoefficientVertical(bytesAsInts, bytesAsInts1, n);
+            double[] corr = toDoubleArray(imagetobyte3);
+            double[] corr1 = toDoubleArray(imagetobyte4);
+            double corr2 = Correlation(corr, corr1);
+            model.corrhorizontal = Ahmed22;
+            model.corrvertical = Ahmed23;
+            float Ahmed24 = correlationCoefficientxor(bytesAsInts, bytesAsInts1, n);
+            model.corrdiagnol = Ahmed24;
+            return View(model);
+            //End  coffecient correlation 
+        }
+        public async Task<IActionResult> scrambledandswapcolorImagesmetrics(int? Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            PatientPhoto patientPhoto = await _context.patientPhotos.Include(x => x.patient)
+                .FirstOrDefaultAsync(x => x.Id == Id);
+            if (patientPhoto == null)
+            {
+                return NotFound();
+            }
+            patientimageviewmodel model = new patientimageviewmodel
+            {
+                Id = patientPhoto.Id,
+                ImageId = patientPhoto.ImageId.ToString(),
+                patient = patientPhoto.patient,
+            };
+            string pathScramble = ($"images\\Png" + ".jpg");
+            model.scrabmle = pathScramble;
+            var httpClient2 = new HttpClient();
+            var stream2 = await httpClient2.GetStreamAsync(model.ImageFullPath);
+            System.Drawing.Bitmap scramble2 = new System.Drawing.Bitmap(stream2);
+            model.swappingARGB = ($"images\\rgbPng" + ".jpg");
+            var httpClient = new HttpClient();
+            var stream = await httpClient.GetStreamAsync(model.SwappingARGB);
+            System.Drawing.Bitmap Almershady = new System.Drawing.Bitmap(stream);
+
+
+            //histogram
+
+            Histogram(scramble2);
+            Histogram3(Almershady);
+            string path11 = ($"images\\histogramxorimage" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
+            string path12 = ($"images\\histogramorginalimage" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
+            model.histgrame = path11;
+            model.histgrameorginal = path12;
+
+            //end histogram            
+            //NPCR
+
+            int Tollerance = 0;
+            model.NPCR = CompareImages(scramble2, Almershady, Tollerance);
+            //End NPCR 
+            // Entropy           
+            byte[] imagetobyte1 = BitmapToByteArray(scramble2);
+            byte[] imagetobyte2 = BitmapToByteArray(Almershady);
+            double orginal = Entropy(imagetobyte1);
+            double scramble = Entropy(imagetobyte2);
+            model.Entropyorginal = orginal;
+            model.Entropyscample = scramble;
+            //end  Entropy
+            //coffecient correlation 
+            var httpClient5 = new HttpClient();
+            var stream5 = await httpClient5.GetStreamAsync(model.Scramble);
+            System.Drawing.Bitmap corellationcoffecient1 = new System.Drawing.Bitmap(stream5);
+            byte[] imagetobyte3 = BitmapToByteArray(corellationcoffecient1);
+            var httpClient6 = new HttpClient();
+            var stream6 = await httpClient6.GetStreamAsync(model.SwappingARGB);
+            System.Drawing.Bitmap corellationcoffecient2 = new System.Drawing.Bitmap(stream6);
+            byte[] imagetobyte4 = BitmapToByteArray(corellationcoffecient2);
+            int[] bytesAsInts = imagetobyte3.Select(y => (int)y).ToArray();
+            int[] bytesAsInts1 = imagetobyte4.Select(y => (int)y).ToArray();
+            int n = bytesAsInts.Length;
+            float Ahmed22 = correlationCoefficienthorizontal(bytesAsInts, bytesAsInts1, n);
+            float Ahmed23 = correlationCoefficientVertical(bytesAsInts, bytesAsInts1, n);
+            double[] corr = toDoubleArray(imagetobyte3);
+            double[] corr1 = toDoubleArray(imagetobyte4);
+            double corr2 = Correlation(corr, corr1);
+            model.corrhorizontal = Ahmed22;
+            model.corrvertical = Ahmed23;
+            float Ahmed24 = correlationCoefficientxor(bytesAsInts, bytesAsInts1, n);
+            model.corrdiagnol = Ahmed24;
+            return View(model);
+            //End  coffecient correlation 
+        }
         public async Task<IActionResult> scrambledandxoroperationImagesmetrics(int? Id)
         {
             if (Id == null)
@@ -1603,6 +1757,29 @@ namespace HealthCare.API.Controllers
             string SwapColorsRGBtoserverstring = ($"images\\SwapColorsRGBtoserverPng" + ".jpg");
             model.swappingARGB = SwapColorsRGBtoserverstring;
             //EndSwapColorsRGB
+
+            //scramble and color swap 
+            var httpClient16 = new HttpClient();
+            var stream16 = await httpClient16.GetStreamAsync(model.SwappingARGB);
+            System.Drawing.Bitmap colorswap = new System.Drawing.Bitmap(stream16);
+            System.Drawing.Bitmap scrambleandcolorswap = BitwiseBlend(scramble2, colorswap,
+                  BitwiseBlendType.Xor, BitwiseBlendType.Xor
+                                     , BitwiseBlendType.Xor);
+            scrambleandcolorswap.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\scrambleandcolorswap" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+            model.scrambleandcolorswap = ($"images\\scrambleandcolorswapPng" + ".jpg");
+            //end scramble and color swap
+
+            //xor operation between scramble and chaotic
+            var httpClient17 = new HttpClient();
+            var stream17 = await httpClient17.GetStreamAsync(model.Chaotic5d);
+            System.Drawing.Bitmap scambleandchaotic = new System.Drawing.Bitmap(stream17);
+            System.Drawing.Bitmap scambleandchaotic5d = BitwiseBlend(scambleandchaotic, bmp,
+                BitwiseBlendType.Xor, BitwiseBlendType.Xor
+                                   , BitwiseBlendType.Xor);
+            scambleandchaotic5d.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\scrambleandchaotic5d" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+            model.xorbetweenscrambleandchaotic5d = ($"images\\scrambleandchaotic5dPng" + ".jpg");
+            //xor operation between scramble and chaotic
+
             return View(model);
         }
 

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "NgkvfMkSwF/ln8oR6fSTZDjDSFbE6tZF2U6FM0O6RFg=",
+  "Hash": "hPNxlomhKiWjqXXEoUQHfJ+8YvjWZpjQkuD+2YL31hg=",
   "Source": "HealthCare.API",
   "BasePath": "_content/HealthCare.API",
   "Mode": "Default",
@@ -510,23 +510,6 @@
       "OriginalItemSpec": "wwwroot\\images\\redPng.jpg"
     },
     {
-      "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\rgbPng - Copy.jpg",
-      "SourceId": "HealthCare.API",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\",
-      "BasePath": "_content/HealthCare.API",
-      "RelativePath": "images/rgbPng - Copy.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\rgbPng - Copy.jpg"
-    },
-    {
       "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\rgbPng.jpg",
       "SourceId": "HealthCare.API",
       "SourceType": "Discovered",
@@ -542,6 +525,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\rgbPng.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\scrambleandchaotic5dPng.jpg",
+      "SourceId": "HealthCare.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\",
+      "BasePath": "_content/HealthCare.API",
+      "RelativePath": "images/scrambleandchaotic5dPng.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\scrambleandchaotic5dPng.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\scrambleandcolorswapPng.jpg",
+      "SourceId": "HealthCare.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\",
+      "BasePath": "_content/HealthCare.API",
+      "RelativePath": "images/scrambleandcolorswapPng.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\scrambleandcolorswapPng.jpg"
     },
     {
       "Identity": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\SwapColorsRGBtoserverPng.jpg",

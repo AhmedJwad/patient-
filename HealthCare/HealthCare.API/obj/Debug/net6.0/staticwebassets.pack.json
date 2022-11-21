@@ -137,12 +137,16 @@
       "PackagePath": "staticwebassets\\images\\redPng.jpg"
     },
     {
-      "Id": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\rgbPng - Copy.jpg",
-      "PackagePath": "staticwebassets\\images\\rgbPng - Copy.jpg"
-    },
-    {
       "Id": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\rgbPng.jpg",
       "PackagePath": "staticwebassets\\images\\rgbPng.jpg"
+    },
+    {
+      "Id": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\scrambleandchaotic5dPng.jpg",
+      "PackagePath": "staticwebassets\\images\\scrambleandchaotic5dPng.jpg"
+    },
+    {
+      "Id": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\scrambleandcolorswapPng.jpg",
+      "PackagePath": "staticwebassets\\images\\scrambleandcolorswapPng.jpg"
     },
     {
       "Id": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\imagesfbe8c82e-34c1-4a17-a013-aeba5204efa8",

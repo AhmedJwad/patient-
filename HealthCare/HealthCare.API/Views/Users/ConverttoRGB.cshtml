@@ -95,13 +95,16 @@
 <table class="table">
     <thead class="thead-dark">
         <tr>
+            <th scope="col">Scramble</th>
             <th scope="col">Chaotic5d</th>
-            
+            <th scope="col">Xor operation between Scramble image and chaotic image</th>            
         </tr>
     </thead>
     <tbody>
         <tr>
+            <th><img src="@Model.Scramble" width="250" height="200" /></th>
             <th><img src="@Model.Chaotic5d" width="250" height="200" /></th>
+            <th><img src="@Model.Xorbetweenscrambleandchaotic5d" width="250" height="200" /></th>
            
         </tr>
     </tbody>
@@ -128,4 +131,56 @@
         </tr>
     </tbody>
 </table>
+<hr />
+@*scramble and color swap *@
+<h1> Xor operation between scramble image and color swap image </h1>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+           @* <th scope="col">Scramble Image</th>
+            <th scope="col">Color swap Image</th
+            <th scope="col">Xor operation between Scramble image and coloe swap image</th>*@
+      
+            <th scope="col">Scramble Image</th>
+            <th scope="col">Color swap Image</th>
+            <th scope="col">Xor operation between </br> Scramble image and coloe swap image</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td ><img src="@Model.Scramble" width="250" height="200" /></td>
+            <td><img src="@Model.SwappingARGB" width="250" height="200" /></td>
+            <td><img src="@Model.Scrambleandcolorswap" width="250" height="200" /></td>
+        </tr>
+    </tbody>
+</table>
+<div class="btn btn-primary btn-lg btn-block">
+    <a asp-action="scrambledandswapcolorImagesmetrics" asp-route-id="@Model.Id" class="btn btn-primary btn-lg btn-block">Metrics<i class="glyphicon glyphicon-align-justify"></i></a>
+</div>
+<hr />
+@*scramble and color swap *@
+<h1> color swap image and xor image from scramble and color swap image  </h1>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            @* <th scope="col">Scramble Image</th>
+            <th scope="col">Color swap Image</th
+            <th scope="col">Xor operation between Scramble image and coloe swap image</th>*@
+        
+            <th scope="col">Color swap Image</th>
+            <th scope="col">xor image from scramble and color swap image</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><img src="@Model.SwappingARGB" width="250" height="200" /></td>
+            <td><img src="@Model.Scrambleandcolorswap" width="250" height="200" /></td>            
+        </tr>
+    </tbody>
+</table>
+<div class="btn btn-primary btn-lg btn-block">
+    <a asp-action="colorwapimageandxorimagemetrics" asp-route-id="@Model.Id" class="btn btn-primary btn-lg btn-block">Metrics<i class="glyphicon glyphicon-align-justify"></i></a>
+</div>
 <hr />

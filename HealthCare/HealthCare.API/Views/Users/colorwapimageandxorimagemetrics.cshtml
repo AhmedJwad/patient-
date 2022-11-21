@@ -1,0 +1,98 @@
+﻿@model HealthCare.API.Models.patientimageviewmodel
+@{
+    ViewData["Title"] = "colorwapimageandxorimagemetrics";
+}
+
+
+
+@*Histogram Image *@
+<h1><center> Histogram analysis of color swap images and Xoroperation images. </center></h1>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">color swap Image</th>
+            <th scope="col">Histogram color swap Image</th>
+            <th scope="col">Xoroperation Image</th>
+            <th scope="col">Histogram Xoroperation Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th><img src="@Model.SwappingARGB" width="250" height="200" /></th>
+            <td>
+                <img src="@Model.HistogrameOrginae" width="250" height="200" />
+            </td>
+            <td>
+                <img src="@Model.Scrambleandcolorswap" width="250" height="200" />
+            </td>
+            <td> <img src="@Model.Histograme" width="250" height="200"</td>
+        </tr>
+    </tbody>
+</table>
+<hr style="width:100%;text-align:left;margin-left:0">
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Entropy</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row"> <img src="@Model.SwappingARGB" width="350" height="300" /> </th>
+            <td>@Model.Entropyorginal</td>
+
+        </tr>
+        <tr>
+            <th scope="row"><img src="@Model.Scrambleandcolorswap" width="350" height="300" /></th>
+            <td>@Model.Entropyscample</td>
+
+        </tr>
+
+    </tbody>
+</table>
+<br />
+<h1> The NPCR values between pixels in original image and scrambled image</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">color swap image</th>
+            <th scope="col">Xor operation image</th>
+            <th scope="col">NPCR</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row"> <img src="@Model.SwappingARGB" width="350" height="300" /> </th>
+            <th scope="row"><img src="@Model.Scrambleandcolorswap" width="350" height="300" /></th>
+            <td>@Model.NPCR</td>
+
+        </tr>
+
+    </tbody>
+</table>
+<hr />
+@*correlation coffecient *@
+<h1> The Correlation cofficient rate between pixel in the original and Scrambled Images </h1>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">color swap Image</th>
+            <th scope="col">XorImage</th>
+            <th scope="col">The Correlation cofficient(H)</th>
+            <th scope="col">The Correlation cofficient(V)</th>
+            <th scope="col">The Correlation cofficient(D)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th><img src="@Model.SwappingARGB" width="250" height="200" /></th>
+            <td><img src="@Model.Scrambleandcolorswap" width="250" height="200" /></td>
+            <td>@Model.corrhorizontal</td>
+            <td>@Model.corrvertical</td>
+            <td>@Model.corrdiagnol</td>
+        </tr>
+    </tbody>
+</table>
