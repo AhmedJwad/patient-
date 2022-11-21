@@ -932,7 +932,7 @@ namespace HealthCare.API.Controllers
             string pathScramble = ($"images\\Png" + ".jpg");
             model.scrabmle = pathScramble;
             var httpClient2 = new HttpClient();
-            var stream2 = await httpClient2.GetStreamAsync(model.Scramble);
+            var stream2 = await httpClient2.GetStreamAsync(model.ImageFullPath);
             System.Drawing.Bitmap scramble2 = new System.Drawing.Bitmap(stream2);
             model.xorbetweenscrambledimageandkimage = ($"images\\XorimageoperationPng" + ".jpg");
             var httpClient = new HttpClient();
@@ -943,9 +943,9 @@ namespace HealthCare.API.Controllers
             //histogram
 
             Histogram(scramble2);
-            Histogram2(Almershady);
-            string path11 = ($"images\\histogram3" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
-            string path12 = ($"images\\histogram2" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
+            Histogram3(Almershady);
+            string path11 = ($"images\\histogramxorimage" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
+            string path12 = ($"images\\histogramorginalimage" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
             model.histgrame = path11;
             model.histgrameorginal = path12;
 
@@ -976,13 +976,13 @@ namespace HealthCare.API.Controllers
             int[] bytesAsInts1 = imagetobyte4.Select(y => (int)y).ToArray();
             int n = bytesAsInts.Length;
             float Ahmed22 = correlationCoefficienthorizontal(bytesAsInts, bytesAsInts1, n);
-            float Ahmed23 = correlationCoefficientVertical(bytesAsInts, bytesAsInts1, n);
-            float Ahmed24 = correlationCoefficientxor(bytesAsInts1, bytesAsInts, n);
+            float Ahmed23 = correlationCoefficientVertical(bytesAsInts, bytesAsInts1, n);           
             double[] corr = toDoubleArray(imagetobyte3);
             double[] corr1 = toDoubleArray(imagetobyte4);
             double corr2 = Correlation(corr, corr1);
             model.corrhorizontal = Ahmed22;
-            model.corrvertical = Ahmed23;
+            model.corrvertical = Ahmed23;           
+            float Ahmed24 = correlationCoefficientxor(bytesAsInts, bytesAsInts1,  n);
             model.corrdiagnol = Ahmed24;
             return View(model);
             //End  coffecient correlation 
@@ -1006,7 +1006,11 @@ namespace HealthCare.API.Controllers
                 ImageId = patientPhoto.ImageId.ToString(),
                 patient = patientPhoto.patient,
             };
-
+            string pathScramble = ($"images\\Png" + ".jpg");
+            model.scrabmle = pathScramble;
+            var httpClient2 = new HttpClient();
+            var stream2 = await httpClient2.GetStreamAsync(model.ImageFullPath);
+            System.Drawing.Bitmap scramble2 = new System.Drawing.Bitmap(stream2);
            model.chaotic5d= ($"images\\choatic5dPng" + ".jpg");
 
             var httpClient = new HttpClient();
@@ -1016,20 +1020,16 @@ namespace HealthCare.API.Controllers
             System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(Almershady, new System.Drawing.Size(350, 300));
             //histogram
 
-            Histogram(bmp);
-            Histogram2(Almershady);
-            string path11 = ($"images\\histogram3" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
-            string path12 = ($"images\\histogram2" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
+          //  Histogram3(bmp);
+            Histogram(scramble2);
+            string path11 = ($"images\\histogramxorimage" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
+            string path12 = ($"images\\histogramorginalimage" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
             model.histgrame = path11;
             model.histgrameorginal = path12;
 
             //end histogram            
             //NPCR
-            string pathScramble = ($"images\\Png" + ".jpg");
-            model.scrabmle = pathScramble;
-            var httpClient2 = new HttpClient();
-            var stream2 = await httpClient2.GetStreamAsync(model.Scramble);
-            System.Drawing.Bitmap scramble2 = new System.Drawing.Bitmap(stream2);
+           ;
             int Tollerance = 0;
             model.NPCR = CompareImages(scramble2, bmp, Tollerance);
             //End NPCR 
@@ -1060,7 +1060,9 @@ namespace HealthCare.API.Controllers
             double corr2 = Correlation(corr, corr1);
             model.corrhorizontal = Ahmed22;
             model.corrvertical = Ahmed23;
-            model.corrdiagnol = corr2;
+            float Ahmed24 = correlationCoefficientxor(bytesAsInts, bytesAsInts1, n);
+            model.corrdiagnol = Ahmed24;
+            model.corrdiagnol = Ahmed24;
             return View(model);
             //End  coffecient correlation 
         }
@@ -1083,34 +1085,34 @@ namespace HealthCare.API.Controllers
                 ImageId = patientPhoto.ImageId.ToString(),
                 patient = patientPhoto.patient,
             };
+            string pathScramble = ($"images\\Png" + ".jpg");
+            model.scrabmle = pathScramble;
+            var httpClient2 = new HttpClient();
+            var stream2 = await httpClient2.GetStreamAsync(model.Scramble);
+            System.Drawing.Bitmap Scamble = new System.Drawing.Bitmap(stream2);          
+         
             var httpClient = new HttpClient();
-            var stream = await httpClient.GetStreamAsync(model.ImageFullPath);               
-
-
-
-            System.Drawing.Bitmap Almershady = new System.Drawing.Bitmap(stream);
-            System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(Almershady, new System.Drawing.Size(350, 300));    
-            //histogram
-          
+            var stream = await httpClient.GetStreamAsync(model.ImageFullPath);              
+            System.Drawing.Bitmap Almershady = new System.Drawing.Bitmap(stream);           
+            System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(Almershady, new System.Drawing.Size(400, 350));
             Histogram(bmp);
-            Histogram2(Almershady);          
-            string path11 = ($"images\\histogram3" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
-            string path12 = ($"images\\histogram2" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
+            Histogram2(Almershady);
+
+
+            string path11 = ($"images\\histogramScramble" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
+            string path12 = ($"images\\histogramorginalimage" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
             model.histgrame = path11;
             model.histgrameorginal = path12;
 
             //end histogram            
             //NPCR
-            string pathScramble = ($"images\\Png"  + ".jpg");
-            model.scrabmle = pathScramble;
-            var httpClient2 = new HttpClient();
-            var stream2 = await httpClient2.GetStreamAsync(model.Scramble);
-            System.Drawing.Bitmap scramble2 = new System.Drawing.Bitmap(stream2);           
+      
+                     
             int Tollerance = 0;
-            model.NPCR = CompareImages(scramble2, bmp, Tollerance);
+            model.NPCR = CompareImages(Scamble, Almershady, Tollerance);
             //End NPCR 
             // Entropy           
-            byte[] imagetobyte1 = BitmapToByteArray(bmp);
+            byte[] imagetobyte1 = BitmapToByteArray(Scamble);
             byte[] imagetobyte2 = BitmapToByteArray(Almershady);
             double orginal = Entropy(imagetobyte1);
             double scramble = Entropy(imagetobyte2);
@@ -1422,20 +1424,20 @@ namespace HealthCare.API.Controllers
 
             //end convert to 8 bit 
             //histogram
-           
+
             var httpClient1 = new HttpClient();
             var stream1 = await httpClient.GetStreamAsync(model.Scramble);
-            System.Drawing.Bitmap almershady2 = new System.Drawing.Bitmap(stream1);           
-            Histogram(bmp);           
+            System.Drawing.Bitmap almershady2 = new System.Drawing.Bitmap(stream1);
+            Histogram(bmp);
             Histogram2(Almershady);
-          
+
             HistogramEqualization equalization = new HistogramEqualization();
             equalization.ApplyInPlace(almershady2);
-            almershady2.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\histogram" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+            almershady2.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\histogram" + ".bmp"));
             string path11 = ($"images\\histogram3" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
             string path12 = ($"images\\histogram2" + System.Drawing.Imaging.ImageFormat.Png + ".jpg");
             model.histgrame = path11;
-            model.histgrameorginal=path12;         
+            model.histgrameorginal = path12;
 
             //end histogram            
             //NPCR         
@@ -1604,9 +1606,9 @@ namespace HealthCare.API.Controllers
             return View(model);
         }
 
-       
-       
-       
+
+     
+
         public static System.Drawing.Bitmap SwapColors(System.Drawing.Bitmap sourceImage,ColourSwapType swapType)                                   
                  
         {
@@ -1777,7 +1779,7 @@ namespace HealthCare.API.Controllers
             float corr = (float)(n * sum_XY - sum_X * sum_Y) /
                          (float)(Math.Sqrt((n * squareSum_X -
                          sum_X * sum_X) * (n * squareSum_Y -
-                         sum_Y * sum_Y)));                        
+                         sum_Y * sum_Y))*100000);                        
 
             return corr;
         }
@@ -2282,7 +2284,7 @@ namespace HealthCare.API.Controllers
            
            
           
-            img.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\histogram3" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+            img.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\histogramorginalimage" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
         }       
 
 
@@ -2313,11 +2315,11 @@ namespace HealthCare.API.Controllers
                     float pct = histogram_r[i] / max;   // What percentage of the max is this value?
                     g.DrawLine(Pens.Black,
                         new System.Drawing.Point(i, img.Height - 5),
-                        new System.Drawing.Point(i, img.Height - 5 - (int)(pct * histHeight ))  // Use that percentage of the height
+                        new System.Drawing.Point(i, img.Height - 5 - (int)(pct * histHeight * 2))  // Use that percentage of the height
                         );
                 }
             }
-            img.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\histogram2" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
+            img.Save(Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\histogramScramble" + System.Drawing.Imaging.ImageFormat.Png + ".jpg"));
         }
    
 

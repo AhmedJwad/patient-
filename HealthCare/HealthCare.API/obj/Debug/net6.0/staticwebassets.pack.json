@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets"
     },
     {
+      "Id": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\HistEqPng.jpg",
+      "PackagePath": "staticwebassets\\images\\HistEqPng.jpg"
+    },
+    {
       "Id": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\Png.jpg",
       "PackagePath": "staticwebassets\\images\\Png.jpg"
     },
@@ -85,6 +89,10 @@
       "PackagePath": "staticwebassets\\images\\histagram.png"
     },
     {
+      "Id": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\histogram.bmp",
+      "PackagePath": "staticwebassets\\images\\histogram.bmp"
+    },
+    {
       "Id": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\histogram2Png.jpg",
       "PackagePath": "staticwebassets\\images\\histogram2Png.jpg"
     },
@@ -95,6 +103,14 @@
     {
       "Id": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\histogramPng.jpg",
       "PackagePath": "staticwebassets\\images\\histogramPng.jpg"
+    },
+    {
+      "Id": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\histogramScramblePng.jpg",
+      "PackagePath": "staticwebassets\\images\\histogramScramblePng.jpg"
+    },
+    {
+      "Id": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\histogramorginalimagePng.jpg",
+      "PackagePath": "staticwebassets\\images\\histogramorginalimagePng.jpg"
     },
     {
       "Id": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\histogramxorimagePng.jpg",
@@ -119,6 +135,10 @@
     {
       "Id": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\redPng.jpg",
       "PackagePath": "staticwebassets\\images\\redPng.jpg"
+    },
+    {
+      "Id": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\rgbPng - Copy.jpg",
+      "PackagePath": "staticwebassets\\images\\rgbPng - Copy.jpg"
     },
     {
       "Id": "C:\\Users\\alnaseem\\source\\repos\\patient\\HealthCare\\HealthCare.API\\wwwroot\\images\\rgbPng.jpg",
