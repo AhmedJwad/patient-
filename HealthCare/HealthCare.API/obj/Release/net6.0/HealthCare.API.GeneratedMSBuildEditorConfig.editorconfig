@@ -5,6 +5,7 @@ build_property.UsingMicrosoftNETSdkWeb = true
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
 build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = HealthCare.API
 build_property.RootNamespace = HealthCare.API
@@ -211,6 +212,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcQXNzaW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/Users/CahoticandscrambleImagesmetrics.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcQ2Fob3RpY2FuZHNjcmFtYmxlSW1hZ2VzbWV0cmljcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/Users/colorwapimageandxorimagemetrics.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcY29sb3J3YXBpbWFnZWFuZHhvcmltYWdlbWV0cmljcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/Users/ConverttoRGB.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcQ29udmVydHRvUkdCLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -261,6 +270,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/Users/IndexUserPatients.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcSW5kZXhVc2VyUGF0aWVudHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/Users/MetricImages.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcTWV0cmljSW1hZ2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/Users/scrambledandswapcolorImagesmetrics.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcc2NyYW1ibGVkYW5kc3dhcGNvbG9ySW1hZ2VzbWV0cmljcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/Users/scrambledandxoroperationImagesmetrics.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcc2NyYW1ibGVkYW5keG9yb3BlcmF0aW9uSW1hZ2VzbWV0cmljcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/alnaseem/source/repos/patient/HealthCare/HealthCare.API/Views/Users/_Detail.cshtml]
