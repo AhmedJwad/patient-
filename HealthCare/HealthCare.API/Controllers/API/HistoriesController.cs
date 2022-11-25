@@ -77,6 +77,7 @@ namespace HealthCare.API.Controllers.API
         [HttpPut("{id}")]
         public async Task<IActionResult> PutHistory(int id, HistoryRequest request)
         {
+           
            if (id!=request.Id)
             {
                 return BadRequest();
@@ -93,8 +94,7 @@ namespace HealthCare.API.Controllers.API
             history.surgeries = request.surgeries;
             history.illnesses = request.illnesses;
             history.Result = request.Result;
-            history.allergies = request.allergies;    
-            
+            history.allergies = request.allergies;           
             _context.histories.Update(history);
             await _context.SaveChangesAsync();
             return NoContent();
