@@ -15,7 +15,7 @@ namespace HealthCare.API.Controllers.API
     {
         private readonly DataContext _context;
 
-        public DetailsController(DataContext context, )
+        public DetailsController(DataContext context )
         {
             _context = context;
         }

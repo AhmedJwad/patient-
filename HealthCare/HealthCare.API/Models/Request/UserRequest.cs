@@ -26,6 +26,6 @@ namespace HealthCare.API.Models.Request
         [Required(ErrorMessage = "The field {0} is required.")]
         public string PhoneNumber { get; set; }     
 
-        public byte[] Image { get; set; }
+       public byte[] Image { get; set; }
     }
 }

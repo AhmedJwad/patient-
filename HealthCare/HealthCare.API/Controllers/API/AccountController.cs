@@ -2,7 +2,11 @@
 using HealthCare.API.Data.Entities;
 using HealthCare.API.Helpers;
 using HealthCare.API.Models;
+using HealthCare.API.Models.Request;
+using HealthCare.Common.Enums;
+using HealthCare.Common.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -30,6 +34,76 @@ namespace HealthCare.API.Controllers.API
             _mailHelper = mailHelper;
             _blobHelper = blobHelper;
         }
+        [HttpPost]
+        public async Task<ActionResult<User>>PostUser(RegisterRequest request)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            User user = await _userhelper.GetUserAsync(request.Email);
+            if(user!=null)
+            {
+                return BadRequest("There is already a registered user with that email.");
+            }
+            Guid imageId = Guid.Empty;
+            if(request.Image !=null && request.Image.Length > 0)
+            {
+                imageId = await _blobHelper.UploadBlobAsync(request.Image, "users");
+            }
+
+            user = new()
+            {
+                Address = request.Address,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                PhoneNumber = request.PhoneNumber,
+                Email = request.Email,
+                UserName = request.Email,
+                ImageId = imageId,
+               
+            };
+
+            if (request.RoleId==1)
+            {
+                user.userType = UserType.User;
+                await _userhelper.AddUserAsync(user, request.Password);
+                await _userhelper.AddUsertoRoleAsync(user, user.userType.ToString());
+            }
+            else if(request.RoleId==2)
+            {
+                user.userType = UserType.patient;
+                await _userhelper.AddUserAsync(user, request.Password);
+                await _userhelper.AddUsertoRoleAsync(user, user.userType.ToString());
+                var userpatient = new UserPatient
+                {
+                    User = user,
+                    Patients = new List<Patient>(),
+                };
+                _context.UserPatients.Add(userpatient);
+                await _context.SaveChangesAsync();
+            }
+            string myToken = await _userhelper.GenerateEmailConfirmationTokenAsync(user);
+            string tokenLink = Url.Action("ConfirmEmail", "Account", new
+            {
+                userid = user.Id,
+                token = myToken
+            }, protocol: HttpContext.Request.Scheme);
+
+            _mailHelper.SendMail(
+                    $"{user.FirstName} {user.LastName}",
+                    user.UserName,
+                    "HealthCare - Email Confirmation",
+                    $"<h1>HealthCare - Email Confirmation</h1>" +
+                        $"To enable the user please click on the following link:, " +
+                        $"<p><a href = \"{tokenLink}\">Confirm Email</a></p>");
+
+            return Ok(user);
+
+        }
+
+        
 
         [HttpPost]
         [Route("CreateToken")]
@@ -77,6 +151,7 @@ namespace HealthCare.API.Controllers.API
 
             return Created(string.Empty, results);
         }
+       
 
     }
 }
