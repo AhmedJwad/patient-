@@ -5,13 +5,17 @@ using HealthCare.API.Models;
 using HealthCare.API.Models.Request;
 using HealthCare.Common.Enums;
 using HealthCare.Common.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Sentry;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using User = HealthCare.API.Data.Entities.User;
 
 namespace HealthCare.API.Controllers.API
 {
@@ -151,7 +155,38 @@ namespace HealthCare.API.Controllers.API
 
             return Created(string.Empty, results);
         }
-       
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost]
+        [Route("ChangePassword")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                string email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+                User user = await _userhelper.GetUserAsync(email);
+                if(user != null)
+                {
+                    IdentityResult result = await _userhelper.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                    if(result.Succeeded)
+                    {
+                        return NoContent();
+                    }
+                    else
+                    {
+                        return BadRequest(result.Errors.FirstOrDefault().Description);
+                    }
+                }
+                else
+                {
+                    return BadRequest("user no exist");
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
 
     }
 }
