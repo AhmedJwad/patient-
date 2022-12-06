@@ -55,9 +55,10 @@ namespace HealthCare.API.Controllers
         private readonly IconverterHelper _converterhleper;
         private readonly IBlobHelper _blobHelper;
         private readonly IconverterHelper _converterhelper;
+        private readonly IMailHelper _mailHelper;
 
         public UsersController(DataContext context, IuserHelper userhelper, ICombosHelper combosHelper,
-            IconverterHelper converterhleper, IBlobHelper blobHelper , IconverterHelper converterhelper)
+            IconverterHelper converterhleper, IBlobHelper blobHelper , IconverterHelper converterhelper, IMailHelper mailHelper)
         {
             _context = context;
             _userhelper = userhelper;
@@ -65,6 +66,7 @@ namespace HealthCare.API.Controllers
             _converterhleper = converterhleper;
             _blobHelper = blobHelper;
             _converterhelper = converterhelper;
+           _mailHelper = mailHelper;
         }
         public async Task<IActionResult> Agenda(string Id)
         {
@@ -276,6 +278,59 @@ namespace HealthCare.API.Controllers
 
             return RedirectToAction(nameof(Details), new { id = user.Id });
         }
+        public async Task<IActionResult> IndexAdmin()
+        {
+            return View(await _context.Users.Include(x => x.Patients)
+                .Where(x => x.userType == UserType.Admin).ToListAsync());
+
+        }
+        public IActionResult CreateAdmin()
+        {
+            UserViewModel model = new()
+            {
+                Id = Guid.NewGuid().ToString(),
+                
+            };
+
+            return View(model);
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateAdmin(UserViewModel model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                Guid imageId = Guid.Empty;
+                if (model.ImageFile != null)
+                {
+                    imageId = await _blobHelper.UploadBlobAsync(model.ImageFile, "users");
+
+                }
+                User user = await _converterhleper.ToUserAsync(model, imageId, true);
+                user.userType = UserType.Admin;
+                await _userhelper.AddUserAsync(user, "123456");
+                await _userhelper.AddUsertoRoleAsync(user, UserType.Admin.ToString());
+                string myToken = await _userhelper.GenerateEmailConfirmationTokenAsync(user);
+                string tokenLink = Url.Action("ConfirmEmail", "Account", new
+                {
+                    userid = user.Id,
+                    token = myToken
+                }, protocol: HttpContext.Request.Scheme);
+
+                Response response = _mailHelper.SendMail(
+                    $"{model.FirstName} {model.LastName}",
+                    model.Email,
+                    "HealthCare - Email Confirmation",
+                    $"<h1>HealthCare - Email Confirmation</h1>" +
+                        $"To enable the user please click on the following link:, " +
+                        $"<p><a href = \"{tokenLink}\">Confirm Email</a></p>");
+                return RedirectToAction(nameof(IndexAdmin));
+            }
+            return View(model);
+        }
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.Users.Include(x => x.Patients)
@@ -311,6 +366,20 @@ namespace HealthCare.API.Controllers
                 user.userType = UserType.User;
                 await _userhelper.AddUserAsync(user, "123456");
                 await _userhelper.AddUsertoRoleAsync(user, UserType.User.ToString());
+                string myToken = await _userhelper.GenerateEmailConfirmationTokenAsync(user);
+                string tokenLink = Url.Action("ConfirmEmail", "Account", new
+                {
+                    userid = user.Id,
+                    token = myToken
+                }, protocol: HttpContext.Request.Scheme);
+
+                Response response = _mailHelper.SendMail(
+                    $"{model.FirstName} {model.LastName}",
+                    model.Email,
+                    "HealthCare - Email Confirmation",
+                    $"<h1>HealthCare - Email Confirmation</h1>" +
+                        $"To enable the user please click on the following link:, " +
+                        $"<p><a href = \"{tokenLink}\">Confirm Email</a></p>");
                 return RedirectToAction(nameof(Index));
             }
             return View(model);

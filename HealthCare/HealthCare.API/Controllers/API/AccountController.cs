@@ -188,5 +188,31 @@ namespace HealthCare.API.Controllers.API
             }
         }
 
+        [HttpPost]
+        [Route ("RecoverPassword")]
+        public async Task<IActionResult> RecoverPassword(RecoverPasswordViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                User user = await _userhelper.GetUserAsync(model.Email);
+                if(user==null)
+                {
+                    return BadRequest("The email entered does not correspond to any user.");
+                }
+                string myToken = await _userhelper.GeneratePasswordResetTokenAsync(user);
+                string link = Url.Action(
+                    "ResetPassword",
+                    "Account",
+                    new { token = myToken }, protocol: HttpContext.Request.Scheme);
+                _mailHelper.SendMail($"{user.FullName} ",
+                    model.Email, "HealthCare - Password Reset", $"<h1>HealthCare - Password Reset</h1>" +
+                    $"To set a new password click on the following link:</br></br>" +
+                    $"<a href = \"{link}\">Change of password</a>");
+                return Ok("Instructions for changing your password have been sent to your email.");
+            }
+            return BadRequest(model);
+
+        }
+
     }
 }
