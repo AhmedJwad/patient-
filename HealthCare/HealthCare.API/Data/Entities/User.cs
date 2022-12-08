@@ -28,10 +28,20 @@ namespace HealthCare.API.Data.Entities
         public Guid ImageId { get; set; }
 
         [Display(Name = "Photo")]
-        public string ImageFullPath => ImageId == Guid.Empty
+        public string ImageFullPath => loginType == LoginType.Email ?
+            ImageId == Guid.Empty
            ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
-           : $"https://imagesahmed.blob.core.windows.net/users/{ImageId}";
+           : $"https://imagesahmed.blob.core.windows.net/users/{ImageId}"
+            : string.IsNullOrEmpty(SocialImageURL)
+            ? $"https://healthcareapi20220724094946.azurewebsites.net/images/noimage.png"
+            : SocialImageURL;
 
+        [Display(Name = "Photo")]
+        public string SocialImageURL { get; set; }        
+
+
+        [Display(Name = "Type of User")]
+        public LoginType loginType { get; set; }
 
         [Display(Name = "Type of User")]
         public UserType userType { get; set; }

@@ -214,5 +214,95 @@ namespace HealthCare.API.Controllers.API
 
         }
 
+        [HttpPost]
+        [Route("SocialLogin")]
+        public async Task<IActionResult> SocialLogin(SocialLoginRequest model)
+        {
+            if(ModelState.IsValid)
+            {
+                User user= await _userhelper.GetUserAsync (model.Email); 
+                if(user != null)
+                {
+                    if (user.loginType != model.LoginType)
+                    {
+                        return BadRequest("The user has already logged in previously by email or another social network");
+                    }
+                    Microsoft.AspNetCore.Identity.SignInResult result = await _userhelper.ValidatePasswordAsync(user, model.Id);
+                    if (result.Succeeded)
+                    {
+                        await UpdateUserAsync(user, model);
+                        return CreateToken(user);
+                    }
+                }                
+                else
+                {
+                    await CreateUserAsync( model);
+                    user = await _userhelper.GetUserAsync(model.Email);
+                    return CreateToken(user);
+                }
+            }
+            return BadRequest();
+        }
+
+        private async Task CreateUserAsync(SocialLoginRequest model)
+        {
+            FirstLastName firstLastName = SeparateFirstandLastName(model.FullName);
+            if(string.IsNullOrEmpty(model.FirstName))
+            {
+                model.FirstName = firstLastName.FirsName;
+            }
+            if (string.IsNullOrEmpty(model.LastName))
+            {
+                model.LastName = firstLastName.LastName;
+            }
+            User user = new()
+            {
+                Address="Babylon",
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                loginType = model.LoginType,
+                PhoneNumber = "022111544",
+                SocialImageURL = model.PhotoURL,
+                UserName = model.Email,
+                userType = UserType.User,
+            };
+            await _userhelper.AddUserAsync(user, model.Id);
+            await _userhelper.AddUsertoRoleAsync(user, user.userType.ToString());
+            string token = await _userhelper.GenerateEmailConfirmationTokenAsync(user);
+            await _userhelper.ConfirmEmailAsync(user, token);
+
+        }
+
+        private FirstLastName SeparateFirstandLastName(string fullName)
+        {
+            int pos=fullName.IndexOf(' ');
+            FirstLastName firstLastName = new();
+            if(pos==-1)
+            {
+                firstLastName.FirsName = fullName;
+                firstLastName.LastName = fullName;
+            }
+            else
+            {
+                firstLastName.FirsName = fullName.Substring(0, pos);
+                firstLastName.LastName = fullName.Substring(pos + 1, fullName.Length - pos - 1);
+            }
+            return firstLastName;
+        }
+
+        private async Task UpdateUserAsync(User user, SocialLoginRequest model)
+        {
+            user.SocialImageURL = model.PhotoURL;
+            if(!string.IsNullOrEmpty(model.FirstName)) 
+            {
+                user.FirstName = model.FirstName;
+            }
+            if (!string.IsNullOrEmpty(model.LastName))
+            {
+                user.FirstName = model.LastName;
+            }
+            await _userhelper.UpdateUserAsync(user);
+        }
     }
 }

@@ -37,6 +37,9 @@ namespace HealthCare.API.Models.Response
         [Display(Name = "Type of User")]
         public UserType userType { get; set; }
 
+        [Display(Name = "Type of User")]
+        public LoginType loginType { get; set; }
+
         [Display(Name = "User")]
         public string FullName => $"{firstName} {lastName}";
 

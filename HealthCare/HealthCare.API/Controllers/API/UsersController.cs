@@ -72,6 +72,7 @@ namespace HealthCare.API.Controllers.API
                 phoneNumber = response.PhoneNumber,    
                 email=response.Email,
                 userName = response.UserName,
+                loginType=response.loginType,
                 patients= response.Patients?.Select(p=> new Patientresponse
                {
                    Id=p.Id,
