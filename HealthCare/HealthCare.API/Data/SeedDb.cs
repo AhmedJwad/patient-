@@ -45,6 +45,7 @@ namespace HealthCare.API.Data
                     LastName = lastname,
                     Email = email,
                     PhoneNumber = phonenumber,
+                    CountryCode = "964",
                     Address = address,                   
                     userType = userType,
                     UserName = email,                 

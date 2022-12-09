@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace HealthCare.API.Models.Request
 {
@@ -15,7 +16,12 @@ namespace HealthCare.API.Models.Request
 
         [MaxLength(50, ErrorMessage = "The field {0} cannot have more than {1} characters.")]
         [Required(ErrorMessage = "The field {0} is required.")]
-        public string LastName { get; set; }       
+        public string LastName { get; set; }
+
+      
+        [MaxLength(5, ErrorMessage = "The {0} field cannot be longer than {1} characters.")]
+        [Required(ErrorMessage = "The {0} field is required.")]
+        public string CountryCode { get; set; }
 
         [MaxLength(100, ErrorMessage = "The field {0} cannot have more than {1} characters.")]
         [Required(ErrorMessage = "The field {0} is required.")]

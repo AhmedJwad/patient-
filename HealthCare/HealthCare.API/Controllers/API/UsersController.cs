@@ -1,6 +1,7 @@
 ﻿using HealthCare.API.Data;
 using HealthCare.API.Data.Entities;
 using HealthCare.API.Helpers;
+using HealthCare.API.Migrations;
 using HealthCare.API.Models.Request;
 using HealthCare.API.Models.Response;
 using HealthCare.Common.Enums;
@@ -73,6 +74,7 @@ namespace HealthCare.API.Controllers.API
                 email=response.Email,
                 userName = response.UserName,
                 loginType=response.loginType,
+                CountryCode=response.CountryCode,
                 patients= response.Patients?.Select(p=> new Patientresponse
                {
                    Id=p.Id,
@@ -206,6 +208,7 @@ namespace HealthCare.API.Controllers.API
                 LastName = request.LastName,
                 Email = request.Email,
                 ImageId = imageId,
+                CountryCode= request.CountryCode,
                 PhoneNumber = request.PhoneNumber,
                 UserName = request.Email,
                 userType = UserType.User,              
@@ -257,6 +260,7 @@ namespace HealthCare.API.Controllers.API
             user.FirstName = request.FirstName;
             user.ImageId = imageId;
             user.LastName = request.LastName;
+            user.CountryCode = request.CountryCode;
             user.PhoneNumber = request.PhoneNumber;          
             await _userhelper.UpdateUserAsync(user);
             return Ok(user);

@@ -34,7 +34,7 @@ namespace HealthCare.API.Helpers
         {
             User user = new User
             {
-                Address = model.Address,
+                Address = model.Address,               
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Username,
@@ -133,6 +133,7 @@ namespace HealthCare.API.Helpers
             currentuser.FirstName = user.FirstName;
             currentuser.LastName = user.LastName;
             currentuser.Address = user.Address;
+            currentuser.CountryCode=user.CountryCode;
             currentuser.PhoneNumber = user.PhoneNumber;
             currentuser.ImageId = user.ImageId;
 

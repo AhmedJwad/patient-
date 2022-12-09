@@ -98,6 +98,7 @@ namespace HealthCare.API.Helpers
             return new User
             {
                 Address=model.Address,  
+                CountryCode=model.CountryCode,
                 PhoneNumber=model.PhoneNumber,  
                 Email=model.Email,
                 LastName=model.LastName,
@@ -115,6 +116,7 @@ namespace HealthCare.API.Helpers
             return new UserViewModel
             {
                 Address = user.Address,
+                CountryCode=user.CountryCode,
                 PhoneNumber = user.PhoneNumber,
                 Email = user.Email,
                 LastName = user.LastName,

@@ -1,5 +1,6 @@
 ﻿using HealthCare.API.Data.Entities;
 using HealthCare.Common.Enums;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace HealthCare.API.Models
@@ -23,7 +24,12 @@ namespace HealthCare.API.Models
         [MaxLength(50, ErrorMessage = "The field {0} cannot have more than {1} characters.")]
         [Required(ErrorMessage = "The field {0} is required.")]
         public string LastName { get; set; }
-        
+
+        [DefaultValue("964")]
+        [Display(Name = "Country Code")]
+        [MaxLength(5, ErrorMessage = "The {0} field cannot be longer than {1} characters.")]
+        [Required(ErrorMessage = "The {0} field is required.")]
+        public string CountryCode { get; set; }
 
         [Display(Name = "Address")]
         [MaxLength(100, ErrorMessage = "The field {0} cannot have more than {1} characters.")]

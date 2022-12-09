@@ -32,6 +32,9 @@
                                 @Html.DisplayNameFor(model => model.PatientsCount)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.CountryCode)
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.PhoneNumber)
                             </th>
                             <th>
@@ -58,6 +61,9 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.PatientsCount)
                             </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CountryCode)
+                                </td>
                              <td>
                                 @Html.DisplayFor(modelItem => item.PhoneNumber)
                             </td>
